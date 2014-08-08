@@ -16,7 +16,9 @@
 
 @implementation HelloWorldScene
 {
-    CCSprite *_sprite;
+    Player *_player;
+    CCPhysicsNode *_physicsWorld;
+    Rope* _currentRope;
 }
 
 // -----------------------------------------------------------------------
@@ -43,14 +45,18 @@
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
     
-    // Add a sprite
-    _sprite = [CCSprite spriteWithImageNamed:@"Icon-72.png"];
-    _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
-    [self addChild:_sprite];
+    // Create physics
+    _physicsWorld = [CCPhysicsNode node];
+    _physicsWorld.gravity = ccp(0,0);
+    _physicsWorld.debugDraw = YES;
+    _physicsWorld.collisionDelegate = self;
+    [_physicsWorld setGravity:CGPointMake(0, 0)];
+    [self addChild:_physicsWorld];
     
-    // Animate sprite with action
-    CCActionRotateBy* actionSpin = [CCActionRotateBy actionWithDuration:1.5f angle:360];
-    [_sprite runAction:[CCActionRepeatForever actionWithAction:actionSpin]];
+    // Add a player
+    _player = [Player createPlayer:self.contentSizeInPoints.width*.2 initialY:self.contentSizeInPoints.height *.9];
+    [_physicsWorld addChild:_player];
+    
     
     // Create a back button
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
@@ -59,6 +65,13 @@
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
 
+    // Create initial rope
+    CGPoint startLoc = ccp(self.contentSize.width/2, self.contentSize.height * 0.9f);
+    _currentRope = [Rope createRope:_player origin:&startLoc];
+    [_physicsWorld addChild:_currentRope];
+    
+    //_currentRope = NULL;
+    
     // done
 	return self;
 }
@@ -100,12 +113,15 @@
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLoc = [touch locationInNode:self];
     
-    // Log touch location
-    CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
+    if (_currentRope != NULL) {
+        [_physicsWorld removeChild:_currentRope];
+    }
+    _currentRope = [Rope createRope:_player origin:&touchLoc];
+    [_physicsWorld addChild:_currentRope];
     
     // Move our sprite to touch location
-    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchLoc];
-    [_sprite runAction:actionMove];
+    //CCActionPlace *actionMove = [CCActionPlace actionWithPosition:touchLoc];
+    //[_player runAction:actionMove];
 }
 
 // -----------------------------------------------------------------------

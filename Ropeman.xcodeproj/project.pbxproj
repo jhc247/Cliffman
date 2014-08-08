@@ -212,6 +212,8 @@
 		F11D79CC1994122D000EC80A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79CB1994122D000EC80A /* AppDelegate.m */; };
 		F11D79CF1994122D000EC80A /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79CE1994122D000EC80A /* HelloWorldScene.m */; };
 		F11D79D21994122D000EC80A /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79D11994122D000EC80A /* IntroScene.m */; };
+		F11D79DD19941D85000EC80A /* Rope.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79DC19941D85000EC80A /* Rope.m */; };
+		F11D79E119941EB1000EC80A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79E019941EB1000EC80A /* Player.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -653,6 +655,11 @@
 		F11D79CE1994122D000EC80A /* HelloWorldScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HelloWorldScene.m; path = Classes/HelloWorldScene.m; sourceTree = "<group>"; };
 		F11D79D01994122D000EC80A /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		F11D79D11994122D000EC80A /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
+		F11D79DB19941D85000EC80A /* Rope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rope.h; sourceTree = "<group>"; };
+		F11D79DC19941D85000EC80A /* Rope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rope.m; sourceTree = "<group>"; };
+		F11D79DF19941EB1000EC80A /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		F11D79E019941EB1000EC80A /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		F11D79E319943148000EC80A /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1544,8 +1551,13 @@
 				F11D79CB1994122D000EC80A /* AppDelegate.m */,
 				F11D79CD1994122D000EC80A /* HelloWorldScene.h */,
 				F11D79CE1994122D000EC80A /* HelloWorldScene.m */,
+				F11D79DB19941D85000EC80A /* Rope.h */,
+				F11D79DF19941EB1000EC80A /* Player.h */,
+				F11D79E019941EB1000EC80A /* Player.m */,
+				F11D79DC19941D85000EC80A /* Rope.m */,
 				F11D79D01994122D000EC80A /* IntroScene.h */,
 				F11D79D11994122D000EC80A /* IntroScene.m */,
+				F11D79E319943148000EC80A /* Constants.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1682,6 +1694,7 @@
 				F11D77A91994122A000EC80A /* ccGLStateCache.m in Sources */,
 				F11D78A11994122B000EC80A /* OALActionManager.m in Sources */,
 				F11D78001994122B000EC80A /* CCScheduler.m in Sources */,
+				F11D79DD19941D85000EC80A /* Rope.m in Sources */,
 				F11D77D41994122A000EC80A /* CCParticleExamples.m in Sources */,
 				F11D79061994122C000EC80A /* CCSlider.m in Sources */,
 				F11D78411994122B000EC80A /* CCTMXXMLParser.m in Sources */,
@@ -1775,6 +1788,7 @@
 				F11D788D1994122B000EC80A /* TGAlib.m in Sources */,
 				F11D78591994122B000EC80A /* UITouch+CC.m in Sources */,
 				F11D79371994122C000EC80A /* utility.c in Sources */,
+				F11D79E119941EB1000EC80A /* Player.m in Sources */,
 				F11D78961994122B000EC80A /* ZipUtils.m in Sources */,
 				F11D78A71994122B000EC80A /* OALUtilityActions.m in Sources */,
 				F11D78521994122B000EC80A /* CCES2Renderer.m in Sources */,
@@ -1989,6 +2003,7 @@
 				F11D79D71994122D000EC80A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F11D79D81994122D000EC80A /* Build configuration list for PBXNativeTarget "Ropeman" */ = {
 			isa = XCConfigurationList;
@@ -1997,6 +2012,7 @@
 				F11D79DA1994122D000EC80A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
