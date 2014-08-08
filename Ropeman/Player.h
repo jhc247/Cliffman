@@ -14,10 +14,9 @@
     
 }
 
-@property (nonatomic, readwrite) float TensionX;
-@property (nonatomic, readwrite) float TensionY;
 
 + (Player*)createPlayer: (float)x initialY:(float)y;
 - (id)init: (float)x initialY:(float)y;
+- (void)attachRope;
 
 @end

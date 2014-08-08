@@ -10,7 +10,7 @@
 
 
 @implementation Player {
-    
+
 }
 
 
@@ -30,12 +30,10 @@
     self = [super initWithImageNamed:@"Icon-72.png"];
     self.position  = ccp(x,y);
     self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0]; // 1
-    self.physicsBody.collisionGroup = @"playerGroup"; // 2
-    self.physicsBody.sensor = YES;
+    self.physicsBody.collisionGroup = @"playerGroup";
+    self.physicsBody.sensor = NO;
     self.physicsBody.mass = PLAYER_MASS;
-    self.physicsBody.affectedByGravity = NO;
-    _TensionX= 0;
-    _TensionY = 0;
+    self.physicsBody.affectedByGravity = YES;
     return self;
 }
 
@@ -53,9 +51,7 @@
     CGRect newSize = CGRectMake(50, 50, width + 1, height);
     [self setTextureRect:newSize];*/
     
-    [self.physicsBody applyForce:ccp(_TensionX, GRAVITY_Y + _TensionY)];
-    CCLOG(@"Velocity: %@",NSStringFromCGPoint(self.physicsBody.velocity));
-    CCLOG(@"Forces: %f, %f",_TensionX, GRAVITY_Y + _TensionY);
-    
 }
+
+
 @end

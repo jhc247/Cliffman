@@ -50,7 +50,7 @@
     _physicsWorld.gravity = ccp(0,0);
     _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
-    [_physicsWorld setGravity:CGPointMake(0, 0)];
+    [_physicsWorld setGravity:CGPointMake(GRAVITY_X, GRAVITY_Y)];
     [self addChild:_physicsWorld];
     
     // Add a player
@@ -65,12 +65,13 @@
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
 
-    // Create initial rope
-    CGPoint startLoc = ccp(self.contentSize.width/2, self.contentSize.height * 0.9f);
-    _currentRope = [Rope createRope:_player origin:&startLoc];
-    [_physicsWorld addChild:_currentRope];
     
-    //_currentRope = NULL;
+    // Create walls
+    Wall *ceiling = [Wall createWall:0 y:self.contentSize.height-50 width:self.contentSize.width height:50];
+    Wall *divider =[Wall createWall:self.contentSize.width/2-100 y:self.contentSize.height*.7 width:200 height:self.contentSize.height*.3];
+    [_physicsWorld addChild: ceiling];
+    [_physicsWorld addChild: divider];
+    _currentRope = NULL;
     
     // done
 	return self;
@@ -118,10 +119,15 @@
     }
     _currentRope = [Rope createRope:_player origin:&touchLoc];
     [_physicsWorld addChild:_currentRope];
-    
+    [_currentRope enableRope];
+    [_currentRope rising];
     // Move our sprite to touch location
     //CCActionPlace *actionMove = [CCActionPlace actionWithPosition:touchLoc];
     //[_player runAction:actionMove];
+}
+
+-(void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    [_currentRope doneRising];
 }
 
 // -----------------------------------------------------------------------

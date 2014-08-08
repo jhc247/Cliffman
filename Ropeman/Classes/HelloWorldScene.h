@@ -12,6 +12,7 @@
 #import "cocos2d-ui.h"
 #import "Player.h"
 #import "Rope.h"
+#import "Wall.h"
 
 // -----------------------------------------------------------------------
 

@@ -17,5 +17,8 @@
 
 + (Rope *)createRope: (Player*)player origin:(CGPoint*)origin;
 - (id)init: (Player*)player origin:(CGPoint*)origin;
+- (void)enableRope;
+- (void)rising;
+- (void)doneRising;
 
 @end
