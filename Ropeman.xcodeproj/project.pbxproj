@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F100AAAE19948B1D0066E5BE /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = F100AAAD19948B1D0066E5BE /* Wall.m */; };
+		F100AAB11995B91A0066E5BE /* TouchLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F100AAB01995B91A0066E5BE /* TouchLayer.m */; };
 		F11D772319941229000EC80A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11D772219941229000EC80A /* QuartzCore.framework */; };
 		F11D772519941229000EC80A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11D772419941229000EC80A /* OpenGLES.framework */; };
 		F11D772719941229000EC80A /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11D772619941229000EC80A /* OpenAL.framework */; };
@@ -230,6 +231,8 @@
 /* Begin PBXFileReference section */
 		F100AAAC19948B1D0066E5BE /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		F100AAAD19948B1D0066E5BE /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
+		F100AAAF1995B91A0066E5BE /* TouchLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchLayer.h; sourceTree = "<group>"; };
+		F100AAB01995B91A0066E5BE /* TouchLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchLayer.m; sourceTree = "<group>"; };
 		F11D771F19941229000EC80A /* Ropeman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ropeman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F11D772219941229000EC80A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F11D772419941229000EC80A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1554,6 +1557,8 @@
 				F11D79CB1994122D000EC80A /* AppDelegate.m */,
 				F11D79CD1994122D000EC80A /* HelloWorldScene.h */,
 				F11D79CE1994122D000EC80A /* HelloWorldScene.m */,
+				F100AAAF1995B91A0066E5BE /* TouchLayer.h */,
+				F100AAB01995B91A0066E5BE /* TouchLayer.m */,
 				F11D79DB19941D85000EC80A /* Rope.h */,
 				F11D79DF19941EB1000EC80A /* Player.h */,
 				F11D79E019941EB1000EC80A /* Player.m */,
@@ -1700,6 +1705,7 @@
 				F11D77A91994122A000EC80A /* ccGLStateCache.m in Sources */,
 				F11D78A11994122B000EC80A /* OALActionManager.m in Sources */,
 				F11D78001994122B000EC80A /* CCScheduler.m in Sources */,
+				F100AAB11995B91A0066E5BE /* TouchLayer.m in Sources */,
 				F11D79DD19941D85000EC80A /* Rope.m in Sources */,
 				F11D77D41994122A000EC80A /* CCParticleExamples.m in Sources */,
 				F11D79061994122C000EC80A /* CCSlider.m in Sources */,

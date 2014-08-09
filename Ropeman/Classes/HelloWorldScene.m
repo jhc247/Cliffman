@@ -9,6 +9,7 @@
 
 #import "HelloWorldScene.h"
 #import "IntroScene.h"
+#import "TouchLayer.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - HelloWorldScene
@@ -19,6 +20,9 @@
     Player *_player;
     CCPhysicsNode *_physicsWorld;
     Rope* _currentRope;
+    float cameraLeft;
+    
+    TouchLayer *touchLayer;
 }
 
 // -----------------------------------------------------------------------
@@ -39,11 +43,12 @@
     if (!self) return(nil);
     
     // Enable touch handling on scene node
-    self.userInteractionEnabled = YES;
+    self.userInteractionEnabled = NO;
     
-    // Create a colored background (Dark Grey)
+    /*// Create a colored background (Dark Grey)
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
+    */
     
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
@@ -57,20 +62,17 @@
     _player = [Player createPlayer:self.contentSizeInPoints.width*.2 initialY:self.contentSizeInPoints.height *.8];
     [_physicsWorld addChild:_player];
     
-    // Create a back button
-    CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
-    backButton.positionType = CCPositionTypeNormalized;
-    backButton.position = ccp(0.85f, 0.95f); // Top Right of screen
-    [backButton setTarget:self selector:@selector(onBackClicked:)];
-    [self addChild:backButton];
-
-    
     // Create walls
     Wall *ceiling = [Wall createWall:0 y:self.contentSize.height-50 width:self.contentSize.width height:50];
     Wall *divider =[Wall createWall:self.contentSize.width/2-100 y:self.contentSize.height*.7 width:200 height:self.contentSize.height*.3];
     [_physicsWorld addChild: ceiling];
     [_physicsWorld addChild: divider];
     _currentRope = NULL;
+    
+    // Initialize camera
+    touchLayer = [TouchLayer createTouchLayer:self.contentSize];
+    [self addChild:touchLayer];
+    cameraLeft = 0;
     
     // done
 	return self;
@@ -106,6 +108,17 @@
     [super onExit];
 }
 
+- (void)update:(CCTime)delta {
+    float currentX = _player.position.x - cameraLeft;
+    float threshholdX = CAMERA_PANNING_PERCENT * self.contentSize.width;
+    if (currentX >= threshholdX) {
+        float delta = currentX - threshholdX;
+        cameraLeft += delta;
+        self.position = ccp(self.position.x - delta, 0);
+        touchLayer.position = ccp(touchLayer.position.x + delta, touchLayer.position.y);
+    }
+}
+
 // -----------------------------------------------------------------------
 #pragma mark - Touch Handler
 // -----------------------------------------------------------------------
@@ -121,17 +134,6 @@
 
 -(void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     //[_currentRope doneRising];
-}
-
-// -----------------------------------------------------------------------
-#pragma mark - Button Callbacks
-// -----------------------------------------------------------------------
-
-- (void)onBackClicked:(id)sender
-{
-    // back to intro scene with transition
-    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
 }
 
 // -----------------------------------------------------------------------
