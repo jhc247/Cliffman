@@ -63,10 +63,12 @@
     [_physicsWorld addChild:_player];
     
     // Create walls
-    Wall *ceiling = [Wall createWall:0 y:self.contentSize.height-50 width:self.contentSize.width height:50];
+    Wall *ceiling = [Wall createWall:0 y:self.contentSize.height-50 width:self.contentSize.width*2 height:50];
     Wall *divider =[Wall createWall:self.contentSize.width/2-100 y:self.contentSize.height*.7 width:200 height:self.contentSize.height*.3];
+    //Wall *floor = [Wall createWall:0 y:100 width:self.contentSize.width height:50];
     [_physicsWorld addChild: ceiling];
     [_physicsWorld addChild: divider];
+    //[_physicsWorld addChild: floor];
     _currentRope = NULL;
     
     // Initialize camera

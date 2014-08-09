@@ -52,6 +52,10 @@
     CGRect newSize = CGRectMake(50, 50, width + 1, height);
     [self setTextureRect:newSize];*/
     
+    float xVel = self.physicsBody.velocity.x;
+    float yVel = self.physicsBody.velocity.y;
+    [self.physicsBody setVelocity:ccp(xVel * (1-AIR_RESISTANCE), yVel)];
+    
     
     // Apply horizontal air resistance
     float velocity = self.physicsBody.velocity.x;

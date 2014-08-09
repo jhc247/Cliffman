@@ -107,6 +107,8 @@
                 xForce = -ROPE_PULL_FORCE * sinf(CC_DEGREES_TO_RADIANS(angle));
                 yForce = -ROPE_PULL_FORCE * cosf(CC_DEGREES_TO_RADIANS(angle));
                 //[_player.physicsBody applyForce:ccp(xForce, yForce)];
+                
+                [_player.physicsBody applyForce:ccp(0, ROPE_ADDITIONAL_GRAVITY)];
             }
             break;
         case Detaching:
@@ -216,12 +218,12 @@
     float rightX = x + width;
     float topY = y + height;
     float bottomY = y;
-    CCLOG(@"l,r,t,b: %f,%f,%f,%f", leftX, rightX, topY, bottomY);
-    CCLOG(@"prev, curr: (%f,%f), %@", prevX, prevY, NSStringFromCGPoint(self.position));
+    //CCLOG(@"l,r,t,b: %f,%f,%f,%f", leftX, rightX, topY, bottomY);
+    //CCLOG(@"prev, curr: (%f,%f), %@", prevX, prevY, NSStringFromCGPoint(self.position));
     float buffer = ROPE_HOOK_RADIUS;
     
     if (prevX + buffer <= leftX && self.position.x + buffer >= leftX) {
-        CCLOG(@"Collided with the left side of a wall");
+        //CCLOG(@"Collided with the left side of a wall");
         self.rotation = 90;
         self.position = ccp(leftX - self.contentSize.width/2,self.position.y);
         //perpendicularPosition = ccp(previousPosition.x, aquila.position.y);
@@ -229,7 +231,7 @@
     }
     // Collision on the right side of the wall
     else if (prevX - buffer >= rightX && self.position.x - buffer <= rightX) {
-        CCLOG(@"Collided with the right side of a wall");
+        //CCLOG(@"Collided with the right side of a wall");
         self.rotation = 270;
         self.position = ccp(rightX + self.contentSize.width/2,self.position.y);
         //perpendicularPosition = ccp(previousPosition.x, aquila.position.y);
@@ -237,7 +239,7 @@
     }
     // Collision on the top side of the wall
     else if (prevY - buffer >= topY && self.position.y - buffer <= topY) {
-        CCLOG(@"Collided with the top side of a wall");
+        //CCLOG(@"Collided with the top side of a wall");
         self.rotation = 180;
         self.position = ccp(self.position.x,topY + self.contentSize.height/2);
         //perpendicularPosition = ccp(aquila.position.x, previousPosition.y);
@@ -245,7 +247,7 @@
     }
     // Collision on the bottom side of the wall
     else if (prevY + buffer <= bottomY && self.position.y + buffer >= bottomY) {
-        CCLOG(@"Collided with the bottom side of a wall");
+        //CCLOG(@"Collided with the bottom side of a wall");
         self.rotation = 0;
         self.position = ccp(self.position.x,bottomY - self.contentSize.height/2);
         //perpendicularPosition = ccp(aquila.position.x, previousPosition.y);
@@ -257,7 +259,7 @@
     
     
     self.physicsBody.type = CCPhysicsBodyTypeStatic;
-    float ropeLength = ccpDistance(_player.position, self.position);
+    float ropeLength = ccpDistance(_player.position, self.position) + ROPE_INITIAL_SLACK;
     ropeLength = (ropeLength >= ROPE_MINMAX_LENGTH) ? ropeLength : ROPE_MINMAX_LENGTH;
     joint = [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:self.physicsBody anchorA:ccp(_player.contentSize.width/2, _player.contentSize.height/2) anchorB:ccp(self.contentSize.width/2,0) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
     pulling = YES;
@@ -270,6 +272,9 @@
     state = Detaching;
     [joint invalidate];
     [_parent removeChild:self];
+    [_player.physicsBody applyForce:ccp(0, -ROPE_ADDITIONAL_GRAVITY)];
+    CCLOG(@"forces upon detaching: %f,%f",_player.physicsBody.force.x, _player.physicsBody.force.y);
+    //[_player.physicsBody applyForce:ccp(0, 20000)];
 }
 
 /*- (void)stopPulling {

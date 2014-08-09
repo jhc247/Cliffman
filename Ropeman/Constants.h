@@ -23,6 +23,8 @@ static const float ROPE_BUFFER = 50;
 static const float ROPE_PULL_FORCE = 1000;
 static const float ROPE_MIN_LENGTH = 0;
 static const float ROPE_HOOK_RADIUS = 10;
+static const float ROPE_INITIAL_SLACK = 0;
+static const float ROPE_ADDITIONAL_GRAVITY = -3000;
 
 static const float GRAVITY_X = 0;
 static const float GRAVITY_Y = -450;
