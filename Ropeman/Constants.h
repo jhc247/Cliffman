@@ -33,4 +33,5 @@ static const float GRAVITY_Y = -450;
 static const float AIR_RESISTANCE = 0.01f;
 //static const float GRAVITY_Y = -5;
 
-static const float CAMERA_PANNING_PERCENT = 0.5f;
+static const float CAMERA_PANNING_PERCENT_RIGHT = 0.60f;
+static const float CAMERA_PANNING_PERCENT_LEFT = 0.00f;

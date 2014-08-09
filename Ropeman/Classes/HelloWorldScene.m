@@ -112,9 +112,16 @@
 
 - (void)update:(CCTime)delta {
     float currentX = _player.position.x - cameraLeft;
-    float threshholdX = CAMERA_PANNING_PERCENT * self.contentSize.width;
-    if (currentX >= threshholdX) {
-        float delta = currentX - threshholdX;
+    float leftThreshhold = CAMERA_PANNING_PERCENT_LEFT * self.contentSize.width;
+    float rightThreshhold = CAMERA_PANNING_PERCENT_RIGHT * self.contentSize.width;
+    if (currentX >= rightThreshhold) {
+        float delta = currentX - rightThreshhold;
+        cameraLeft += delta;
+        self.position = ccp(self.position.x - delta, 0);
+        touchLayer.position = ccp(touchLayer.position.x + delta, touchLayer.position.y);
+    }
+    else if (currentX <= leftThreshhold) {
+        float delta = currentX - leftThreshhold;
         cameraLeft += delta;
         self.position = ccp(self.position.x - delta, 0);
         touchLayer.position = ccp(touchLayer.position.x + delta, touchLayer.position.y);
