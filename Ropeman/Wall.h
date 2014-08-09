@@ -16,4 +16,6 @@
 + (Wall*)createWall: (float)x y:(float)y width:(float)width height:(float)height;
 - (id)init: (float)x y:(float)y width:(float)width height:(float)height;
 
+- (float)getWidth;
+- (float)getHeight;
 @end

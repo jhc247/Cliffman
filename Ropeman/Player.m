@@ -31,6 +31,7 @@
     self.position  = ccp(x,y);
     self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0]; // 1
     self.physicsBody.collisionGroup = @"playerGroup";
+    self.physicsBody.collisionType = @"playerCollision";
     self.physicsBody.sensor = NO;
     self.physicsBody.mass = PLAYER_MASS;
     self.physicsBody.affectedByGravity = YES;
@@ -50,6 +51,19 @@
     float width = [self textureRect].size.width;
     CGRect newSize = CGRectMake(50, 50, width + 1, height);
     [self setTextureRect:newSize];*/
+    
+    
+    // Apply horizontal air resistance
+    float velocity = self.physicsBody.velocity.x;
+    float resistance;
+    if (velocity > 0) {
+        resistance = -(velocity * velocity) * AIR_RESISTANCE;
+    }
+    else {
+        resistance = (velocity * velocity) * AIR_RESISTANCE;
+    }
+    
+    //[self.physicsBody applyForce:ccp(resistance, 0)];
     
 }
 

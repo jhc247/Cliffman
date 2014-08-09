@@ -9,7 +9,8 @@
 #import "Wall.h"
 
 @implementation Wall {
-    
+    float _height;
+    float _width;
 }
 
 // -----------------------------------------------------------------------
@@ -25,18 +26,30 @@
     self = [super init];
     if (!self) return(nil);
     
+    _height = height;
+    _width = width;
+    
     self.position = ccp(x,y);
     self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, CGSizeMake(width,height)} cornerRadius:0.0f];
     self.physicsBody.collisionGroup = @"wallGroup";
+    self.physicsBody.collisionType = @"wallCollision";
     self.physicsBody.affectedByGravity = NO;
     self.physicsBody.type = CCPhysicsBodyTypeStatic;
-    
+
     return self;
 }
 
 -(void)dealloc
 {
     
+}
+
+- (float)getWidth {
+    return _width;
+}
+
+- (float)getHeight {
+    return _height;
 }
 
 @end

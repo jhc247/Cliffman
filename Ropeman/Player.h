@@ -10,6 +10,17 @@
 #import "cocos2d.h"
 #import "Constants.h"
 
+// -----------------------------------------------------------------------
+// Types of effects applied to the spheres
+typedef NS_ENUM(NSInteger, PlayerState)
+{
+    Starting,
+    Falling,
+    Rising,
+    Hanging,
+    Dying
+};
+
 @interface Player : CCSprite {
     
 }

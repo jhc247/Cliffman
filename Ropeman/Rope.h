@@ -11,14 +11,28 @@
 #import "Player.h"
 #import "Constants.h"
 
-@interface Rope : CCNodeColor {
+// Types of effects applied to the spheres
+typedef NS_ENUM(NSInteger, RopeState)
+{
+    Flying,
+    Attached,
+    Detaching
+};
+
+@interface Rope : CCSprite {
     
 }
 
+
+
 + (Rope *)createRope: (Player*)player origin:(CGPoint*)origin;
 - (id)init: (Player*)player origin:(CGPoint*)origin;
-- (void)enableRope;
-- (void)rising;
-- (void)doneRising;
+
+- (void)attach: (float)x y:(float)y width:(float)width height:(float)height;
+- (void)detach;
+- (void)stopPulling;
+- (BOOL)isAttached;
+//- (void)rising;
+//- (void)doneRising;
 
 @end

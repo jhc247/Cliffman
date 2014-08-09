@@ -54,9 +54,8 @@
     [self addChild:_physicsWorld];
     
     // Add a player
-    _player = [Player createPlayer:self.contentSizeInPoints.width*.2 initialY:self.contentSizeInPoints.height *.9];
+    _player = [Player createPlayer:self.contentSizeInPoints.width*.2 initialY:self.contentSizeInPoints.height *.8];
     [_physicsWorld addChild:_player];
-    
     
     // Create a back button
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
@@ -114,20 +113,14 @@
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLoc = [touch locationInNode:self];
     
-    if (_currentRope != NULL) {
-        [_physicsWorld removeChild:_currentRope];
-    }
+    [_currentRope detach];
+    
     _currentRope = [Rope createRope:_player origin:&touchLoc];
     [_physicsWorld addChild:_currentRope];
-    [_currentRope enableRope];
-    [_currentRope rising];
-    // Move our sprite to touch location
-    //CCActionPlace *actionMove = [CCActionPlace actionWithPosition:touchLoc];
-    //[_player runAction:actionMove];
 }
 
 -(void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    [_currentRope doneRising];
+    //[_currentRope doneRising];
 }
 
 // -----------------------------------------------------------------------
@@ -142,4 +135,19 @@
 }
 
 // -----------------------------------------------------------------------
+
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(Wall *)wall ropeCollision:(Rope *)rope {
+    [_currentRope attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
+    return YES;
+}
+
+/*
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair playerCollision:(Player *)player ropeCollision:(Rope *)rope {
+    if ([_currentRope isAttached]) {
+        [_currentRope stopPulling];
+    }
+    return YES;
+}*/
+
 @end
