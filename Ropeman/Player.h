@@ -28,6 +28,5 @@ typedef NS_ENUM(NSInteger, PlayerState)
 
 + (Player*)createPlayer: (float)x initialY:(float)y;
 - (id)init: (float)x initialY:(float)y;
-- (void)attachRope;
 
 @end

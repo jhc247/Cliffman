@@ -216,6 +216,11 @@
 		F11D79D21994122D000EC80A /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79D11994122D000EC80A /* IntroScene.m */; };
 		F11D79DD19941D85000EC80A /* Rope.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79DC19941D85000EC80A /* Rope.m */; };
 		F11D79E119941EB1000EC80A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79E019941EB1000EC80A /* Player.m */; };
+		F122395519986532005D7B31 /* test_sprite-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F122395419986532005D7B31 /* test_sprite-ipad.png */; };
+		F155307119987754005FF5DF /* monkey_jump_swing_2.png in Resources */ = {isa = PBXBuildFile; fileRef = F155306F19987754005FF5DF /* monkey_jump_swing_2.png */; };
+		F155307619988140005FF5DF /* monkey_jump_swing_2-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F155307319988140005FF5DF /* monkey_jump_swing_2-hd.png */; };
+		F155307719988140005FF5DF /* monkey_jump_swing_2-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F155307419988140005FF5DF /* monkey_jump_swing_2-ipad.png */; };
+		F155307819988140005FF5DF /* monkey_jump_swing_2-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = F155307519988140005FF5DF /* monkey_jump_swing_2-ipadhd.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -666,6 +671,11 @@
 		F11D79DF19941EB1000EC80A /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		F11D79E019941EB1000EC80A /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		F11D79E319943148000EC80A /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		F122395419986532005D7B31 /* test_sprite-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "test_sprite-ipad.png"; path = "Resources/test_sprite-ipad.png"; sourceTree = "<group>"; };
+		F155306F19987754005FF5DF /* monkey_jump_swing_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monkey_jump_swing_2.png; path = Resources/monkey_jump_swing_2.png; sourceTree = "<group>"; };
+		F155307319988140005FF5DF /* monkey_jump_swing_2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkey_jump_swing_2-hd.png"; path = "Resources/monkey_jump_swing_2-hd.png"; sourceTree = "<group>"; };
+		F155307419988140005FF5DF /* monkey_jump_swing_2-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkey_jump_swing_2-ipad.png"; path = "Resources/monkey_jump_swing_2-ipad.png"; sourceTree = "<group>"; };
+		F155307519988140005FF5DF /* monkey_jump_swing_2-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkey_jump_swing_2-ipadhd.png"; path = "Resources/monkey_jump_swing_2-ipadhd.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -737,6 +747,11 @@
 		F11D773B19941229000EC80A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F155306F19987754005FF5DF /* monkey_jump_swing_2.png */,
+				F155307319988140005FF5DF /* monkey_jump_swing_2-hd.png */,
+				F155307419988140005FF5DF /* monkey_jump_swing_2-ipad.png */,
+				F155307519988140005FF5DF /* monkey_jump_swing_2-ipadhd.png */,
+				F122395419986532005D7B31 /* test_sprite-ipad.png */,
 				F11D773C19941229000EC80A /* Default.png */,
 				F11D773E19941229000EC80A /* Default@2x.png */,
 				F11D774019941229000EC80A /* Default-568h@2x.png */,
@@ -1653,16 +1668,21 @@
 				F11D774C19941229000EC80A /* Icon-72@2x.png in Resources */,
 				F11D773D19941229000EC80A /* Default.png in Resources */,
 				F11D774619941229000EC80A /* Icon.png in Resources */,
+				F155307719988140005FF5DF /* monkey_jump_swing_2-ipad.png in Resources */,
+				F155307119987754005FF5DF /* monkey_jump_swing_2.png in Resources */,
 				F11D775419941229000EC80A /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				F11D774319941229000EC80A /* Default-Landscape~ipad.png in Resources */,
 				F11D775819941229000EC80A /* Icon-Small.png in Resources */,
 				F11D775619941229000EC80A /* Icon-Small-50.png in Resources */,
 				F11D793F1994122D000EC80A /* LICENSE_Kazmath.txt in Resources */,
+				F122395519986532005D7B31 /* test_sprite-ipad.png in Resources */,
 				F11D774A19941229000EC80A /* Icon-72.png in Resources */,
 				F11D78981994122B000EC80A /* LICENSE_cocos2d.txt in Resources */,
+				F155307819988140005FF5DF /* monkey_jump_swing_2-ipadhd.png in Resources */,
 				F11D774119941229000EC80A /* Default-568h@2x.png in Resources */,
 				F11D77611994122A000EC80A /* iTunesArtwork in Resources */,
 				F11D775C19941229000EC80A /* Icon-Spotlight-iOS7.png in Resources */,
+				F155307619988140005FF5DF /* monkey_jump_swing_2-hd.png in Resources */,
 				F11D775019941229000EC80A /* Icon-76@2x.png in Resources */,
 				F11D79C41994122D000EC80A /* LICENSE_Chipmunk.txt in Resources */,
 				F11D775E19941229000EC80A /* Icon-Spotlight-iOS7@2x.png in Resources */,

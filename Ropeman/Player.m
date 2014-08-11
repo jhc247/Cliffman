@@ -27,7 +27,7 @@
     self = [super init];
     if (!self) return(nil);
     
-    self = [super initWithImageNamed:@"Icon-72.png"];
+    self = [super initWithImageNamed:@"monkey_jump_swing_2.png"];
     self.position  = ccp(x,y);
     self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0]; // 1
     self.physicsBody.collisionGroup = @"playerGroup";

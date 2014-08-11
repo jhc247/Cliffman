@@ -63,12 +63,13 @@
     }
     else {
         CCLOG(@"iPad");
+        
     }
     
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
-    _physicsWorld.debugDraw = YES;
+    _physicsWorld.debugDraw = NO;
     _physicsWorld.collisionDelegate = self;
     [_physicsWorld setGravity:CGPointMake(GRAVITY_X, GRAVITY_Y)];
     [self addChild:_physicsWorld];
