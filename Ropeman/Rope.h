@@ -19,6 +19,12 @@ typedef NS_ENUM(NSInteger, RopeState)
     Detaching
 };
 
+typedef NS_ENUM(NSInteger, PullingState)
+{
+    NotPulling,
+    Pulling
+};
+
 @interface Rope : CCSprite {
     
 }
@@ -30,6 +36,9 @@ typedef NS_ENUM(NSInteger, RopeState)
 
 - (void)attach: (float)x y:(float)y width:(float)width height:(float)height;
 - (void)detach;
+- (BOOL)activatePulling;
+
+
 - (void)stopPulling;
 - (BOOL)isAttached;
 //- (void)rising;

@@ -16,8 +16,8 @@
     CCPhysicsJoint* joint;
     
     RopeState state;
-    BOOL pulling;
-    BOOL justStarted;
+    PullingState pullState;
+    
     float prevX;
     float prevY;
     float prevX2;
@@ -66,7 +66,7 @@
     [self.physicsBody setVelocity:ccp(xVel, yVel)];
     
     state = Flying;
-    justStarted = YES;
+    pullState = NotPulling;
     prevX = player.position.x;
     prevY = player.position.y;
     prevX2 = 0;
@@ -96,6 +96,7 @@
     
     float xForce;
     float yForce;
+    
     switch (state) {
         case Flying:
             xForce = -ROPE_ACCEL * sinf(CC_DEGREES_TO_RADIANS(angle));
@@ -103,12 +104,25 @@
             [self.physicsBody applyForce:ccp(xForce, yForce)];
             break;
         case Attached:
-            if (pulling) {
-                xForce = -ROPE_PULL_FORCE * sinf(CC_DEGREES_TO_RADIANS(angle));
-                yForce = -ROPE_PULL_FORCE * cosf(CC_DEGREES_TO_RADIANS(angle));
-                //[_player.physicsBody applyForce:ccp(xForce, yForce)];
+            if (pullState == Pulling) {
+                xForce = -ROPE_PULL_FORCE/1.5 * sinf(CC_DEGREES_TO_RADIANS(angle));
+                yForce = -ROPE_PULL_FORCE/1.5 * cosf(CC_DEGREES_TO_RADIANS(angle));
+                [_player.physicsBody applyImpulse:ccp(xForce, yForce)];
+                pullState = NotPulling;
+                /*
                 
-                [_player.physicsBody applyForce:ccp(0, ROPE_ADDITIONAL_GRAVITY)];
+                if (_player.position.y > self.position.y) {
+                    [_player.physicsBody applyForce:ccp(0, -GRAVITY_Y)];
+                }
+                [_player.physicsBody applyForce:ccp(xForce, yForce)];
+                [_player.physicsBody applyForce:ccp(0, -GRAVITY_Y)];
+                CCLOG(@"Applying yforce: %f", yForce);
+                 */
+            }
+            else {
+                if (ropeLength <= originalLength + 5 && ropeLength >= originalLength - 5) {
+                    [_player.physicsBody applyForce:ccp(0, ROPE_ADDITIONAL_GRAVITY)];
+                }
             }
             break;
         case Detaching:
@@ -116,7 +130,6 @@
         default:
             break;
     }
-    justStarted = NO;
     
     /*
     float ropeLength = ccpDistance(_player.position, self.position);
@@ -261,8 +274,8 @@
     self.physicsBody.type = CCPhysicsBodyTypeStatic;
     float ropeLength = ccpDistance(_player.position, self.position) + ROPE_INITIAL_SLACK;
     ropeLength = (ropeLength >= ROPE_MINMAX_LENGTH) ? ropeLength : ROPE_MINMAX_LENGTH;
-    joint = [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:self.physicsBody anchorA:ccp(_player.contentSize.width/2, _player.contentSize.height/2) anchorB:ccp(self.contentSize.width/2,0) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
-    pulling = YES;
+    originalLength = ropeLength;
+    joint = [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:self.physicsBody anchorA:ccp(_player.contentSize.width/2, _player.contentSize.height/2) anchorB:ccp(self.contentSize.width/2,self.contentSize.height/2) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
 }
 
 - (void)detach {
@@ -274,7 +287,6 @@
     [_parent removeChild:self];
     [_player.physicsBody applyForce:ccp(0, -ROPE_ADDITIONAL_GRAVITY)];
     CCLOG(@"forces upon detaching: %f,%f",_player.physicsBody.force.x, _player.physicsBody.force.y);
-    //[_player.physicsBody applyForce:ccp(0, 20000)];
 }
 
 /*- (void)stopPulling {
@@ -291,6 +303,14 @@
 
 - (BOOL)isAttached {
     return (state == Attached);
+}
+
+- (BOOL)activatePulling {
+    if (state != Attached) {
+        return NO;
+    }
+    pullState = Pulling;
+    return YES;
 }
 
 + (float)getAngle: (CGPoint*)origin target:(CGPoint*)target {

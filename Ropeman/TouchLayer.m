@@ -33,12 +33,23 @@
     self.position = ccp(size.width/2,size.height/2);
     [self setContentSize: size];
     
+    
     // Create a back button
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
     backButton.positionType = CCPositionTypeNormalized;
     backButton.position = ccp(0.90f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
+    
+    // Create a pull button
+    CCNodeColor *p = [CCNodeColor nodeWithColor:[CCColor blueColor] width:100 height:50];
+    //[p set]
+    
+    CCButton *pullButton = [CCButton buttonWithTitle:@"Pull" fontName:@"Verdana-Bold" fontSize:26.0f];
+    pullButton.positionType = CCPositionTypeNormalized;
+    pullButton.position = ccp(0.90f, 0.05f); // Bottom Right of screen
+    [pullButton setTarget:self selector:@selector(onPullClicked:)];
+    [self addChild:pullButton];
     
     return self;
 }
@@ -52,6 +63,12 @@
     // back to intro scene with transition
     [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+}
+
+- (void)onPullClicked:(id)sender
+{
+    HelloWorldScene *scene = (HelloWorldScene*)_parent;
+    [scene pull];
 }
 
 /*

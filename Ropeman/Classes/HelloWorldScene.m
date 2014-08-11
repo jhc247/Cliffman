@@ -50,6 +50,21 @@
     [self addChild:background];
     */
     
+    float width = self.contentSize.width;
+    float height = self.contentSize.height;
+    
+    if (width == 480) { // 3.5" iPhone
+        CCLOG(@"3.5 iPhone");
+        width = 426 + (2/3);
+    }
+    else if (width == 568) { // 4" iPhone
+        CCLOG(@"4 iPhone");
+        width = 426 + (2/3);
+    }
+    else {
+        CCLOG(@"iPad");
+    }
+    
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
@@ -59,16 +74,16 @@
     [self addChild:_physicsWorld];
     
     // Add a player
-    _player = [Player createPlayer:self.contentSizeInPoints.width*.2 initialY:self.contentSizeInPoints.height *.8];
+    _player = [Player createPlayer:width*.2 initialY:height *.5];
     [_physicsWorld addChild:_player];
     
     // Create walls
-    Wall *ceiling = [Wall createWall:0 y:self.contentSize.height-50 width:self.contentSize.width*2 height:50];
-    Wall *divider =[Wall createWall:self.contentSize.width/2-100 y:self.contentSize.height*.7 width:200 height:self.contentSize.height*.3];
-    //Wall *floor = [Wall createWall:0 y:100 width:self.contentSize.width height:50];
+    Wall *ceiling = [Wall createWall:0 y:height*.9 width:width*3 height:height*.1];
+    Wall *divider =[Wall createWall:width y:height*.7 width:width*.3 height:height*.3];
+    //Wall *floater = [Wall createWall:width * 1.5 y:self.contentSize.height*.7 width:100 height:100];
     [_physicsWorld addChild: ceiling];
     [_physicsWorld addChild: divider];
-    //[_physicsWorld addChild: floor];
+    //[_physicsWorld addChild: floater];
     _currentRope = NULL;
     
     // Initialize camera
@@ -146,6 +161,15 @@
 }
 
 // -----------------------------------------------------------------------
+
+
+- (void)pull {
+    
+    if (_currentRope == NULL) {
+        return;
+    }
+    [_currentRope activatePulling];
+}
 
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(Wall *)wall ropeCollision:(Rope *)rope {

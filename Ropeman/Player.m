@@ -55,17 +55,7 @@
     float xVel = self.physicsBody.velocity.x;
     float yVel = self.physicsBody.velocity.y;
     [self.physicsBody setVelocity:ccp(xVel * (1-AIR_RESISTANCE), yVel)];
-    
-    
-    // Apply horizontal air resistance
-    float velocity = self.physicsBody.velocity.x;
-    float resistance;
-    if (velocity > 0) {
-        resistance = -(velocity * velocity) * AIR_RESISTANCE;
-    }
-    else {
-        resistance = (velocity * velocity) * AIR_RESISTANCE;
-    }
+
     
     //[self.physicsBody applyForce:ccp(resistance, 0)];
     
