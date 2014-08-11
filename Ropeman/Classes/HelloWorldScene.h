@@ -13,6 +13,9 @@
 #import "Player.h"
 #import "Rope.h"
 #import "Wall.h"
+#import "Constants.h"
+#import "IntroScene.h"
+#import "TouchLayer.h"
 
 // -----------------------------------------------------------------------
 

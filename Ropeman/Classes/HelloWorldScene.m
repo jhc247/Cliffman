@@ -8,8 +8,6 @@
 // -----------------------------------------------------------------------
 
 #import "HelloWorldScene.h"
-#import "IntroScene.h"
-#import "TouchLayer.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - HelloWorldScene
@@ -21,8 +19,10 @@
     CCPhysicsNode *_physicsWorld;
     Rope* _currentRope;
     float cameraLeft;
-    
+    float width, height;
     TouchLayer *touchLayer;
+    
+    BOOL IS_IPAD;
 }
 
 // -----------------------------------------------------------------------
@@ -50,47 +50,38 @@
     [self addChild:background];
     */
     
-    float width = self.contentSize.width;
-    float height = self.contentSize.height;
+    width = [CCDirector is_iPad] ? self.contentSize.width : (426 + (2/3));
+    height = self.contentSize.height;
     
-    if (width == 480) { // 3.5" iPhone
-        CCLOG(@"3.5 iPhone");
-        width = 426 + (2/3);
-    }
-    else if (width == 568) { // 4" iPhone
-        CCLOG(@"4 iPhone");
-        width = 426 + (2/3);
-    }
-    else {
-        CCLOG(@"iPad");
-        
-    }
     
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.gravity = ccp(0,0);
-    _physicsWorld.debugDraw = NO;
+    _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
-    [_physicsWorld setGravity:CGPointMake(GRAVITY_X, GRAVITY_Y)];
+    float x_grav = [CCDirector is_iPad] ? GRAVITY_X : GRAVITY_X / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    float y_grav = [CCDirector is_iPad] ? GRAVITY_Y : GRAVITY_Y / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    _physicsWorld.gravity = ccp(x_grav, y_grav);
     [self addChild:_physicsWorld];
     
     // Add a player
-    _player = [Player createPlayer:width*.2 initialY:height *.5];
+    _player = [Player createPlayer:width*.2 initialY:height*.8];
     [_physicsWorld addChild:_player];
     
     // Create walls
     Wall *ceiling = [Wall createWall:0 y:height*.9 width:width*3 height:height*.1];
     Wall *divider =[Wall createWall:width y:height*.7 width:width*.3 height:height*.3];
-    //Wall *floater = [Wall createWall:width * 1.5 y:self.contentSize.height*.7 width:100 height:100];
+    Wall *floater = [Wall createWall:width * 1.5 y:self.contentSize.height*.5 width:width*.1 height:height*.1];
     [_physicsWorld addChild: ceiling];
     [_physicsWorld addChild: divider];
-    //[_physicsWorld addChild: floater];
+    [_physicsWorld addChild: floater];
     _currentRope = NULL;
     
     // Initialize camera
     touchLayer = [TouchLayer createTouchLayer:self.contentSize];
     [self addChild:touchLayer];
     cameraLeft = 0;
+    
+    CCLOG(@"To y: %f", height*.9);
     
     // done
 	return self;
@@ -128,8 +119,8 @@
 
 - (void)update:(CCTime)delta {
     float currentX = _player.position.x - cameraLeft;
-    float leftThreshhold = CAMERA_PANNING_PERCENT_LEFT * self.contentSize.width;
-    float rightThreshhold = CAMERA_PANNING_PERCENT_RIGHT * self.contentSize.width;
+    float leftThreshhold = CAMERA_PANNING_PERCENT_LEFT * width;
+    float rightThreshhold = CAMERA_PANNING_PERCENT_RIGHT * width;
     if (currentX >= rightThreshhold) {
         float delta = currentX - rightThreshhold;
         cameraLeft += delta;
@@ -153,7 +144,7 @@
     
     [_currentRope detach];
     
-    _currentRope = [Rope createRope:_player origin:&touchLoc];
+    _currentRope = [Rope createRope:_player target:&touchLoc];
     [_physicsWorld addChild:_currentRope];
 }
 
@@ -175,13 +166,14 @@
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(Wall *)wall ropeCollision:(Rope *)rope {
     [_currentRope attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
+    CCLOG(@"Speed: %@", NSStringFromCGPoint(rope.physicsBody.velocity));
     return YES;
 }
 
-/*
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair playerCollision:(Player *)player ropeCollision:(Rope *)rope {
+
+/*- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair playerCollision:(Player *)player ropeCollision:(Rope *)rope {
     if ([_currentRope isAttached]) {
-        [_currentRope stopPulling];
+    //    [_currentRope stopPulling];
     }
     return YES;
 }*/

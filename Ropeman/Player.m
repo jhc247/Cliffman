@@ -27,14 +27,18 @@
     self = [super init];
     if (!self) return(nil);
     
-    self = [super initWithImageNamed:@"monkey_jump_swing_2.png"];
+    self = [super initWithImageNamed:@"dude.png"];
     self.position  = ccp(x,y);
-    self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0]; // 1
+    //self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0]; // 1
+    self.physicsBody = [CCPhysicsBody bodyWithPillFrom:ccp(self.contentSize.width/2,self.contentSize.height*.22) to:ccp(self.contentSize.width/2, self.contentSize.height*.5) cornerRadius:self.contentSize.height*.2];
     self.physicsBody.collisionGroup = @"playerGroup";
     self.physicsBody.collisionType = @"playerCollision";
     self.physicsBody.sensor = NO;
     self.physicsBody.mass = PLAYER_MASS;
     self.physicsBody.affectedByGravity = YES;
+    
+    CCLOG(@"From y: %f", self.contentSize.height*.7);
+    
     return self;
 }
 
@@ -54,8 +58,7 @@
     
     float xVel = self.physicsBody.velocity.x;
     float yVel = self.physicsBody.velocity.y;
-    [self.physicsBody setVelocity:ccp(xVel * (1-AIR_RESISTANCE), yVel)];
-
+    //[self.physicsBody setVelocity:ccp(xVel * (1-AIR_RESISTANCE), yVel)];
     
     //[self.physicsBody applyForce:ccp(resistance, 0)];
     

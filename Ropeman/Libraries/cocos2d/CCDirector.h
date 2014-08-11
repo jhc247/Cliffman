@@ -204,6 +204,7 @@ and when to execute the Scenes.
 /** returns a shared instance of the director */
 +(CCDirector*)sharedDirector;
 
++ (BOOL) is_iPad;
 
 #pragma mark Director - Stats
 

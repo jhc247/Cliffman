@@ -10,9 +10,9 @@
 
 
 @implementation Rope {
-    Player* _player;
-    CGPoint _origin;
+    Player *_player;
     float originalLength;
+    float originalAngle;
     CCPhysicsJoint* joint;
     
     RopeState state;
@@ -22,6 +22,8 @@
     float prevY;
     float prevX2;
     float prevY2;
+    
+    float ticks;
 }
 
 
@@ -29,48 +31,54 @@
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (Rope *)createRope: (Player*)player origin:(CGPoint*)origin {
-    return [[self alloc] init:player origin:(CGPoint*)origin];
++ (Rope *)createRope: (Player*)player target:(CGPoint*)target {
+    return [[self alloc] init:player target:(CGPoint*)target];
 }
 
-- (id)init: (Player*)player origin:(CGPoint*)origin {
+- (id)init: (Player*)player target:(CGPoint*)target {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
     
-    CGPoint target = CGPointMake(player.position.x, player.position.y);
-    float angle = [Rope getAngle:origin target:&target];
+    CGPoint playerPosition = CGPointMake(player.position.x, player.position.y);
+    float angle = [Rope getAngle:&playerPosition target:target];
     
     // Store arguments in class
     _player = player;
-    _origin = ccp(origin->x, origin->y);
+    //_origin = ccp(origin->x, origin->y);
     
     // Initialize sprite
-    self = [super initWithImageNamed:@"Icon-Small.png" ];
-    float xPos = player.position.x - PLAYER_ARM_LENGTH * sinf(CC_DEGREES_TO_RADIANS(angle));
-    float yPos = player.position.y - PLAYER_ARM_LENGTH * cosf(CC_DEGREES_TO_RADIANS(angle));
+    self = [super initWithImageNamed:@"dude.png" ];
+    float arm_length = [CCDirector is_iPad] ? PLAYER_ARM_LENGTH : PLAYER_ARM_LENGTH / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    float xPos = player.position.x + (arm_length * sinf(CC_DEGREES_TO_RADIANS(angle)));
+    float yPos = player.position.y + (arm_length * cosf(CC_DEGREES_TO_RADIANS(angle)));
     self.position = ccp(xPos, yPos);
     self.anchorPoint = ccp(0.5, 0.5);
-    self.rotation = angle - 180;
+    self.rotation = angle;
+    originalAngle = angle;
     
     // Set up physics
-    self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:ROPE_HOOK_RADIUS andCenter:ccp(self.contentSize.width/2, self.contentSize.height*.5)];
+    self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:ROPE_HOOK_RADIUS andCenter:ccp(self.contentSize.width/2, self.contentSize.height/2)];
     //self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0]; // 1
     self.physicsBody.collisionGroup = @"ropeGroup";
     self.physicsBody.collisionType = @"ropeCollision";
     self.physicsBody.sensor = YES;
     self.physicsBody.affectedByGravity = NO;
     self.physicsBody.type = CCPhysicsBodyTypeDynamic;
-    float xVel = -PLAYER_SHOOT_SPEED * sinf(CC_DEGREES_TO_RADIANS(angle));
-    float yVel = -PLAYER_SHOOT_SPEED * cosf(CC_DEGREES_TO_RADIANS(angle));
+    float shoot_speed = [CCDirector is_iPad] ? PLAYER_SHOOT_SPEED : PLAYER_SHOOT_SPEED / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    float xVel = shoot_speed * sinf(CC_DEGREES_TO_RADIANS(angle));
+    float yVel = shoot_speed * cosf(CC_DEGREES_TO_RADIANS(angle));
     [self.physicsBody setVelocity:ccp(xVel, yVel)];
-    
+    CCLOG(@"Initial Speed: %@", NSStringFromCGPoint(self.physicsBody.velocity));
     state = Flying;
     pullState = NotPulling;
     prevX = player.position.x;
     prevY = player.position.y;
     prevX2 = 0;
     prevY2 = 0;
+    
+    ticks = 0;
+    
     return self;
 }
 
@@ -85,43 +93,49 @@
 
 
 - (void)update:(CCTime)delta {
+    
+    
     float ropeLength = ccpDistance(_player.position, self.position);
     CGPoint target = CGPointMake(_player.position.x, _player.position.y);
-    float angle = [Rope getAngle:&_origin target:&target];
+    //float angle = [Rope getAngle:&CGPointZero target:&target];
     prevX2 = prevX;
     prevY2 = prevY;
     prevX = self.position.x;
     prevY = self.position.y;
-    
     
     float xForce;
     float yForce;
     
     switch (state) {
         case Flying:
-            xForce = -ROPE_ACCEL * sinf(CC_DEGREES_TO_RADIANS(angle));
-            yForce = -ROPE_ACCEL * cosf(CC_DEGREES_TO_RADIANS(angle));
+            ticks = ticks + 1;
+            float acceleration_rope = [CCDirector is_iPad] ? ROPE_ACCEL : ROPE_ACCEL / IPAD_TO_IPHONE_HEIGHT_RATIO;
+            xForce = acceleration_rope * sinf(CC_DEGREES_TO_RADIANS(originalAngle));
+            yForce = acceleration_rope * cosf(CC_DEGREES_TO_RADIANS(originalAngle));
             [self.physicsBody applyForce:ccp(xForce, yForce)];
             break;
         case Attached:
             if (pullState == Pulling) {
-                xForce = -ROPE_PULL_FORCE/1.5 * sinf(CC_DEGREES_TO_RADIANS(angle));
-                yForce = -ROPE_PULL_FORCE/1.5 * cosf(CC_DEGREES_TO_RADIANS(angle));
+                float acceleration_pull = [CCDirector is_iPad] ? ROPE_PULL_FORCE : ROPE_PULL_FORCE / IPAD_TO_IPHONE_HEIGHT_RATIO;
+                CGPoint origin = _player.position;
+                CGPoint target = self.position;
+                float angle = [Rope getAngle:&origin target:&target];
+                xForce = acceleration_pull * sinf(CC_DEGREES_TO_RADIANS(angle));
+                yForce = acceleration_pull * cosf(CC_DEGREES_TO_RADIANS(angle));
                 [_player.physicsBody applyImpulse:ccp(xForce, yForce)];
                 pullState = NotPulling;
-                /*
                 
                 if (_player.position.y > self.position.y) {
-                    [_player.physicsBody applyForce:ccp(0, -GRAVITY_Y)];
+                    //[_player.physicsBody applyForce:ccp(0, -GRAVITY_Y)];
                 }
-                [_player.physicsBody applyForce:ccp(xForce, yForce)];
-                [_player.physicsBody applyForce:ccp(0, -GRAVITY_Y)];
-                CCLOG(@"Applying yforce: %f", yForce);
-                 */
+                //[_player.physicsBody applyForce:ccp(xForce, yForce)];
+                //[_player.physicsBody applyForce:ccp(0, -GRAVITY_Y)];
+                //CCLOG(@"Applying yforce: %f", yForce);
+                 
             }
             else {
                 if (ropeLength <= originalLength + 5 && ropeLength >= originalLength - 5) {
-                    [_player.physicsBody applyForce:ccp(0, ROPE_ADDITIONAL_GRAVITY)];
+                    //[_player.physicsBody applyForce:ccp(0, ROPE_ADDITIONAL_GRAVITY)];
                 }
             }
             break;
@@ -130,77 +144,7 @@
         default:
             break;
     }
-    
-    /*
-    float ropeLength = ccpDistance(_player.position, self.position);
-    CGPoint target = CGPointMake(_player.position.x, _player.position.y);
-    float angle = [Rope getAngle:&_origin target:&target];
-    float adjustedAngle = truncf(angle - 180);
-    */
-    //float xTension = ropeTension * sinf(adjustedAngle);
-    //float yTension = -ropeTension * cosf(adjustedAngle);
-    
-    
-    /*// Apply forces to player
-    if (angle >= 270 || angle <= 90 || ropeLength < originalLength - ROPE_BUFFER) {
-        self.color = [CCColor yellowColor];
-        _player.TensionX = 0;
-        _player.TensionY = 0;
-    }
-    else if (ropeLength <= originalLength + ROPE_BUFFER) {
-        self.color = [CCColor greenColor];
-        _player.TensionX = xTension;
-        _player.TensionY = yTension;
-    }
-    else {
-        self.color = [CCColor redColor];
-        _player.TensionX = 0;
-        _player.TensionY = 0;
-        float xmomentum = 1.5*_player.physicsBody.mass * _player.physicsBody.velocity.x;
-        float ymomentum = 1.5*_player.physicsBody.mass * _player.physicsBody.velocity.y;
-        
-        
-        [_player.physicsBody applyImpulse:ccp(-xmomentum, -ymomentum)];
-    }
-    
-    else if (ropeLength <= originalLength + 5 || ropeLength >= originalLength - 5) {
-        //[_player.physicsBody applyForce:ccp(0, -GRAVITY_Y)];
-    }
-    else {
-        float yImpulse = -GRAVITY_Y;
-        [_player.physicsBody applyImpulse:ccp(0,yImpulse)];
-    }
-    
-    //[_player.physicsBody applyForce:ccp(0, -GRAVITY_Y*2)];
-    //CCLOG(@"CLICKED");
-    */
-    
-    // Update the rope
-    //float scale = ropeLength / originalLength;
-    //self.scaleY = scale;
-    //self.rotation = angle;
-    //self.physicsBody.
-    //CGSize size = CGSizeMake(ROPE_THICKNESS, ropeLength);
-    //self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, size} cornerRadius:0]; // 1
-    //self.physicsBody.collisionGroup = @"ropeGroup";
-    //self.physicsBody.sensor = YES;
-    //self.physicsBody.affectedByGravity = NO;
-    
-    
-/*
-    if (rising) {
-        float xTension = PLAYER_RISING_FORCE * sinf(CC_DEGREES_TO_RADIANS(adjustedAngle));
-        float yTension = PLAYER_RISING_FORCE * cosf(CC_DEGREES_TO_RADIANS(adjustedAngle));
-        CCLOG(@"yTension: %f", yTension);
-        [_player.physicsBody applyForce:ccp(xTension, yTension)];
-    }
-    if (!attached) {
-        float xForce = -ROPE_ACCEL * sinf(CC_DEGREES_TO_RADIANS(angle));
-        float yForce = -ROPE_ACCEL * cosf(CC_DEGREES_TO_RADIANS(angle));
-        [self.physicsBody applyForce:ccp(xForce, yForce)];
-    }
-*/
-    
+
 }
 
 /*- (void)rising {
@@ -226,7 +170,7 @@
         NSAssert(false, @"Invalid state change: attempting to attach");
     }
     state = Attached;
-    
+    CCLOG(@"Ticks: %f", ticks);
     float leftX = x;
     float rightX = x + width;
     float topY = y + height;
@@ -267,7 +211,7 @@
         //modifiedTargetPosition = ccp(targetPosition.x, previousPosition.y);
     }
     else {
-        //CCLOG(@"ERROR");
+        CCLOG(@"ERROR");
     }
     
     
@@ -275,7 +219,8 @@
     float ropeLength = ccpDistance(_player.position, self.position) + ROPE_INITIAL_SLACK;
     ropeLength = (ropeLength >= ROPE_MINMAX_LENGTH) ? ropeLength : ROPE_MINMAX_LENGTH;
     originalLength = ropeLength;
-    joint = [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:self.physicsBody anchorA:ccp(_player.contentSize.width/2, _player.contentSize.height/2) anchorB:ccp(self.contentSize.width/2,self.contentSize.height/2) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
+    //joint = [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:self.physicsBody anchorA:ccp(_player.contentSize.width*.65, _player.contentSize.height*.51) anchorB:ccp(self.contentSize.width/2,0) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
+    joint = [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:self.physicsBody anchorA:ccp(_player.contentSize.width*.5, _player.contentSize.height*.5) anchorB:ccp(self.contentSize.width/2,self.contentSize.height/2) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
 }
 
 - (void)detach {
@@ -285,28 +230,16 @@
     state = Detaching;
     [joint invalidate];
     [_parent removeChild:self];
-    [_player.physicsBody applyForce:ccp(0, -ROPE_ADDITIONAL_GRAVITY)];
+    //[_player.physicsBody applyForce:ccp(0, -ROPE_ADDITIONAL_GRAVITY)];
     CCLOG(@"forces upon detaching: %f,%f",_player.physicsBody.force.x, _player.physicsBody.force.y);
 }
-
-/*- (void)stopPulling {
-    if (!pulling) {
-        NSAssert(false, @"Invalid state change: attempting to stop pulling");
-    }
-    CCLOG(@"Stopped pulling");
-    pulling = NO;
-    [joint invalidate];
-    [_parent removeChild:self];
-    //[self attach];
-    
-}*/
 
 - (BOOL)isAttached {
     return (state == Attached);
 }
 
 - (BOOL)activatePulling {
-    if (state != Attached) {
+    if (state != Attached || pullState == Pulled) {
         return NO;
     }
     pullState = Pulling;

@@ -144,6 +144,10 @@ static CCDirector *_sharedDirector = nil;
 	_sharedDirector = nil;
 }
 
++ (BOOL) is_iPad {
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+}
+
 - (id) init
 {
 	if( (self=[super init] ) ) {

@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		F100AAAE19948B1D0066E5BE /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = F100AAAD19948B1D0066E5BE /* Wall.m */; };
 		F100AAB11995B91A0066E5BE /* TouchLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F100AAB01995B91A0066E5BE /* TouchLayer.m */; };
+		F10B672719992925003D12F0 /* dude-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F10B672519992925003D12F0 /* dude-ipad.png */; };
+		F10B672819992925003D12F0 /* dude-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = F10B672619992925003D12F0 /* dude-ipadhd.png */; };
+		F10B672B19992997003D12F0 /* dude-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F10B672919992997003D12F0 /* dude-hd.png */; };
+		F10B672C19992997003D12F0 /* dude.png in Resources */ = {isa = PBXBuildFile; fileRef = F10B672A19992997003D12F0 /* dude.png */; };
 		F11D772319941229000EC80A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11D772219941229000EC80A /* QuartzCore.framework */; };
 		F11D772519941229000EC80A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11D772419941229000EC80A /* OpenGLES.framework */; };
 		F11D772719941229000EC80A /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11D772619941229000EC80A /* OpenAL.framework */; };
@@ -238,6 +242,10 @@
 		F100AAAD19948B1D0066E5BE /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
 		F100AAAF1995B91A0066E5BE /* TouchLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchLayer.h; sourceTree = "<group>"; };
 		F100AAB01995B91A0066E5BE /* TouchLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchLayer.m; sourceTree = "<group>"; };
+		F10B672519992925003D12F0 /* dude-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dude-ipad.png"; path = "Resources/dude-ipad.png"; sourceTree = "<group>"; };
+		F10B672619992925003D12F0 /* dude-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dude-ipadhd.png"; path = "Resources/dude-ipadhd.png"; sourceTree = "<group>"; };
+		F10B672919992997003D12F0 /* dude-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dude-hd.png"; path = "Resources/dude-hd.png"; sourceTree = "<group>"; };
+		F10B672A19992997003D12F0 /* dude.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dude.png; path = Resources/dude.png; sourceTree = "<group>"; };
 		F11D771F19941229000EC80A /* Ropeman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ropeman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F11D772219941229000EC80A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F11D772419941229000EC80A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -747,6 +755,10 @@
 		F11D773B19941229000EC80A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F10B672919992997003D12F0 /* dude-hd.png */,
+				F10B672A19992997003D12F0 /* dude.png */,
+				F10B672519992925003D12F0 /* dude-ipad.png */,
+				F10B672619992925003D12F0 /* dude-ipadhd.png */,
 				F155306F19987754005FF5DF /* monkey_jump_swing_2.png */,
 				F155307319988140005FF5DF /* monkey_jump_swing_2-hd.png */,
 				F155307419988140005FF5DF /* monkey_jump_swing_2-ipad.png */,
@@ -1665,12 +1677,14 @@
 				F11D79561994122D000EC80A /* LICENSE_CCBReader.txt in Resources */,
 				F11D774819941229000EC80A /* Icon@2x.png in Resources */,
 				F11D775A19941229000EC80A /* Icon-Small@2x.png in Resources */,
+				F10B672C19992997003D12F0 /* dude.png in Resources */,
 				F11D774C19941229000EC80A /* Icon-72@2x.png in Resources */,
 				F11D773D19941229000EC80A /* Default.png in Resources */,
 				F11D774619941229000EC80A /* Icon.png in Resources */,
 				F155307719988140005FF5DF /* monkey_jump_swing_2-ipad.png in Resources */,
 				F155307119987754005FF5DF /* monkey_jump_swing_2.png in Resources */,
 				F11D775419941229000EC80A /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
+				F10B672719992925003D12F0 /* dude-ipad.png in Resources */,
 				F11D774319941229000EC80A /* Default-Landscape~ipad.png in Resources */,
 				F11D775819941229000EC80A /* Icon-Small.png in Resources */,
 				F11D775619941229000EC80A /* Icon-Small-50.png in Resources */,
@@ -1679,10 +1693,12 @@
 				F11D774A19941229000EC80A /* Icon-72.png in Resources */,
 				F11D78981994122B000EC80A /* LICENSE_cocos2d.txt in Resources */,
 				F155307819988140005FF5DF /* monkey_jump_swing_2-ipadhd.png in Resources */,
+				F10B672819992925003D12F0 /* dude-ipadhd.png in Resources */,
 				F11D774119941229000EC80A /* Default-568h@2x.png in Resources */,
 				F11D77611994122A000EC80A /* iTunesArtwork in Resources */,
 				F11D775C19941229000EC80A /* Icon-Spotlight-iOS7.png in Resources */,
 				F155307619988140005FF5DF /* monkey_jump_swing_2-hd.png in Resources */,
+				F10B672B19992997003D12F0 /* dude-hd.png in Resources */,
 				F11D775019941229000EC80A /* Icon-76@2x.png in Resources */,
 				F11D79C41994122D000EC80A /* LICENSE_Chipmunk.txt in Resources */,
 				F11D775E19941229000EC80A /* Icon-Spotlight-iOS7@2x.png in Resources */,

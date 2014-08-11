@@ -22,7 +22,8 @@ typedef NS_ENUM(NSInteger, RopeState)
 typedef NS_ENUM(NSInteger, PullingState)
 {
     NotPulling,
-    Pulling
+    Pulling,
+    Pulled
 };
 
 @interface Rope : CCSprite {
@@ -31,15 +32,13 @@ typedef NS_ENUM(NSInteger, PullingState)
 
 
 
-+ (Rope *)createRope: (Player*)player origin:(CGPoint*)origin;
-- (id)init: (Player*)player origin:(CGPoint*)origin;
++ (Rope *)createRope: (Player*)player target:(CGPoint*)target;
+- (id)init: (Player*)player target:(CGPoint*)target;
 
 - (void)attach: (float)x y:(float)y width:(float)width height:(float)height;
 - (void)detach;
 - (BOOL)activatePulling;
 
-
-- (void)stopPulling;
 - (BOOL)isAttached;
 //- (void)rising;
 //- (void)doneRising;
