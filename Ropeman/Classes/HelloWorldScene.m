@@ -22,7 +22,9 @@
     float width, height;
     TouchLayer *touchLayer;
     
-    BOOL IS_IPAD;
+    float level_width;
+    
+    BOOL game_over;
 }
 
 // -----------------------------------------------------------------------
@@ -52,7 +54,7 @@
     
     width = [CCDirector is_iPad] ? self.contentSize.width : (426 + (2/3));
     height = self.contentSize.height;
-    
+    level_width = width * 3.1;
     
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
@@ -64,12 +66,12 @@
     [self addChild:_physicsWorld];
     
     // Add a player
-    _player = [Player createPlayer:width*.2 initialY:height*.8];
+    _player = [Player createPlayer:0 initialY:height*.8];
     [_physicsWorld addChild:_player];
     
     // Create walls
     Wall *ceiling = [Wall createWall:0 y:height*.9 width:width*3 height:height*.1];
-    Wall *divider =[Wall createWall:width y:height*.7 width:width*.3 height:height*.3];
+    Wall *divider =[Wall createWall:width*.6 y:height*.7 width:width*.3 height:height*.3];
     Wall *floater = [Wall createWall:width * 1.5 y:self.contentSize.height*.5 width:width*.1 height:height*.1];
     [_physicsWorld addChild: ceiling];
     [_physicsWorld addChild: divider];
@@ -119,19 +121,30 @@
 
 - (void)update:(CCTime)delta {
     float currentX = _player.position.x - cameraLeft;
-    float leftThreshhold = CAMERA_PANNING_PERCENT_LEFT * width;
-    float rightThreshhold = CAMERA_PANNING_PERCENT_RIGHT * width;
+    float leftThreshhold = CAMERA_PANNING_PERCENT_LEFT * self.contentSize.width;
+    float rightThreshhold = CAMERA_PANNING_PERCENT_RIGHT * self.contentSize.width;
     if (currentX >= rightThreshhold) {
         float delta = currentX - rightThreshhold;
+        if (cameraLeft + self.contentSize.width > level_width) {
+            delta = 0;
+        }
         cameraLeft += delta;
         self.position = ccp(self.position.x - delta, 0);
         touchLayer.position = ccp(touchLayer.position.x + delta, touchLayer.position.y);
     }
     else if (currentX <= leftThreshhold) {
         float delta = currentX - leftThreshhold;
+        if (cameraLeft + delta < 0) {
+            delta = -cameraLeft;
+        }
         cameraLeft += delta;
         self.position = ccp(self.position.x - delta, 0);
         touchLayer.position = ccp(touchLayer.position.x + delta, touchLayer.position.y);
+    }
+    
+    if (_player.position.y + _player.contentSize.height/2 < 0) {
+        CCLOG(@"Died");
+        game_over = YES;
     }
 }
 
@@ -140,6 +153,9 @@
 // -----------------------------------------------------------------------
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    if (game_over) {
+        return;
+    }
     CGPoint touchLoc = [touch locationInNode:self];
     
     [_currentRope detach];
@@ -157,7 +173,7 @@
 
 - (void)pull {
     
-    if (_currentRope == NULL) {
+    if (_currentRope == NULL || game_over) {
         return;
     }
     [_currentRope activatePulling];
