@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, PlayerState)
 }
 
 
-+ (Player*)createPlayer: (float)x initialY:(float)y;
-- (id)init: (float)x initialY:(float)y;
++ (Player*)createPlayer: (CGPoint)position;
+- (id)init: (CGPoint)position;
 
 @end

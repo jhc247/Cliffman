@@ -18,17 +18,17 @@
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (Player *)createPlayer:(float)x initialY:(float)y {
-    return [[self alloc] init:x initialY:y];
++ (Player *)createPlayer: (CGPoint)position {
+    return [[self alloc] init:position];
 }
 
-- (id)init: (float)x initialY:(float)y {
+- (id)init: (CGPoint)position {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
     
     self = [super initWithImageNamed:@"dude.png"];
-    self.position  = ccp(x,y);
+    self.position  = position;
     //self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0]; // 1
     self.physicsBody = [CCPhysicsBody bodyWithPillFrom:ccp(self.contentSize.width/2,self.contentSize.height*.22) to:ccp(self.contentSize.width/2, self.contentSize.height*.5) cornerRadius:self.contentSize.height*.2];
     self.physicsBody.collisionGroup = @"playerGroup";
@@ -36,8 +36,6 @@
     self.physicsBody.sensor = NO;
     self.physicsBody.mass = PLAYER_MASS;
     self.physicsBody.affectedByGravity = YES;
-    
-    CCLOG(@"From y: %f", self.contentSize.height*.7);
     
     return self;
 }

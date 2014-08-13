@@ -41,10 +41,7 @@
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
-    // Create a pull button
-    CCNodeColor *p = [CCNodeColor nodeWithColor:[CCColor blueColor] width:100 height:50];
-    //[p set]
-    
+    // Create a pull button    
     CCButton *pullButton = [CCButton buttonWithTitle:@"Pull" fontName:@"Verdana-Bold" fontSize:26.0f];
     pullButton.positionType = CCPositionTypeNormalized;
     pullButton.position = ccp(0.90f, 0.05f); // Bottom Right of screen

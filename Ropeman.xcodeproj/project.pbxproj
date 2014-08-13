@@ -229,6 +229,8 @@
 		F1571470199BE4E900BA57C9 /* background-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F157146C199BE4E900BA57C9 /* background-hd.png */; };
 		F1571471199BE4E900BA57C9 /* background-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F157146D199BE4E900BA57C9 /* background-ipad.png */; };
 		F1571472199BE4E900BA57C9 /* background-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = F157146E199BE4E900BA57C9 /* background-ipadhd.png */; };
+		F1571475199BEED400BA57C9 /* Spike.m in Sources */ = {isa = PBXBuildFile; fileRef = F1571474199BEED400BA57C9 /* Spike.m */; };
+		F1571477199BFE4700BA57C9 /* testlevel.tmx in Resources */ = {isa = PBXBuildFile; fileRef = F1571476199BFE4700BA57C9 /* testlevel.tmx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -692,6 +694,9 @@
 		F157146C199BE4E900BA57C9 /* background-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-hd.png"; path = "Resources/background-hd.png"; sourceTree = "<group>"; };
 		F157146D199BE4E900BA57C9 /* background-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-ipad.png"; path = "Resources/background-ipad.png"; sourceTree = "<group>"; };
 		F157146E199BE4E900BA57C9 /* background-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-ipadhd.png"; path = "Resources/background-ipadhd.png"; sourceTree = "<group>"; };
+		F1571473199BEED400BA57C9 /* Spike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spike.h; sourceTree = "<group>"; };
+		F1571474199BEED400BA57C9 /* Spike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spike.m; sourceTree = "<group>"; };
+		F1571476199BFE4700BA57C9 /* testlevel.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = testlevel.tmx; path = Resources/testlevel.tmx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -763,6 +768,7 @@
 		F11D773B19941229000EC80A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F1571476199BFE4700BA57C9 /* testlevel.tmx */,
 				F10B672919992997003D12F0 /* dude-hd.png */,
 				F10B672A19992997003D12F0 /* dude.png */,
 				F10B672519992925003D12F0 /* dude-ipad.png */,
@@ -1596,6 +1602,8 @@
 				F11D79CB1994122D000EC80A /* AppDelegate.m */,
 				F11D79CD1994122D000EC80A /* HelloWorldScene.h */,
 				F11D79CE1994122D000EC80A /* HelloWorldScene.m */,
+				F1571473199BEED400BA57C9 /* Spike.h */,
+				F1571474199BEED400BA57C9 /* Spike.m */,
 				F100AAAF1995B91A0066E5BE /* TouchLayer.h */,
 				F100AAB01995B91A0066E5BE /* TouchLayer.m */,
 				F11D79DB19941D85000EC80A /* Rope.h */,
@@ -1718,6 +1726,7 @@
 				F11D79C41994122D000EC80A /* LICENSE_Chipmunk.txt in Resources */,
 				F11D775E19941229000EC80A /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				F11D774E19941229000EC80A /* Icon-76.png in Resources */,
+				F1571477199BFE4700BA57C9 /* testlevel.tmx in Resources */,
 				F11D79241994122C000EC80A /* ChangeLog in Resources */,
 				F1571470199BE4E900BA57C9 /* background-hd.png in Resources */,
 				F11D77631994122A000EC80A /* iTunesArtwork@2x in Resources */,
@@ -1851,6 +1860,7 @@
 				F11D79461994122D000EC80A /* CCBKeyframe.m in Sources */,
 				F11D79001994122C000EC80A /* CCControlTextureFactory.m in Sources */,
 				F11D77851994122A000EC80A /* CCAnimationCache.m in Sources */,
+				F1571475199BEED400BA57C9 /* Spike.m in Sources */,
 				F11D79091994122C000EC80A /* CCTableView.m in Sources */,
 				F11D79CC1994122D000EC80A /* AppDelegate.m in Sources */,
 				F11D779C1994122A000EC80A /* CCDrawingPrimitives.m in Sources */,

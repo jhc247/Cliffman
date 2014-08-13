@@ -31,17 +31,17 @@
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (Rope *)createRope: (Player*)player target:(CGPoint*)target {
-    return [[self alloc] init:player target:(CGPoint*)target];
++ (Rope *)createRope: (Player*)player target:(CGPoint)target {
+    return [[self alloc] init:player target:target];
 }
 
-- (id)init: (Player*)player target:(CGPoint*)target {
+- (id)init: (Player*)player target:(CGPoint)target {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
     
     CGPoint playerPosition = CGPointMake(player.position.x, player.position.y);
-    float angle = [Rope getAngle:&playerPosition target:target];
+    float angle = [Rope getAngle:playerPosition target:target];
     
     // Store arguments in class
     _player = player;
@@ -93,11 +93,7 @@
 
 
 - (void)update:(CCTime)delta {
-    
-    
     float ropeLength = ccpDistance(_player.position, self.position);
-    CGPoint target = CGPointMake(_player.position.x, _player.position.y);
-    //float angle = [Rope getAngle:&CGPointZero target:&target];
     prevX2 = prevX;
     prevY2 = prevY;
     prevX = self.position.x;
@@ -119,7 +115,7 @@
                 float acceleration_pull = [CCDirector is_iPad] ? ROPE_PULL_FORCE : ROPE_PULL_FORCE / IPAD_TO_IPHONE_HEIGHT_RATIO;
                 CGPoint origin = _player.position;
                 CGPoint target = self.position;
-                float angle = [Rope getAngle:&origin target:&target];
+                float angle = [Rope getAngle:origin target:target];
                 xForce = acceleration_pull * sinf(CC_DEGREES_TO_RADIANS(angle));
                 yForce = acceleration_pull * cosf(CC_DEGREES_TO_RADIANS(angle));
                 [_player.physicsBody applyImpulse:ccp(xForce, yForce)];
@@ -246,9 +242,9 @@
     return YES;
 }
 
-+ (float)getAngle: (CGPoint*)origin target:(CGPoint*)target {
-    float deltaX = target->x - origin->x;
-    float deltaY = target->y - origin->y;
++ (float)getAngle: (CGPoint)origin target:(CGPoint)target {
+    float deltaX = target.x - origin.x;
+    float deltaY = target.y - origin.y;
     float angle = CC_RADIANS_TO_DEGREES(atanf(deltaY/deltaX)) - 90;
     if (deltaY >= 0) {
         if (deltaX >= 0) {

@@ -32,8 +32,8 @@ typedef NS_ENUM(NSInteger, PullingState)
 
 
 
-+ (Rope *)createRope: (Player*)player target:(CGPoint*)target;
-- (id)init: (Player*)player target:(CGPoint*)target;
++ (Rope *)createRope: (Player*)player target:(CGPoint)target;
+- (id)init: (Player*)player target:(CGPoint)target;
 
 - (void)attach: (float)x y:(float)y width:(float)width height:(float)height;
 - (void)detach;

@@ -56,10 +56,13 @@
     height = self.contentSize.height;
     level_width = width * 3;
     
+    // Set-up game elements extraction from TiledMap
+    CCTiledMap *tilemap = [CCTiledMap tiledMapWithFile:@"testlevel.tmx"];
+    
+    // Create background
     CCTexture *backgroundTexture = [CCTexture textureWithFile:@"background.png"];
     int numRepetitions = (int)(ceilf(level_width / backgroundTexture.contentSize.width));
     numRepetitions = numRepetitions < 1 ? 1 : numRepetitions;
-    
     for (int i = 0; i < numRepetitions; i++) {
         CCSprite* background = [CCSprite spriteWithTexture:backgroundTexture];
         background.anchorPoint = ccp(0,0);
@@ -76,28 +79,61 @@
     _physicsWorld.gravity = ccp(x_grav, y_grav);
     [self addChild:_physicsWorld];
     
-    // Add a player
-    _player = [Player createPlayer:0 initialY:height*.8];
+    // Create walls
+    CCTiledMapObjectGroup *wallGroup = [tilemap objectGroupNamed:@"walls"];
+    NSMutableArray *walls = [wallGroup objects];
+    for (NSMutableDictionary *wall in walls) {
+        float x = [[wall valueForKey:@"x"] floatValue];
+        float y = [[wall valueForKey:@"y"] floatValue];
+        float wid = [[wall valueForKey:@"width"] floatValue];
+        float hei = [[wall valueForKey:@"height"] floatValue];
+        if (![CCDirector is_iPad]) {
+            x = x / IPAD_TO_IPHONE_HEIGHT_RATIO;
+            y = y / IPAD_TO_IPHONE_HEIGHT_RATIO;
+            wid = wid / IPAD_TO_IPHONE_HEIGHT_RATIO;
+            hei = hei / IPAD_TO_IPHONE_HEIGHT_RATIO;
+        }
+        
+        Wall* w = [Wall createWall:x y:y width:wid height:hei];
+        [_physicsWorld addChild:w];
+    }
+    
+    // Create spikes
+    CCTiledMapObjectGroup *spikesGroup = [tilemap objectGroupNamed:@"spikes"];
+    NSMutableArray *spikes = [spikesGroup objects];
+    for (NSMutableDictionary *spike in spikes) {
+        float x = [[spike valueForKey:@"x"] floatValue];
+        float y = [[spike valueForKey:@"y"] floatValue];
+        SpikeOrientation orientation = [[Spike valueForKey:@"orientation"] intValue];
+        if (![CCDirector is_iPad]) {
+            x = x / IPAD_TO_IPHONE_HEIGHT_RATIO;
+            y = y / IPAD_TO_IPHONE_HEIGHT_RATIO;
+        }
+        Spike *s = [Spike createSpike:ccp(x, y) orientation:orientation];
+        [_physicsWorld addChild:s];
+    }
+    
+    // Create the player
+    CCTiledMapObjectGroup *playerGroup = [tilemap objectGroupNamed:@"player"];
+    NSMutableDictionary *p = [[playerGroup objects] objectAtIndex:0];
+    float x = [[p valueForKey:@"x"] floatValue] + 23;
+    float y = [[p valueForKey:@"y"] floatValue] + 57;
+    if (![CCDirector is_iPad]) {
+        x = x / IPAD_TO_IPHONE_HEIGHT_RATIO;
+        y = y / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    }
+    _player = [Player createPlayer:ccp(x,y)];
+    
     [_physicsWorld addChild:_player];
     
-    // Create walls
-    Wall *ceiling = [Wall createWall:0 y:height*.9 width:2.1*backgroundTexture.contentSize.width height:height*.1];
-    Wall *divider =[Wall createWall:width*.6 y:height*.7 width:width*.3 height:height*.3];
-    Wall *floater = [Wall createWall:width * 1.5 y:self.contentSize.height*.5 width:width*.1 height:height*.1];
-    [_physicsWorld addChild: ceiling];
-    [_physicsWorld addChild: divider];
-    [_physicsWorld addChild: floater];
-    _currentRope = NULL;
-    
-    // Initialize camera
+    // Set-up camera
     touchLayer = [TouchLayer createTouchLayer:self.contentSize];
     [self addChild:touchLayer];
     cameraLeft = 0;
     
-    CCLOG(@"To y: %f", height*.9);
+    _currentRope = NULL;
     
-    // done
-	return self;
+    return self;
 }
 
 // -----------------------------------------------------------------------
@@ -155,7 +191,7 @@
     
     if (_player.position.y + _player.contentSize.height/2 < 0) {
         //CCLOG(@"Died");
-        game_over = YES;
+        //game_over = YES;
     }
 }
 
@@ -167,11 +203,11 @@
     if (game_over) {
         return;
     }
+    
     CGPoint touchLoc = [touch locationInNode:self];
-    
+
     [_currentRope detach];
-    
-    _currentRope = [Rope createRope:_player target:&touchLoc];
+    _currentRope = [Rope createRope:_player target:touchLoc];
     [_physicsWorld addChild:_currentRope];
 }
 
@@ -195,6 +231,14 @@
     [_currentRope attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
     CCLOG(@"Speed: %@", NSStringFromCGPoint(rope.physicsBody.velocity));
     return YES;
+}
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair spikeCollision:(Spike *)spike playerCollision:(Player *)player {
+    CCLOG(@"Hit spike");
+    
+    //[_currentRope attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
+    //CCLOG(@"Speed: %@", NSStringFromCGPoint(rope.physicsBody.velocity));
+    return NO;
 }
 
 
