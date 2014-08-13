@@ -225,6 +225,10 @@
 		F155307619988140005FF5DF /* monkey_jump_swing_2-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F155307319988140005FF5DF /* monkey_jump_swing_2-hd.png */; };
 		F155307719988140005FF5DF /* monkey_jump_swing_2-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F155307419988140005FF5DF /* monkey_jump_swing_2-ipad.png */; };
 		F155307819988140005FF5DF /* monkey_jump_swing_2-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = F155307519988140005FF5DF /* monkey_jump_swing_2-ipadhd.png */; };
+		F157146F199BE4E900BA57C9 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = F157146B199BE4E900BA57C9 /* background.png */; };
+		F1571470199BE4E900BA57C9 /* background-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F157146C199BE4E900BA57C9 /* background-hd.png */; };
+		F1571471199BE4E900BA57C9 /* background-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F157146D199BE4E900BA57C9 /* background-ipad.png */; };
+		F1571472199BE4E900BA57C9 /* background-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = F157146E199BE4E900BA57C9 /* background-ipadhd.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -684,6 +688,10 @@
 		F155307319988140005FF5DF /* monkey_jump_swing_2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkey_jump_swing_2-hd.png"; path = "Resources/monkey_jump_swing_2-hd.png"; sourceTree = "<group>"; };
 		F155307419988140005FF5DF /* monkey_jump_swing_2-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkey_jump_swing_2-ipad.png"; path = "Resources/monkey_jump_swing_2-ipad.png"; sourceTree = "<group>"; };
 		F155307519988140005FF5DF /* monkey_jump_swing_2-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monkey_jump_swing_2-ipadhd.png"; path = "Resources/monkey_jump_swing_2-ipadhd.png"; sourceTree = "<group>"; };
+		F157146B199BE4E900BA57C9 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Resources/background.png; sourceTree = "<group>"; };
+		F157146C199BE4E900BA57C9 /* background-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-hd.png"; path = "Resources/background-hd.png"; sourceTree = "<group>"; };
+		F157146D199BE4E900BA57C9 /* background-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-ipad.png"; path = "Resources/background-ipad.png"; sourceTree = "<group>"; };
+		F157146E199BE4E900BA57C9 /* background-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-ipadhd.png"; path = "Resources/background-ipadhd.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -763,6 +771,10 @@
 				F155307319988140005FF5DF /* monkey_jump_swing_2-hd.png */,
 				F155307419988140005FF5DF /* monkey_jump_swing_2-ipad.png */,
 				F155307519988140005FF5DF /* monkey_jump_swing_2-ipadhd.png */,
+				F157146B199BE4E900BA57C9 /* background.png */,
+				F157146C199BE4E900BA57C9 /* background-hd.png */,
+				F157146D199BE4E900BA57C9 /* background-ipad.png */,
+				F157146E199BE4E900BA57C9 /* background-ipadhd.png */,
 				F122395419986532005D7B31 /* test_sprite-ipad.png */,
 				F11D773C19941229000EC80A /* Default.png */,
 				F11D773E19941229000EC80A /* Default@2x.png */,
@@ -1685,12 +1697,14 @@
 				F155307119987754005FF5DF /* monkey_jump_swing_2.png in Resources */,
 				F11D775419941229000EC80A /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				F10B672719992925003D12F0 /* dude-ipad.png in Resources */,
+				F1571471199BE4E900BA57C9 /* background-ipad.png in Resources */,
 				F11D774319941229000EC80A /* Default-Landscape~ipad.png in Resources */,
 				F11D775819941229000EC80A /* Icon-Small.png in Resources */,
 				F11D775619941229000EC80A /* Icon-Small-50.png in Resources */,
 				F11D793F1994122D000EC80A /* LICENSE_Kazmath.txt in Resources */,
 				F122395519986532005D7B31 /* test_sprite-ipad.png in Resources */,
 				F11D774A19941229000EC80A /* Icon-72.png in Resources */,
+				F157146F199BE4E900BA57C9 /* background.png in Resources */,
 				F11D78981994122B000EC80A /* LICENSE_cocos2d.txt in Resources */,
 				F155307819988140005FF5DF /* monkey_jump_swing_2-ipadhd.png in Resources */,
 				F10B672819992925003D12F0 /* dude-ipadhd.png in Resources */,
@@ -1698,12 +1712,14 @@
 				F11D77611994122A000EC80A /* iTunesArtwork in Resources */,
 				F11D775C19941229000EC80A /* Icon-Spotlight-iOS7.png in Resources */,
 				F155307619988140005FF5DF /* monkey_jump_swing_2-hd.png in Resources */,
+				F1571472199BE4E900BA57C9 /* background-ipadhd.png in Resources */,
 				F10B672B19992997003D12F0 /* dude-hd.png in Resources */,
 				F11D775019941229000EC80A /* Icon-76@2x.png in Resources */,
 				F11D79C41994122D000EC80A /* LICENSE_Chipmunk.txt in Resources */,
 				F11D775E19941229000EC80A /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				F11D774E19941229000EC80A /* Icon-76.png in Resources */,
 				F11D79241994122C000EC80A /* ChangeLog in Resources */,
+				F1571470199BE4E900BA57C9 /* background-hd.png in Resources */,
 				F11D77631994122A000EC80A /* iTunesArtwork@2x in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

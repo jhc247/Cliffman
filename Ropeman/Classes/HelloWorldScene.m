@@ -54,7 +54,18 @@
     
     width = [CCDirector is_iPad] ? self.contentSize.width : (426 + (2/3));
     height = self.contentSize.height;
-    level_width = width * 3.1;
+    level_width = width * 3;
+    
+    CCTexture *backgroundTexture = [CCTexture textureWithFile:@"background.png"];
+    int numRepetitions = (int)(ceilf(level_width / backgroundTexture.contentSize.width));
+    numRepetitions = numRepetitions < 1 ? 1 : numRepetitions;
+    
+    for (int i = 0; i < numRepetitions; i++) {
+        CCSprite* background = [CCSprite spriteWithTexture:backgroundTexture];
+        background.anchorPoint = ccp(0,0);
+        background.position = ccp(background.contentSize.width * i, 0);
+        [self addChild:background];
+    }
     
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
@@ -70,7 +81,7 @@
     [_physicsWorld addChild:_player];
     
     // Create walls
-    Wall *ceiling = [Wall createWall:0 y:height*.9 width:width*3 height:height*.1];
+    Wall *ceiling = [Wall createWall:0 y:height*.9 width:2.1*backgroundTexture.contentSize.width height:height*.1];
     Wall *divider =[Wall createWall:width*.6 y:height*.7 width:width*.3 height:height*.3];
     Wall *floater = [Wall createWall:width * 1.5 y:self.contentSize.height*.5 width:width*.1 height:height*.1];
     [_physicsWorld addChild: ceiling];
@@ -143,7 +154,7 @@
     }
     
     if (_player.position.y + _player.contentSize.height/2 < 0) {
-        CCLOG(@"Died");
+        //CCLOG(@"Died");
         game_over = YES;
     }
 }
