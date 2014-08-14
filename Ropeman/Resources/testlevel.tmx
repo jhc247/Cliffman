@@ -8,8 +8,9 @@
  <objectgroup name="walls" width="48" height="12">
   <object name="ceiling-1" x="0" y="0" width="1536" height="64"/>
   <object name="ceiling-2" x="2560" y="0" width="512" height="64"/>
+  <object name="floater" x="440" y="434" width="216" height="115"/>
  </objectgroup>
  <objectgroup name="player" width="48" height="12">
-  <object name="player" x="382" y="323" width="57" height="96"/>
+  <object name="player" x="513" y="146" width="57" height="96"/>
  </objectgroup>
 </map>

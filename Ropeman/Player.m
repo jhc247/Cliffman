@@ -60,6 +60,11 @@
     
     //[self.physicsBody applyForce:ccp(resistance, 0)];
     
+    // Hack to prevent player body from merging with walls, causing the game to freeze
+    // No noticeable effect on game physics
+    float anti_gravity = [CCDirector is_iPad] ? IPAD_TO_IPHONE_HEIGHT_RATIO : 1;
+    [self.physicsBody applyImpulse:ccp(0, anti_gravity)];
+    
 }
 
 

@@ -29,6 +29,8 @@
     _height = height;
     _width = width;
     
+    self = [super initWithColor:[CCColor blackColor] width:width height:height];
+    
     self.position = ccp(x,y);
     self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, CGSizeMake(width,height)} cornerRadius:0.0f];
     self.physicsBody.collisionGroup = @"wallGroup";

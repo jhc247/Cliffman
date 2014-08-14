@@ -15,7 +15,7 @@
 static const float IPAD_TO_IPHONE_HEIGHT_RATIO = 2.4;
 
 static const float PLAYER_MASS = 1.0f;
-static const float PLAYER_SHOOT_SPEED = 450;
+static const float PLAYER_SHOOT_SPEED = 700;
 static const float PLAYER_ARM_LENGTH = 30;
 
 static const float ROPE_ACCEL = 3000;
@@ -24,7 +24,7 @@ static const float ROPE_MINMAX_LENGTH = 50;
 static const float ROPE_BUFFER = 50;
 static const float ROPE_PULL_FORCE = 500;
 static const float ROPE_MIN_LENGTH = 0;
-static const float ROPE_HOOK_RADIUS = 10;
+static const float ROPE_HOOK_RADIUS = 5;
 static const float ROPE_INITIAL_SLACK = 0;
 static const float ROPE_ADDITIONAL_GRAVITY = -3000;
 

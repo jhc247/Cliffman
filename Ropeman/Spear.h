@@ -26,13 +26,13 @@ typedef NS_ENUM(NSInteger, PullingState)
     Pulled
 };
 
-@interface Rope : CCSprite {
+@interface Spear : CCSprite {
     
 }
 
 
 
-+ (Rope *)createRope: (Player*)player target:(CGPoint)target;
++ (Spear *)createSpear: (Player*)player target:(CGPoint)target;
 - (id)init: (Player*)player target:(CGPoint)target;
 
 - (void)attach: (float)x y:(float)y width:(float)width height:(float)height;
@@ -40,7 +40,5 @@ typedef NS_ENUM(NSInteger, PullingState)
 - (BOOL)activatePulling;
 
 - (BOOL)isAttached;
-//- (void)rising;
-//- (void)doneRising;
 
 @end

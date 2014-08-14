@@ -17,7 +17,7 @@
 {
     Player *_player;
     CCPhysicsNode *_physicsWorld;
-    Rope* _currentRope;
+    Spear* _currentSpear;
     float cameraLeft;
     float width, height;
     TouchLayer *touchLayer;
@@ -72,7 +72,7 @@
     
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.debugDraw = YES;
+    _physicsWorld.debugDraw = NO;
     _physicsWorld.collisionDelegate = self;
     float x_grav = [CCDirector is_iPad] ? GRAVITY_X : GRAVITY_X / IPAD_TO_IPHONE_HEIGHT_RATIO;
     float y_grav = [CCDirector is_iPad] ? GRAVITY_Y : GRAVITY_Y / IPAD_TO_IPHONE_HEIGHT_RATIO;
@@ -131,7 +131,7 @@
     [self addChild:touchLayer];
     cameraLeft = 0;
     
-    _currentRope = NULL;
+    _currentSpear = NULL;
     
     return self;
 }
@@ -206,9 +206,9 @@
     
     CGPoint touchLoc = [touch locationInNode:self];
 
-    [_currentRope detach];
-    _currentRope = [Rope createRope:_player target:touchLoc];
-    [_physicsWorld addChild:_currentRope];
+    [_currentSpear detach];
+    _currentSpear = [Spear createSpear:_player target:touchLoc];
+    [_physicsWorld addChild:_currentSpear z:-10];
 }
 
 -(void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -220,16 +220,16 @@
 
 - (void)pull {
     
-    if (_currentRope == NULL || game_over) {
+    if (_currentSpear == NULL || game_over) {
         return;
     }
-    [_currentRope activatePulling];
+    [_currentSpear activatePulling];
 }
 
 
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(Wall *)wall ropeCollision:(Rope *)rope {
-    [_currentRope attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
-    CCLOG(@"Speed: %@", NSStringFromCGPoint(rope.physicsBody.velocity));
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(Wall *)wall spearCollision:(Spear *)spear {
+    [_currentSpear attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
+    CCLOG(@"Speed: %@", NSStringFromCGPoint(spear.physicsBody.velocity));
     return YES;
 }
 
