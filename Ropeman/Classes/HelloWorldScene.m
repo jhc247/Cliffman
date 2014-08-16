@@ -17,7 +17,6 @@
 {
     Player *_player;
     CCPhysicsNode *_physicsWorld;
-    Spear* _currentSpear;
     float cameraLeft;
     float width, height;
     TouchLayer *touchLayer;
@@ -47,6 +46,7 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = NO;
     
+    
     /*// Create a colored background (Dark Grey)
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
@@ -72,12 +72,15 @@
     
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.debugDraw = NO;
+    //_physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     float x_grav = [CCDirector is_iPad] ? GRAVITY_X : GRAVITY_X / IPAD_TO_IPHONE_HEIGHT_RATIO;
     float y_grav = [CCDirector is_iPad] ? GRAVITY_Y : GRAVITY_Y / IPAD_TO_IPHONE_HEIGHT_RATIO;
     _physicsWorld.gravity = ccp(x_grav, y_grav);
     [self addChild:_physicsWorld];
+    
+    CCSpriteBatchNode *playerBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"playersprites.pvr.ccz"];
+    [_physicsWorld addChild:playerBatchNode];
     
     // Create walls
     CCTiledMapObjectGroup *wallGroup = [tilemap objectGroupNamed:@"walls"];
@@ -95,7 +98,7 @@
         }
         
         Wall* w = [Wall createWall:x y:y width:wid height:hei];
-        [_physicsWorld addChild:w];
+        [_physicsWorld addChild:w z:Z_ORDER_WALL];
     }
     
     // Create spikes
@@ -124,14 +127,12 @@
     }
     _player = [Player createPlayer:ccp(x,y)];
     
-    [_physicsWorld addChild:_player];
+    [playerBatchNode addChild:_player z:Z_ORDER_PLAYER];
     
     // Set-up camera
     touchLayer = [TouchLayer createTouchLayer:self.contentSize];
     [self addChild:touchLayer];
     cameraLeft = 0;
-    
-    _currentSpear = NULL;
     
     return self;
 }
@@ -205,10 +206,7 @@
     }
     
     CGPoint touchLoc = [touch locationInNode:self];
-
-    [_currentSpear detach];
-    _currentSpear = [Spear createSpear:_player target:touchLoc];
-    [_physicsWorld addChild:_currentSpear z:-10];
+    [_player throwSpear:touchLoc];
 }
 
 -(void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -218,18 +216,19 @@
 // -----------------------------------------------------------------------
 
 
-- (void)pull {
-    
-    if (_currentSpear == NULL || game_over) {
-        return;
-    }
-    [_currentSpear activatePulling];
+- (BOOL)pull {
+    return game_over ? NO : [_player pull];
 }
 
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(Wall *)wall spearCollision:(Spear *)spear {
-    [_currentSpear attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
-    CCLOG(@"Speed: %@", NSStringFromCGPoint(spear.physicsBody.velocity));
+    [spear attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
+    
+    // Create the physics joint
+    float ropeLength = ccpDistance(_player.position, spear.position) + ROPE_INITIAL_SLACK;
+    ropeLength = (ropeLength >= ROPE_MINMAX_LENGTH) ? ropeLength : ROPE_MINMAX_LENGTH;
+    [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:spear.physicsBody anchorA:ccp(_player.contentSize.width*.5, _player.contentSize.height*.5) anchorB:ccp(spear.contentSize.width/2,spear.contentSize.height*.2) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
+    
     return YES;
 }
 

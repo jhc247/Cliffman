@@ -9,7 +9,11 @@
 
 #import "AppDelegate.h"
 #import "IntroScene.h"
-#import "HelloWorldScene.h"
+#import "CCAnimation.h"
+#import "CCAnimationCache.h"
+#import "Constants.h"
+#import <Foundation/Foundation.h>
+#import "cocos2d.h"
 
 @implementation AppDelegate
 
@@ -36,13 +40,29 @@
 		// Run in portrait mode.
 //		CCSetupScreenOrientation: CCScreenOrientationPortrait,
 		// Run at a reduced framerate.
-//		CCSetupAnimationInterval: @(1.0/15.0),
+//		CCSetupAnimationInterval: @(1.0/8.0),
 		// Run the fixed timestep extra fast.
 //		CCSetupFixedUpdateInterval: @(1.0/180.0),
 		// Make iPad's act like they run at a 2x content scale. (iPad retina 4x)
 //		CCSetupTabletScale2X: @(YES),
 	}];
 	
+    // -----------------------------------------------------------------------
+    #pragma mark - Add Sprite Frames
+    // -----------------------------------------------------------------------
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"playersprites.plist"];
+
+    
+    
+    NSMutableArray *throwFrames = [NSMutableArray array];
+    for (int i = 0; i < 4; i++) {
+        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"obj_SpearThrow00%d.png", i]];
+        [throwFrames addObject:frame];
+    }
+    
+    CCAnimation *animation = [CCAnimation animationWithSpriteFrames:throwFrames delay:PLAYER_THROW_ANIMATION_DELAY];
+    [[CCAnimationCache sharedAnimationCache] addAnimation:animation name:PLAYER_THROW_ANIMATION_NAME];
+    
 	return YES;
 }
 

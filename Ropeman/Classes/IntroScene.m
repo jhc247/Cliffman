@@ -51,7 +51,8 @@
     helloWorldButton.position = ccp(0.5f, 0.35f);
     [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
     [self addChild:helloWorldButton];
-
+    
+    
     // done
 	return self;
 }

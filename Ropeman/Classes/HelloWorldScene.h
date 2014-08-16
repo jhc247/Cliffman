@@ -11,7 +11,6 @@
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
 #import "Player.h"
-#import "Spear.h"
 #import "Spike.h"
 #import "Wall.h"
 #import "Constants.h"
@@ -30,7 +29,7 @@
 
 + (HelloWorldScene *)scene;
 - (id)init;
-- (void)pull;
+- (BOOL)pull;
 
 // -----------------------------------------------------------------------
 @end
