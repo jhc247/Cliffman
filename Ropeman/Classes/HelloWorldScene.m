@@ -30,14 +30,14 @@
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (HelloWorldScene *)scene
++ (HelloWorldScene *)scene: (NSString*)level_name
 {
-    return [[self alloc] init];
+    return [[self alloc] initLevel:level_name];
 }
 
 // -----------------------------------------------------------------------
 
-- (id)init
+- (id)initLevel: (NSString*)level_name
 {
     // Apple recommend assigning self with supers return value
     self = [super init];
@@ -62,7 +62,7 @@
     
     
     // Set-up game elements extraction from TiledMap
-    CCTiledMap *tilemap = [CCTiledMap tiledMapWithFile:@"level-1.tmx"];
+    CCTiledMap *tilemap = [CCTiledMap tiledMapWithFile:level_name];
     
     float coordinateMultiplier;
     switch ([CCDirector sharedDirector].device) {

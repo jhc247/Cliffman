@@ -221,6 +221,7 @@
 		F11D79E119941EB1000EC80A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79E019941EB1000EC80A /* Player.m */; };
 		F1571475199BEED400BA57C9 /* Spike.m in Sources */ = {isa = PBXBuildFile; fileRef = F1571474199BEED400BA57C9 /* Spike.m */; };
 		F1571477199BFE4700BA57C9 /* testlevel.tmx in Resources */ = {isa = PBXBuildFile; fileRef = F1571476199BFE4700BA57C9 /* testlevel.tmx */; };
+		F1A45B3E19A11D1000432B8A /* WorldSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A45B3D19A11D1000432B8A /* WorldSelectScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -677,6 +678,8 @@
 		F1571473199BEED400BA57C9 /* Spike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spike.h; sourceTree = "<group>"; };
 		F1571474199BEED400BA57C9 /* Spike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spike.m; sourceTree = "<group>"; };
 		F1571476199BFE4700BA57C9 /* testlevel.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = testlevel.tmx; path = Resources/testlevel.tmx; sourceTree = "<group>"; };
+		F1A45B3C19A11D1000432B8A /* WorldSelectScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldSelectScene.h; sourceTree = "<group>"; };
+		F1A45B3D19A11D1000432B8A /* WorldSelectScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldSelectScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1583,6 +1586,8 @@
 				F11D79DC19941D85000EC80A /* Spear.m */,
 				F11D79D01994122D000EC80A /* IntroScene.h */,
 				F11D79D11994122D000EC80A /* IntroScene.m */,
+				F1A45B3C19A11D1000432B8A /* WorldSelectScene.h */,
+				F1A45B3D19A11D1000432B8A /* WorldSelectScene.m */,
 				F11D79E319943148000EC80A /* Constants.h */,
 				F100AAAC19948B1D0066E5BE /* Wall.h */,
 				F100AAAD19948B1D0066E5BE /* Wall.m */,
@@ -1704,6 +1709,7 @@
 				F11D77D11994122A000EC80A /* CCParticleBatchNode.m in Sources */,
 				F11D79491994122D000EC80A /* CCBReader.m in Sources */,
 				F11D78F91994122C000EC80A /* CCButton.m in Sources */,
+				F1A45B3E19A11D1000432B8A /* WorldSelectScene.m in Sources */,
 				F11D78A41994122B000EC80A /* OALAudioActions.m in Sources */,
 				F11D78E91994122C000EC80A /* NSMutableArray+WeakReferences.m in Sources */,
 				F11D78631994122B000EC80A /* CCGLView.m in Sources */,

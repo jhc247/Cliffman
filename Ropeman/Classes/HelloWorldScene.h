@@ -8,6 +8,7 @@
 // -----------------------------------------------------------------------
 
 // Importing cocos2d.h and cocos2d-ui.h, will import anything you need to start using Cocos2D v3
+#import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
 #import "Player.h"
@@ -27,8 +28,8 @@
 
 // -----------------------------------------------------------------------
 
-+ (HelloWorldScene *)scene;
-- (id)init;
++ (HelloWorldScene *)scene: (NSString*)level_name;
+
 - (BOOL)pull;
 
 // -----------------------------------------------------------------------

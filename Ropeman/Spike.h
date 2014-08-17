@@ -22,6 +22,5 @@ typedef NS_ENUM(NSInteger, SpikeOrientation)
 }
 
 + (Spike *)createSpike: (CGPoint)position orientation:(SpikeOrientation)orientation;
-- (id)init: (CGPoint)position orientation:(SpikeOrientation)orientation;
 
 @end

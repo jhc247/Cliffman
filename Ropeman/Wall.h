@@ -14,7 +14,6 @@
 }
 
 + (Wall*)createWall: (float)x y:(float)y width:(float)width height:(float)height points:(NSString*)points mult:(float)mult;
-- (id)init: (float)x y:(float)y width:(float)width height:(float)height points:(NSString*)points mult:(float)mult;
 
 - (float)getWidth;
 - (float)getHeight;

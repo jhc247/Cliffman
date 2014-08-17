@@ -33,7 +33,6 @@ typedef NS_ENUM(NSInteger, PullingState)
 @property PullingState pullState;
 
 + (Spear *)createSpear: (CGPoint)playerPosition target:(CGPoint)target;
-- (id)init: (CGPoint)playerPosition target:(CGPoint)target;
 
 - (void)attach: (float)x y:(float)y width:(float)width height:(float)height;
 - (void)detach;

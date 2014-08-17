@@ -17,8 +17,7 @@
 
 // -----------------------------------------------------------------------
 
-+ (instancetype) createTouchLayer:(CGSize)size;
-- (instancetype)initTouchLayer:(CGSize)size;
++ (TouchLayer*) createTouchLayer:(CGSize)size;
 
 @end
 
