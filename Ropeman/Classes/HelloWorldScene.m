@@ -111,8 +111,8 @@
     _physicsWorld.gravity = ccp(x_grav, y_grav);
     [self addChild:_physicsWorld];
     
-    CCSpriteBatchNode *playerBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"playersprites.pvr.ccz"];
-    [_physicsWorld addChild:playerBatchNode];
+    CCSpriteBatchNode *playerBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"sprites_player.pvr.ccz"];
+    [_physicsWorld addChild:playerBatchNode z:Z_ORDER_PLAYER];
     
     // Create walls
     CCTiledMapObjectGroup *wallGroup = [tilemap objectGroupNamed:@"walls"];
@@ -124,7 +124,7 @@
         float hei = [[wall valueForKey:@"height"] floatValue] * coordinateMultiplier;
         NSString *points = [wall valueForKey:@"polygonPoints"];
         Wall* w = [Wall createWall:x y:y width:wid height:hei points:points mult:coordinateMultiplier];
-        [_physicsWorld addChild:w z:Z_ORDER_WALL];
+        [_physicsWorld addChild:w];
     }
     
     // Create spikes
@@ -146,14 +146,13 @@
     float y = ([[p valueForKey:@"y"] floatValue] + 116) * coordinateMultiplier;
     
     _player = [Player createPlayer:ccp(x,y)];
-    [playerBatchNode addChild:_player z:Z_ORDER_PLAYER];
+    [playerBatchNode addChild:_player];
     
     // Set-up camera
     touchLayer = [TouchLayer createTouchLayer:self.contentSize];
     [self addChild:touchLayer];
     
     float leftThreshhold = CAMERA_PANNING_PERCENT_LEFT * self.contentSize.width;
-    self.position = ccp(-leftThreshhold, 0);
     cameraLeft = 0;
     
     return self;
@@ -204,7 +203,7 @@
     }
     else if (currentX <= leftThreshhold) {
         int delta = roundf(currentX - leftThreshhold);
-        if (cameraLeft + delta < leftThreshhold) {
+        if (cameraLeft + delta < 0) {
             delta = -cameraLeft;
         }
         cameraLeft += delta;

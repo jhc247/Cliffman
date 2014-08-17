@@ -50,7 +50,7 @@ static const float CAMERA_PANNING_PERCENT_RIGHT = 0.60f;
 //static const float CAMERA_PANNING_RIGHT_AREA =
 static const float CAMERA_PANNING_PERCENT_LEFT = 0.1042f;
 
-
-static const int Z_ORDER_PLAYER = 0;
+// Z-Orders
+static const int Z_ORDER_PLAYER = 5;
 static const int Z_ORDER_SPEAR = 1;
-static const int Z_ORDER_WALL = 2;
+static const int Z_ORDER_TILEMAP = 0;

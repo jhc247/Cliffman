@@ -58,7 +58,7 @@
 - (void)onBackClicked:(id)sender
 {
     // back to intro scene with transition
-    [[CCDirector sharedDirector] replaceScene:[IntroScene sharedIntroScene]
+    [[CCDirector sharedDirector] replaceScene:[WorldSelectScene sharedWorldSelectScene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
 }
 

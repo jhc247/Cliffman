@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="13" tilewidth="120" tileheight="120">
+ <tileset firstgid="1" name="tiles_snow" tilewidth="122" tileheight="122" spacing="2" margin="2">
+  <image source="tiles_snow.png" trans="ff00ff" width="1751" height="498"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="60" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAWjYBQMVSBLJGYeKAdSGXAQgdkGzHXUByPFnzAwkvwKArj8O1zBqH9H/TucwEjzLwAPNip0MAwAAA==
+  </data>
+ </layer>
+ <objectgroup name="player" width="60" height="13">
+  <object name="player" x="-120" y="240" width="94" height="147"/>
+ </objectgroup>
+ <objectgroup name="walls" width="60" height="13">
+  <object name="floor-1" x="0" y="480" width="720" height="1080"/>
+  <object name="floor-2" x="720" y="480" width="360" height="240"/>
+  <object name="ledge-1" x="720" y="720">
+   <polygon points="0,0 240,0 0,240"/>
+  </object>
+  <object name="ledge-2" x="1320" y="480">
+   <polygon points="0,0 -240,0 -240,240 0,40"/>
+  </object>
+ </objectgroup>
+</map>

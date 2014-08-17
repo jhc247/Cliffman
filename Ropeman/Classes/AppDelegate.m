@@ -50,7 +50,7 @@
     // -----------------------------------------------------------------------
     #pragma mark - Add Sprite Frames To Cache
     // -----------------------------------------------------------------------
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"playersprites.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites_player.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"tiles_spritesheet.plist"];
     
     // -----------------------------------------------------------------------

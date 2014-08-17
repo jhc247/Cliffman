@@ -66,7 +66,7 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     playButton.positionType = CCPositionTypeNormalized;
     playButton.position = ccp(0.25f, 0.35f);
     [playButton setTarget:self selector:@selector(onPlayClicked:)];
-    [playButton setName:@"level-1.tmx"];
+    [playButton setName:@"w1-level1.tmx"];
     [self addChild:playButton];
     
     // Level 2 button
