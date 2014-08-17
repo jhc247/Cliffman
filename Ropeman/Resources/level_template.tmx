@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="13" tilewidth="120" tileheight="120">
+ <tileset firstgid="1" name="tiles_spritesheet" tilewidth="122" tileheight="122" spacing="2" margin="2">
+  <image source="tiles_spritesheet.png" trans="ff00ff" width="1986" height="1490"/>
+ </tileset>
+ <objectgroup name="player" width="60" height="13">
+  <object name="player" x="-42" y="557" width="94" height="147"/>
+ </objectgroup>
+ <objectgroup name="walls" width="60" height="13">
+  <object name="floor-1" x="0" y="720" width="480" height="840"/>
+  <object name="ledge" x="480" y="720">
+   <polygon points="0,0 480,0 480,40 360,120 0,120"/>
+  </object>
+  <object name="ledge-bottom" x="480" y="840">
+   <polygon points="0,0 120,0 0,120"/>
+  </object>
+ </objectgroup>
+ <layer name="Tile Layer 1" width="60" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwGMEMPNhmAN1FKyCChlcOrHNoDtD9O9zBqH+HNxj17/AGAFXoy2kwDAAA
+  </data>
+ </layer>
+</map>

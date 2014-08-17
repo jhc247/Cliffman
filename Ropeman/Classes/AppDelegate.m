@@ -48,20 +48,29 @@
 	}];
 	
     // -----------------------------------------------------------------------
-    #pragma mark - Add Sprite Frames
+    #pragma mark - Add Sprite Frames To Cache
     // -----------------------------------------------------------------------
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"playersprites.plist"];
-
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"tiles_spritesheet.plist"];
     
-    
+    // -----------------------------------------------------------------------
+    #pragma mark - Add Animations To Cache
+    // -----------------------------------------------------------------------
     NSMutableArray *throwFrames = [NSMutableArray array];
     for (int i = 0; i < 4; i++) {
         CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"obj_SpearThrow00%d.png", i]];
         [throwFrames addObject:frame];
     }
-    
     CCAnimation *animation = [CCAnimation animationWithSpriteFrames:throwFrames delay:PLAYER_THROW_ANIMATION_DELAY];
     [[CCAnimationCache sharedAnimationCache] addAnimation:animation name:PLAYER_THROW_ANIMATION_NAME];
+    
+    NSMutableArray *runFrames = [NSMutableArray array];
+    for (int i = 0; i < 8; i++) {
+        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"obj_Run00%d.png", i]];
+        [runFrames addObject:frame];
+    }
+    animation = [CCAnimation animationWithSpriteFrames:runFrames delay:PLAYER_RUN_ANIMATION_DELAY];
+    [[CCAnimationCache sharedAnimationCache] addAnimation:animation name:PLAYER_RUN_ANIMATION_NAME];
     
 	return YES;
 }

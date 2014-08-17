@@ -46,19 +46,50 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = NO;
     
-    
-    /*// Create a colored background (Dark Grey)
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
-    [self addChild:background];
-    */
-    
     width = [CCDirector is_iPad] ? self.contentSize.width : (426 + (2/3));
     height = self.contentSize.height;
     level_width = width * 3;
     
-    // Set-up game elements extraction from TiledMap
-    CCTiledMap *tilemap = [CCTiledMap tiledMapWithFile:@"testlevel.tmx"];
+    // Create a colored background (Dark Grey)
+    // 91-89-60 = dirt color
+    // 48-102-70 = green color
+    CCColor *startColor = [CCColor colorWithRed:91.0/255.0f green:89.0f/255.0f blue:60.0f/255.0f];
+    CCColor *endColor = [CCColor colorWithRed:84.0f/255.0f green:164.0f/255.0f blue:255.0f/255.0f];
     
+    CCNodeGradient *background = [CCNodeGradient nodeWithColor:startColor fadingTo:startColor];
+    [background setContentSize:CGSizeMake(level_width, height)];
+    [self addChild:background];
+    
+    
+    // Set-up game elements extraction from TiledMap
+    CCTiledMap *tilemap = [CCTiledMap tiledMapWithFile:@"level-1.tmx"];
+    
+    float coordinateMultiplier;
+    switch ([CCDirector sharedDirector].device) {
+        case iPadRetina:
+            [tilemap setScale:1.0f];
+            coordinateMultiplier = 0.5f;
+            break;
+        case iPadNonRetina:
+            [tilemap setScale:0.5f];
+            coordinateMultiplier = 0.5f;
+            break;
+        case iPhoneRetina:
+            [tilemap setScale:(100.0f/240.0f)];
+            coordinateMultiplier = (50.0f/240.0f);
+            break;
+        case iPhoneNonRetina:
+            [tilemap setScale:(50.0f/240.0f)];
+            coordinateMultiplier = (50.0f/240.0f);
+            break;
+        default:
+            break;
+    }
+    
+    [tilemap setScale:coordinateMultiplier];
+    [self addChild:tilemap];
+    
+    /*
     // Create background
     CCTexture *backgroundTexture = [CCTexture textureWithFile:@"background.png"];
     int numRepetitions = (int)(ceilf(level_width / backgroundTexture.contentSize.width));
@@ -69,6 +100,7 @@
         background.position = ccp(background.contentSize.width * i, 0);
         [self addChild:background];
     }
+    */
     
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
@@ -86,18 +118,12 @@
     CCTiledMapObjectGroup *wallGroup = [tilemap objectGroupNamed:@"walls"];
     NSMutableArray *walls = [wallGroup objects];
     for (NSMutableDictionary *wall in walls) {
-        float x = [[wall valueForKey:@"x"] floatValue];
-        float y = [[wall valueForKey:@"y"] floatValue];
-        float wid = [[wall valueForKey:@"width"] floatValue];
-        float hei = [[wall valueForKey:@"height"] floatValue];
-        if (![CCDirector is_iPad]) {
-            x = x / IPAD_TO_IPHONE_HEIGHT_RATIO;
-            y = y / IPAD_TO_IPHONE_HEIGHT_RATIO;
-            wid = wid / IPAD_TO_IPHONE_HEIGHT_RATIO;
-            hei = hei / IPAD_TO_IPHONE_HEIGHT_RATIO;
-        }
-        
-        Wall* w = [Wall createWall:x y:y width:wid height:hei];
+        float x = [[wall valueForKey:@"x"] floatValue] * coordinateMultiplier;
+        float y = [[wall valueForKey:@"y"] floatValue] * coordinateMultiplier;
+        float wid = [[wall valueForKey:@"width"] floatValue] * coordinateMultiplier;
+        float hei = [[wall valueForKey:@"height"] floatValue] * coordinateMultiplier;
+        NSString *points = [wall valueForKey:@"polygonPoints"];
+        Wall* w = [Wall createWall:x y:y width:wid height:hei points:points mult:coordinateMultiplier];
         [_physicsWorld addChild:w z:Z_ORDER_WALL];
     }
     
@@ -105,13 +131,10 @@
     CCTiledMapObjectGroup *spikesGroup = [tilemap objectGroupNamed:@"spikes"];
     NSMutableArray *spikes = [spikesGroup objects];
     for (NSMutableDictionary *spike in spikes) {
-        float x = [[spike valueForKey:@"x"] floatValue];
-        float y = [[spike valueForKey:@"y"] floatValue];
+        float x = [[spike valueForKey:@"x"] floatValue] * coordinateMultiplier;
+        float y = [[spike valueForKey:@"y"] floatValue] * coordinateMultiplier;
         SpikeOrientation orientation = [[Spike valueForKey:@"orientation"] intValue];
-        if (![CCDirector is_iPad]) {
-            x = x / IPAD_TO_IPHONE_HEIGHT_RATIO;
-            y = y / IPAD_TO_IPHONE_HEIGHT_RATIO;
-        }
+        
         Spike *s = [Spike createSpike:ccp(x, y) orientation:orientation];
         [_physicsWorld addChild:s];
     }
@@ -119,19 +142,18 @@
     // Create the player
     CCTiledMapObjectGroup *playerGroup = [tilemap objectGroupNamed:@"player"];
     NSMutableDictionary *p = [[playerGroup objects] objectAtIndex:0];
-    float x = [[p valueForKey:@"x"] floatValue] + 23;
-    float y = [[p valueForKey:@"y"] floatValue] + 57;
-    if (![CCDirector is_iPad]) {
-        x = x / IPAD_TO_IPHONE_HEIGHT_RATIO;
-        y = y / IPAD_TO_IPHONE_HEIGHT_RATIO;
-    }
-    _player = [Player createPlayer:ccp(x,y)];
+    float x = ([[p valueForKey:@"x"] floatValue] + 48) * coordinateMultiplier;
+    float y = ([[p valueForKey:@"y"] floatValue] + 116) * coordinateMultiplier;
     
+    _player = [Player createPlayer:ccp(x,y)];
     [playerBatchNode addChild:_player z:Z_ORDER_PLAYER];
     
     // Set-up camera
     touchLayer = [TouchLayer createTouchLayer:self.contentSize];
     [self addChild:touchLayer];
+    
+    float leftThreshhold = CAMERA_PANNING_PERCENT_LEFT * self.contentSize.width;
+    self.position = ccp(-leftThreshhold, 0);
     cameraLeft = 0;
     
     return self;
@@ -172,7 +194,7 @@
     float leftThreshhold = CAMERA_PANNING_PERCENT_LEFT * self.contentSize.width;
     float rightThreshhold = CAMERA_PANNING_PERCENT_RIGHT * self.contentSize.width;
     if (currentX >= rightThreshhold) {
-        float delta = currentX - rightThreshhold;
+        int delta = roundf(currentX - rightThreshhold);
         if (cameraLeft + self.contentSize.width > level_width) {
             delta = 0;
         }
@@ -181,8 +203,8 @@
         touchLayer.position = ccp(touchLayer.position.x + delta, touchLayer.position.y);
     }
     else if (currentX <= leftThreshhold) {
-        float delta = currentX - leftThreshhold;
-        if (cameraLeft + delta < 0) {
+        int delta = roundf(currentX - leftThreshhold);
+        if (cameraLeft + delta < leftThreshhold) {
             delta = -cameraLeft;
         }
         cameraLeft += delta;

@@ -123,10 +123,12 @@ static CCDirector *_sharedDirector = nil;
 		//
 		// Default Director is DisplayLink
 		//
-		if( [ [CCDirector class] isEqual:[self class]] )
+		if( [ [CCDirector class] isEqual:[self class]] ) {
 			_sharedDirector = [[CC_DIRECTOR_DEFAULT alloc] init];
-		else
+        }
+		else {
 			_sharedDirector = [[self alloc] init];
+        }
 	}
 
 	return _sharedDirector;
@@ -192,6 +194,27 @@ static CCDirector *_sharedDirector = nil;
 		
 		__ccContentScaleFactor = 1;
 		self.UIScaleFactor = 1;
+        
+        if ([UIScreen mainScreen].scale == 2.0) {
+            if ([CCDirector is_iPad]) { // iPad Retina
+                CCLOG(@"Device Detected: iPad Retina");
+                _device = iPadRetina;
+            }
+            else { // iPhone Retina
+                CCLOG(@"Device Detected: iPhone Retina");
+                _device = iPhoneRetina;
+            }
+        }
+        else {
+            if ([CCDirector is_iPad]) { // iPad Non-Retina
+                CCLOG(@"Device Detected: iPad Non-Retina");
+                _device = iPadNonRetina;
+            }
+            else { // iPhone Non-Retina
+                CCLOG(@"Device Detected: iPhone Non-Retina");
+                _device = iPhoneNonRetina;
+            }
+        }
 	}
 
 	return self;

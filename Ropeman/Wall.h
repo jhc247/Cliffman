@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface Wall : CCNodeColor {
+@interface Wall : CCNode {
     
 }
 
-+ (Wall*)createWall: (float)x y:(float)y width:(float)width height:(float)height;
-- (id)init: (float)x y:(float)y width:(float)width height:(float)height;
++ (Wall*)createWall: (float)x y:(float)y width:(float)width height:(float)height points:(NSString*)points mult:(float)mult;
+- (id)init: (float)x y:(float)y width:(float)width height:(float)height points:(NSString*)points mult:(float)mult;
 
 - (float)getWidth;
 - (float)getHeight;

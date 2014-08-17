@@ -17,26 +17,46 @@
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (Wall*)createWall: (float)x y:(float)y width:(float)width height:(float)height {
-    return [[self alloc] init:x y:y width:width height:height];
++ (Wall*)createWall: (float)x y:(float)y width:(float)width height:(float)height points:(NSString*) points mult:(float)mult{
+    return [[self alloc] init:x y:y width:width height:height points:points mult:mult];
 }
 
-- (id)init: (float)x y:(float)y width:(float)width height:(float)height {
+- (id)init: (float)x y:(float)y width:(float)width height:(float)height points:(NSString*) points mult:(float)mult {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
     
     _height = height;
     _width = width;
-    
-    self = [super initWithColor:[CCColor blackColor] width:width height:height];
-    
     self.position = ccp(x,y);
-    self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, CGSizeMake(width,height)} cornerRadius:0.0f];
+    
+    //self = [super initWithColor:[CCColor blackColor] width:width height:height];
+    if (points == NULL) {
+        self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, CGSizeMake(width,height)} cornerRadius:0.0f];
+    }
+    else {
+        NSArray *pairs = [points componentsSeparatedByString:@" "];
+        int count = pairs.count;
+        CGPoint points[count];
+        int i = 0;
+        for (NSString* pair in pairs) {
+            NSArray *xy = [pair componentsSeparatedByString:@","];
+            int x = [[xy objectAtIndex:0] intValue] * mult;
+            int y = -[[xy objectAtIndex:1] intValue] * mult;
+            
+            CGPoint point = ccp(x,y);
+            points[i] = point;
+            i++;
+        }
+        
+        self.physicsBody = [CCPhysicsBody bodyWithPolygonFromPoints:points count:count cornerRadius:0];
+    }
+    
     self.physicsBody.collisionGroup = @"wallGroup";
     self.physicsBody.collisionType = @"wallCollision";
     self.physicsBody.affectedByGravity = NO;
     self.physicsBody.type = CCPhysicsBodyTypeStatic;
+    
 
     return self;
 }

@@ -65,6 +65,14 @@ typedef NS_ENUM(NSUInteger, CCDirectorProjection) {
 #define CC_VIEWCONTROLLER NSObject
 #endif
 
+typedef NS_ENUM(NSInteger, DEVICETYPE)
+{
+    iPadRetina,
+    iPadNonRetina,
+    iPhoneRetina,
+    iPhoneNonRetina
+};
+
 /**Class that creates and handle the main Window and manages how
 and when to execute the Scenes.
 
@@ -200,6 +208,8 @@ and when to execute the Scenes.
 /// User definable value that is used for default contentSizes of many node types (CCScene, CCNodeColor, etc).
 /// Defaults to the view size.
 @property(nonatomic, assign) CGSize designSize;
+
+@property(nonatomic, assign) DEVICETYPE device;
 
 /** returns a shared instance of the director */
 +(CCDirector*)sharedDirector;

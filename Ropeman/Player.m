@@ -34,8 +34,9 @@
     self = [super initWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"obj_FallFlat001.png"]];
     //self = [super initWithImageNamed:@"obj_FallFlat001.png"];
     self.position  = position;
+    self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){ccp(self.contentSize.width/2 - self.contentSize.height*.2,self.contentSize.height*.02), CGSizeMake(self.contentSize.height*.4, self.contentSize.height*.68)} cornerRadius:0];
     //self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0]; // 1
-    self.physicsBody = [CCPhysicsBody bodyWithPillFrom:ccp(self.contentSize.width/2,self.contentSize.height*.22) to:ccp(self.contentSize.width/2, self.contentSize.height*.5) cornerRadius:self.contentSize.height*.2];
+    //self.physicsBody = [CCPhysicsBody bodyWithPillFrom:ccp(self.contentSize.width/2,self.contentSize.height*.22) to:ccp(self.contentSize.width/2, self.contentSize.height*.5) cornerRadius:self.contentSize.height*.2];
     self.physicsBody.collisionGroup = @"playerGroup";
     self.physicsBody.collisionType = @"playerCollision";
     self.physicsBody.sensor = NO;
@@ -45,6 +46,10 @@
     
     currentSpear = NULL;
     
+    CCAnimation *animation = [[CCAnimationCache sharedAnimationCache] animationByName:PLAYER_RUN_ANIMATION_NAME];
+    CCActionAnimate *throwAnimation = [CCActionAnimate actionWithAnimation:animation];
+    CCActionRepeatForever *anim = [CCActionRepeatForever actionWithAction:throwAnimation];
+    [self runAction:anim];
     
     return self;
 }
@@ -58,7 +63,27 @@
 // -----------------------------------------------------------------------
 
 - (void)update:(CCTime)delta {
+    float xVel;
+    float xLimit;
     switch (_state) {
+        case Starting:
+            xLimit = [CCDirector is_iPad] ? PLAYER_RUN_DISTANCE : PLAYER_RUN_DISTANCE / IPAD_TO_IPHONE_HEIGHT_RATIO;
+            if (self.position.x >= xLimit) {
+                _state = Falling;
+                float xImp = sinf(CC_DEGREES_TO_RADIANS(PLAYER_JUMP_ANGLE)) * PLAYER_JUMP_IMPULSE;
+                float yImp = cosf(CC_DEGREES_TO_RADIANS(PLAYER_JUMP_ANGLE)) * PLAYER_JUMP_IMPULSE;
+                if (![CCDirector is_iPad]) {
+                    xImp = xImp / IPAD_TO_IPHONE_HEIGHT_RATIO;
+                    yImp = yImp / IPAD_TO_IPHONE_HEIGHT_RATIO;
+                }
+                [self.physicsBody applyImpulse:ccp(0, yImp)];
+                [self stopAllActions];
+            }
+            else {
+                xVel = [CCDirector is_iPad] ? PLAYER_RUN_SPEED : PLAYER_RUN_SPEED / IPAD_TO_IPHONE_HEIGHT_RATIO;
+                self.physicsBody.velocity = ccp(xVel, self.physicsBody.velocity.y);
+            }
+            break;
         case Throwing:
             
             break;
@@ -99,9 +124,26 @@
     }
 }
 
-- (void)throwSpear: (CGPoint) target {
+- (void)startSequence {
+    //CCActionMoveTo *run = [CCActionMoveTo actionWithDuration:PLAYER_RUN_SPEED position:ccp(400, self.position.y)];
+    //[self runAction:run];
+    /*
+    CCActionCallFunc *throw_spear = [CCActionCallFunc actionWithTarget:self selector:NSSelectorFromString(@"throwSpear_helper")];
+    CCAnimation *animation = [[CCAnimationCache sharedAnimationCache] animationByName:PLAYER_RUN_ANIMATION_NAME];
+    CCActionAnimate *throwAnimation = [CCActionAnimate actionWithAnimation:animation];
+    CCActionSequence *actions = [CCActionSequence actionWithArray:@[throwAnimation, throw_spear]];
+    [self runAction:actions];
+
+    */
     
+}
+
+- (void)throwSpear: (CGPoint) target {
+    if (_state == Starting) {
+        return;
+    }
     self.flipX = !(target.x >= self.position.x);
+    self.rotation = 0;
     _state = Throwing;
     helper_throwTarget = target;
     
@@ -119,7 +161,7 @@
 }
 
 - (BOOL)pull {
-    if (currentSpear == NULL) {
+    if (currentSpear == NULL || _state == Starting) {
         return NO;
     }
     CGPoint force = [currentSpear activatePulling: self.position];

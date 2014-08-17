@@ -23,6 +23,14 @@ static NSString* const PLAYER_THROW_ANIMATION_NAME = @"player_throw";
 static const float PLAYER_THROW_ANIMATION_DELAY = 0.05f;
 static const float PLAYER_ARM_LENGTH = 20;
 
+// Player start Sequence
+static const float PLAYER_RUN_SPEED = 300;
+static const float PLAYER_RUN_DISTANCE = 400;
+static const float PLAYER_JUMP_IMPULSE = 300;
+static const float PLAYER_JUMP_ANGLE = 0;
+
+static NSString* const PLAYER_RUN_ANIMATION_NAME = @"player_run";
+static const float PLAYER_RUN_ANIMATION_DELAY = 0.05f;
 
 static const float ROPE_ACCEL = 3000;
 static const float ROPE_THICKNESS = 10;
