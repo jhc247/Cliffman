@@ -28,4 +28,7 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="stars" width="60" height="13">
+  <object name="star-1" x="880" y="1080" width="117" height="126"/>
+ </objectgroup>
 </map>

@@ -169,4 +169,8 @@
     return !(force.x == 0 && force.y == 0);
 }
 
+- (void)killPlayer {
+    _state = Dying;
+}
+
 @end

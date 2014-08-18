@@ -159,6 +159,17 @@
         [spritesBatchNode addChild:b];
     }
     
+    // Create stars
+    CCTiledMapObjectGroup *starGroup = [tilemap objectGroupNamed:@"stars"];
+    NSMutableArray *stars = [starGroup objects];
+    for (NSMutableDictionary *star in stars) {
+        float x = [[star valueForKey:@"x"] floatValue] * coordinateMultiplier;
+        float y = [[star valueForKey:@"y"] floatValue] * coordinateMultiplier;
+        
+        Star *s = [Star createStar:ccp(x, y)];
+        [spritesBatchNode addChild:s];
+    }
+    
     // Set-up camera
     touchLayer = [TouchLayer createTouchLayer:self.contentSize];
     [self addChild:touchLayer];
@@ -251,7 +262,7 @@
     return game_over ? NO : [_player pull];
 }
 
-
+// Spear-Wall
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(Wall *)wall spearCollision:(Spear *)spear {
     [spear attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
     
@@ -263,27 +274,24 @@
     return YES;
 }
 
+// Spear-Bat
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair batCollision:(Bat *)bat spearCollision:(Spear *)spear {
     
     [bat killBat];
-    
     return NO;
 }
 
+// Player-Spike
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair spikeCollision:(Spike *)spike playerCollision:(Player *)player {
     CCLOG(@"Hit spike");
     
-    //[_currentRope attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
-    //CCLOG(@"Speed: %@", NSStringFromCGPoint(rope.physicsBody.velocity));
     return NO;
 }
 
-
-/*- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair playerCollision:(Player *)player ropeCollision:(Rope *)rope {
-    if ([_currentRope isAttached]) {
-    //    [_currentRope stopPulling];
-    }
-    return YES;
-}*/
-
+// Player-Star
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair starCollision:(Star *)star playerCollision:(Player *)player {
+    CCLOG(@"Hit star");
+    [star collect];
+    return NO;
+}
 @end

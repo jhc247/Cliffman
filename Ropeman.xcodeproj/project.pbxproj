@@ -218,6 +218,7 @@
 		F1A45B9819A14B3700432B8A /* sprites-ipadhd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9619A14B3700432B8A /* sprites-ipadhd.pvr.ccz */; };
 		F1A45B9B19A150F100432B8A /* sprites-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9919A150F100432B8A /* sprites-ipad.plist */; };
 		F1A45B9C19A150F100432B8A /* sprites-ipad.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9A19A150F100432B8A /* sprites-ipad.pvr.ccz */; };
+		F1A45B9F19A19A5800432B8A /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A45B9E19A19A5800432B8A /* Star.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -673,6 +674,8 @@
 		F1A45B9619A14B3700432B8A /* sprites-ipadhd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites-ipadhd.pvr.ccz"; path = "Resources/sprites-ipadhd.pvr.ccz"; sourceTree = "<group>"; };
 		F1A45B9919A150F100432B8A /* sprites-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "sprites-ipad.plist"; path = "Resources/sprites-ipad.plist"; sourceTree = "<group>"; };
 		F1A45B9A19A150F100432B8A /* sprites-ipad.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites-ipad.pvr.ccz"; path = "Resources/sprites-ipad.pvr.ccz"; sourceTree = "<group>"; };
+		F1A45B9D19A19A5800432B8A /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
+		F1A45B9E19A19A5800432B8A /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1563,9 +1566,11 @@
 				F1571474199BEED400BA57C9 /* Spike.m */,
 				F100AAAF1995B91A0066E5BE /* TouchLayer.h */,
 				F100AAB01995B91A0066E5BE /* TouchLayer.m */,
-				F11D79DB19941D85000EC80A /* Spear.h */,
 				F11D79DF19941EB1000EC80A /* Player.h */,
 				F11D79E019941EB1000EC80A /* Player.m */,
+				F1A45B9D19A19A5800432B8A /* Star.h */,
+				F1A45B9E19A19A5800432B8A /* Star.m */,
+				F11D79DB19941D85000EC80A /* Spear.h */,
 				F11D79DC19941D85000EC80A /* Spear.m */,
 				F11D79D01994122D000EC80A /* IntroScene.h */,
 				F11D79D11994122D000EC80A /* IntroScene.m */,
@@ -1864,6 +1869,7 @@
 				F11D77D81994122A000EC80A /* CCParticleSystem.m in Sources */,
 				F11D77FD1994122B000EC80A /* CCScene.m in Sources */,
 				F11D782B1994122B000EC80A /* CCTexture.m in Sources */,
+				F1A45B9F19A19A5800432B8A /* Star.m in Sources */,
 				F11D78BD1994122C000EC80A /* ALCaptureDevice.m in Sources */,
 				F11D77F91994122B000EC80A /* CCResponderManager.m in Sources */,
 				F11D77911994122A000EC80A /* CCConfiguration.m in Sources */,

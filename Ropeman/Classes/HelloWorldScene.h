@@ -18,6 +18,7 @@
 #import "IntroScene.h"
 #import "TouchLayer.h"
 #import "Bat.h"
+#import "Star.h"
 
 // -----------------------------------------------------------------------
 
