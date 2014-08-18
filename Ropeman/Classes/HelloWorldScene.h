@@ -17,6 +17,7 @@
 #import "Constants.h"
 #import "IntroScene.h"
 #import "TouchLayer.h"
+#import "Bat.h"
 
 // -----------------------------------------------------------------------
 

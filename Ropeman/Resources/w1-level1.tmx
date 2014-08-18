@@ -21,4 +21,11 @@
    <polygon points="0,0 -240,0 -240,240 0,40"/>
   </object>
  </objectgroup>
+ <objectgroup name="bats" width="60" height="13">
+  <object name="bat-1" x="2232" y="165" width="165" height="224">
+   <properties>
+    <property name="orientation" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

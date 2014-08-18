@@ -104,15 +104,23 @@
     
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
-    //_physicsWorld.debugDraw = YES;
+    _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     float x_grav = [CCDirector is_iPad] ? GRAVITY_X : GRAVITY_X / IPAD_TO_IPHONE_HEIGHT_RATIO;
     float y_grav = [CCDirector is_iPad] ? GRAVITY_Y : GRAVITY_Y / IPAD_TO_IPHONE_HEIGHT_RATIO;
     _physicsWorld.gravity = ccp(x_grav, y_grav);
     [self addChild:_physicsWorld];
     
-    CCSpriteBatchNode *playerBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"sprites_player.pvr.ccz"];
-    [_physicsWorld addChild:playerBatchNode z:Z_ORDER_PLAYER];
+    CCSpriteBatchNode *spritesBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"sprites.pvr.ccz"];
+    [_physicsWorld addChild:spritesBatchNode z:Z_ORDER_PLAYER];
+    
+    // Create the player
+    CCTiledMapObjectGroup *playerGroup = [tilemap objectGroupNamed:@"player"];
+    NSMutableDictionary *p = [[playerGroup objects] objectAtIndex:0];
+    float x = ([[p valueForKey:@"x"] floatValue] + 48) * coordinateMultiplier;
+    float y = ([[p valueForKey:@"y"] floatValue] + 116) * coordinateMultiplier;
+    _player = [Player createPlayer:ccp(x,y)];
+    [spritesBatchNode addChild:_player];
     
     // Create walls
     CCTiledMapObjectGroup *wallGroup = [tilemap objectGroupNamed:@"walls"];
@@ -128,31 +136,33 @@
     }
     
     // Create spikes
-    CCTiledMapObjectGroup *spikesGroup = [tilemap objectGroupNamed:@"spikes"];
-    NSMutableArray *spikes = [spikesGroup objects];
+    CCTiledMapObjectGroup *spikeGroup = [tilemap objectGroupNamed:@"spikes"];
+    NSMutableArray *spikes = [spikeGroup objects];
     for (NSMutableDictionary *spike in spikes) {
         float x = [[spike valueForKey:@"x"] floatValue] * coordinateMultiplier;
         float y = [[spike valueForKey:@"y"] floatValue] * coordinateMultiplier;
-        SpikeOrientation orientation = [[Spike valueForKey:@"orientation"] intValue];
+        Orientation orientation = [[spike valueForKey:@"orientation"] intValue];
         
         Spike *s = [Spike createSpike:ccp(x, y) orientation:orientation];
-        [_physicsWorld addChild:s];
+        [spritesBatchNode addChild:s];
     }
     
-    // Create the player
-    CCTiledMapObjectGroup *playerGroup = [tilemap objectGroupNamed:@"player"];
-    NSMutableDictionary *p = [[playerGroup objects] objectAtIndex:0];
-    float x = ([[p valueForKey:@"x"] floatValue] + 48) * coordinateMultiplier;
-    float y = ([[p valueForKey:@"y"] floatValue] + 116) * coordinateMultiplier;
-    
-    _player = [Player createPlayer:ccp(x,y)];
-    [playerBatchNode addChild:_player];
+    // Create bats
+    CCTiledMapObjectGroup *batGroup = [tilemap objectGroupNamed:@"bats"];
+    NSMutableArray *bats = [batGroup objects];
+    for (NSMutableDictionary *bat in bats) {
+        float x = [[bat valueForKey:@"x"] floatValue] * coordinateMultiplier;
+        float y = [[bat valueForKey:@"y"] floatValue] * coordinateMultiplier;
+        Orientation orientation = [[bat valueForKey:@"orientation"] intValue];
+        
+        Bat *b = [Bat createBat:ccp(x, y) orientation:orientation player:(CCNode*)_player];
+        [spritesBatchNode addChild:b];
+    }
     
     // Set-up camera
     touchLayer = [TouchLayer createTouchLayer:self.contentSize];
     [self addChild:touchLayer];
     
-    float leftThreshhold = CAMERA_PANNING_PERCENT_LEFT * self.contentSize.width;
     cameraLeft = 0;
     
     return self;
@@ -251,6 +261,13 @@
     [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:spear.physicsBody anchorA:ccp(_player.contentSize.width*.5, _player.contentSize.height*.5) anchorB:ccp(spear.contentSize.width/2,spear.contentSize.height*.2) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
     
     return YES;
+}
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair batCollision:(Bat *)bat spearCollision:(Spear *)spear {
+    
+    [bat killBat];
+    
+    return NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair spikeCollision:(Spike *)spike playerCollision:(Player *)player {

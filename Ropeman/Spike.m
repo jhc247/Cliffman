@@ -17,11 +17,11 @@
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (Spike *)createSpike: (CGPoint)position orientation:(SpikeOrientation)orientation {
++ (Spike *)createSpike: (CGPoint)position orientation:(Orientation)orientation {
     return [[self alloc] init:position orientation:orientation];
 }
 
-- (id)init: (CGPoint)position orientation:(SpikeOrientation)orientation; {
+- (id)init: (CGPoint)position orientation:(Orientation)orientation {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);

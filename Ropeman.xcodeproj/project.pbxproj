@@ -212,14 +212,12 @@
 		F1A45B6719A131E100432B8A /* w1-level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B6619A131E100432B8A /* w1-level1.tmx */; };
 		F1A45B6A19A1320500432B8A /* tiles_snow.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B6819A1320500432B8A /* tiles_snow.plist */; };
 		F1A45B6B19A1320500432B8A /* tiles_snow.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B6919A1320500432B8A /* tiles_snow.png */; };
-		F1A45B8419A13AD100432B8A /* sprites_player-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B7C19A13AD100432B8A /* sprites_player-hd.plist */; };
-		F1A45B8519A13AD100432B8A /* sprites_player-hd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B7D19A13AD100432B8A /* sprites_player-hd.pvr.ccz */; };
-		F1A45B8619A13AD100432B8A /* sprites_player-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B7E19A13AD100432B8A /* sprites_player-ipad.plist */; };
-		F1A45B8719A13AD100432B8A /* sprites_player-ipad.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B7F19A13AD100432B8A /* sprites_player-ipad.pvr.ccz */; };
-		F1A45B8819A13AD100432B8A /* sprites_player-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B8019A13AD100432B8A /* sprites_player-ipadhd.plist */; };
-		F1A45B8919A13AD100432B8A /* sprites_player-ipadhd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B8119A13AD100432B8A /* sprites_player-ipadhd.pvr.ccz */; };
-		F1A45B8A19A13AD100432B8A /* sprites_player.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B8219A13AD100432B8A /* sprites_player.plist */; };
-		F1A45B8B19A13AD100432B8A /* sprites_player.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B8319A13AD100432B8A /* sprites_player.pvr.ccz */; };
+		F1A45B8E19A13F1100432B8A /* Bat.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A45B8D19A13F1100432B8A /* Bat.m */; };
+		F1A45B9419A143D100432B8A /* Credits in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9319A143D100432B8A /* Credits */; };
+		F1A45B9719A14B3700432B8A /* sprites-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9519A14B3700432B8A /* sprites-ipadhd.plist */; };
+		F1A45B9819A14B3700432B8A /* sprites-ipadhd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9619A14B3700432B8A /* sprites-ipadhd.pvr.ccz */; };
+		F1A45B9B19A150F100432B8A /* sprites-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9919A150F100432B8A /* sprites-ipad.plist */; };
+		F1A45B9C19A150F100432B8A /* sprites-ipad.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9A19A150F100432B8A /* sprites-ipad.pvr.ccz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -668,14 +666,13 @@
 		F1A45B6619A131E100432B8A /* w1-level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "w1-level1.tmx"; path = "Resources/w1-level1.tmx"; sourceTree = "<group>"; };
 		F1A45B6819A1320500432B8A /* tiles_snow.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = tiles_snow.plist; path = Resources/tiles_snow.plist; sourceTree = "<group>"; };
 		F1A45B6919A1320500432B8A /* tiles_snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tiles_snow.png; path = Resources/tiles_snow.png; sourceTree = "<group>"; };
-		F1A45B7C19A13AD100432B8A /* sprites_player-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "sprites_player-hd.plist"; path = "Resources/sprites_player-hd.plist"; sourceTree = "<group>"; };
-		F1A45B7D19A13AD100432B8A /* sprites_player-hd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites_player-hd.pvr.ccz"; path = "Resources/sprites_player-hd.pvr.ccz"; sourceTree = "<group>"; };
-		F1A45B7E19A13AD100432B8A /* sprites_player-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "sprites_player-ipad.plist"; path = "Resources/sprites_player-ipad.plist"; sourceTree = "<group>"; };
-		F1A45B7F19A13AD100432B8A /* sprites_player-ipad.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites_player-ipad.pvr.ccz"; path = "Resources/sprites_player-ipad.pvr.ccz"; sourceTree = "<group>"; };
-		F1A45B8019A13AD100432B8A /* sprites_player-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "sprites_player-ipadhd.plist"; path = "Resources/sprites_player-ipadhd.plist"; sourceTree = "<group>"; };
-		F1A45B8119A13AD100432B8A /* sprites_player-ipadhd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites_player-ipadhd.pvr.ccz"; path = "Resources/sprites_player-ipadhd.pvr.ccz"; sourceTree = "<group>"; };
-		F1A45B8219A13AD100432B8A /* sprites_player.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = sprites_player.plist; path = Resources/sprites_player.plist; sourceTree = "<group>"; };
-		F1A45B8319A13AD100432B8A /* sprites_player.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = sprites_player.pvr.ccz; path = Resources/sprites_player.pvr.ccz; sourceTree = "<group>"; };
+		F1A45B8C19A13F1100432B8A /* Bat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bat.h; sourceTree = "<group>"; };
+		F1A45B8D19A13F1100432B8A /* Bat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bat.m; sourceTree = "<group>"; };
+		F1A45B9319A143D100432B8A /* Credits */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Credits; sourceTree = "<group>"; };
+		F1A45B9519A14B3700432B8A /* sprites-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "sprites-ipadhd.plist"; path = "Resources/sprites-ipadhd.plist"; sourceTree = "<group>"; };
+		F1A45B9619A14B3700432B8A /* sprites-ipadhd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites-ipadhd.pvr.ccz"; path = "Resources/sprites-ipadhd.pvr.ccz"; sourceTree = "<group>"; };
+		F1A45B9919A150F100432B8A /* sprites-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "sprites-ipad.plist"; path = "Resources/sprites-ipad.plist"; sourceTree = "<group>"; };
+		F1A45B9A19A150F100432B8A /* sprites-ipad.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites-ipad.pvr.ccz"; path = "Resources/sprites-ipad.pvr.ccz"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -752,6 +749,7 @@
 				F11D77641994122A000EC80A /* Libraries */,
 				F11D79C91994122D000EC80A /* Classes */,
 				F11D79C51994122D000EC80A /* Supporting Files */,
+				F1A45B9319A143D100432B8A /* Credits */,
 			);
 			path = Ropeman;
 			sourceTree = "<group>";
@@ -1576,6 +1574,8 @@
 				F11D79E319943148000EC80A /* Constants.h */,
 				F100AAAC19948B1D0066E5BE /* Wall.h */,
 				F100AAAD19948B1D0066E5BE /* Wall.m */,
+				F1A45B8C19A13F1100432B8A /* Bat.h */,
+				F1A45B8D19A13F1100432B8A /* Bat.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1591,25 +1591,13 @@
 		F1A45B4019A129A100432B8A /* Spritesheets */ = {
 			isa = PBXGroup;
 			children = (
+				F1A45B9919A150F100432B8A /* sprites-ipad.plist */,
+				F1A45B9A19A150F100432B8A /* sprites-ipad.pvr.ccz */,
+				F1A45B9519A14B3700432B8A /* sprites-ipadhd.plist */,
+				F1A45B9619A14B3700432B8A /* sprites-ipadhd.pvr.ccz */,
 				F1A45B4219A129E800432B8A /* Tiles */,
-				F1A45B4119A129DF00432B8A /* Player */,
 			);
 			name = Spritesheets;
-			sourceTree = "<group>";
-		};
-		F1A45B4119A129DF00432B8A /* Player */ = {
-			isa = PBXGroup;
-			children = (
-				F1A45B7C19A13AD100432B8A /* sprites_player-hd.plist */,
-				F1A45B7D19A13AD100432B8A /* sprites_player-hd.pvr.ccz */,
-				F1A45B7E19A13AD100432B8A /* sprites_player-ipad.plist */,
-				F1A45B7F19A13AD100432B8A /* sprites_player-ipad.pvr.ccz */,
-				F1A45B8019A13AD100432B8A /* sprites_player-ipadhd.plist */,
-				F1A45B8119A13AD100432B8A /* sprites_player-ipadhd.pvr.ccz */,
-				F1A45B8219A13AD100432B8A /* sprites_player.plist */,
-				F1A45B8319A13AD100432B8A /* sprites_player.pvr.ccz */,
-			);
-			name = Player;
 			sourceTree = "<group>";
 		};
 		F1A45B4219A129E800432B8A /* Tiles */ = {
@@ -1702,31 +1690,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1A45B8B19A13AD100432B8A /* sprites_player.pvr.ccz in Resources */,
+				F1A45B9419A143D100432B8A /* Credits in Resources */,
 				F1A45B6B19A1320500432B8A /* tiles_snow.png in Resources */,
 				F11D773F19941229000EC80A /* Default@2x.png in Resources */,
 				F11D79561994122D000EC80A /* LICENSE_CCBReader.txt in Resources */,
-				F1A45B8A19A13AD100432B8A /* sprites_player.plist in Resources */,
 				F11D773D19941229000EC80A /* Default.png in Resources */,
-				F1A45B8619A13AD100432B8A /* sprites_player-ipad.plist in Resources */,
 				F11D774319941229000EC80A /* Default-Landscape~ipad.png in Resources */,
 				F11D793F1994122D000EC80A /* LICENSE_Kazmath.txt in Resources */,
 				F1A45B6719A131E100432B8A /* w1-level1.tmx in Resources */,
 				F11D78981994122B000EC80A /* LICENSE_cocos2d.txt in Resources */,
-				F1A45B8519A13AD100432B8A /* sprites_player-hd.pvr.ccz in Resources */,
 				F1A45B6319A12DF500432B8A /* background-hd.png in Resources */,
+				F1A45B9C19A150F100432B8A /* sprites-ipad.pvr.ccz in Resources */,
 				F11D774119941229000EC80A /* Default-568h@2x.png in Resources */,
-				F1A45B8419A13AD100432B8A /* sprites_player-hd.plist in Resources */,
+				F1A45B9719A14B3700432B8A /* sprites-ipadhd.plist in Resources */,
 				F11D77611994122A000EC80A /* iTunesArtwork in Resources */,
-				F1A45B8719A13AD100432B8A /* sprites_player-ipad.pvr.ccz in Resources */,
 				F11D79C41994122D000EC80A /* LICENSE_Chipmunk.txt in Resources */,
+				F1A45B9819A14B3700432B8A /* sprites-ipadhd.pvr.ccz in Resources */,
+				F1A45B9B19A150F100432B8A /* sprites-ipad.plist in Resources */,
 				F1A45B6A19A1320500432B8A /* tiles_snow.plist in Resources */,
 				F1A45B6419A12DF500432B8A /* background-ipad.png in Resources */,
 				F11D79241994122C000EC80A /* ChangeLog in Resources */,
 				F11D77631994122A000EC80A /* iTunesArtwork@2x in Resources */,
 				F1A45B6219A12DF500432B8A /* background.png in Resources */,
-				F1A45B8819A13AD100432B8A /* sprites_player-ipadhd.plist in Resources */,
-				F1A45B8919A13AD100432B8A /* sprites_player-ipadhd.pvr.ccz in Resources */,
 				F1A45B6519A12DF500432B8A /* background-ipadhd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1819,6 +1804,7 @@
 				F11D783E1994122B000EC80A /* CCTiledMapObjectGroup.m in Sources */,
 				F11D793B1994122C000EC80A /* vec3.c in Sources */,
 				F11D77BE1994122A000EC80A /* CCLayoutBox.m in Sources */,
+				F1A45B8E19A13F1100432B8A /* Bat.m in Sources */,
 				F11D77BB1994122A000EC80A /* CCLayout.m in Sources */,
 				F11D78DE1994122C000EC80A /* OALSuspendHandler.m in Sources */,
 				F11D793D1994122D000EC80A /* vec4.c in Sources */,

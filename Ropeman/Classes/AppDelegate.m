@@ -50,12 +50,17 @@
     // -----------------------------------------------------------------------
     #pragma mark - Add Sprite Frames To Cache
     // -----------------------------------------------------------------------
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites_player.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFrames];
+    
+    //[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites_player.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"tiles_spritesheet.plist"];
     
     // -----------------------------------------------------------------------
     #pragma mark - Add Animations To Cache
     // -----------------------------------------------------------------------
+    
+    // Player throw animation
     NSMutableArray *throwFrames = [NSMutableArray array];
     for (int i = 0; i < 4; i++) {
         CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"obj_SpearThrow00%d.png", i]];
@@ -64,6 +69,7 @@
     CCAnimation *animation = [CCAnimation animationWithSpriteFrames:throwFrames delay:PLAYER_THROW_ANIMATION_DELAY];
     [[CCAnimationCache sharedAnimationCache] addAnimation:animation name:PLAYER_THROW_ANIMATION_NAME];
     
+    // Player run animation
     NSMutableArray *runFrames = [NSMutableArray array];
     for (int i = 0; i < 8; i++) {
         CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"obj_Run00%d.png", i]];
@@ -71,6 +77,21 @@
     }
     animation = [CCAnimation animationWithSpriteFrames:runFrames delay:PLAYER_RUN_ANIMATION_DELAY];
     [[CCAnimationCache sharedAnimationCache] addAnimation:animation name:PLAYER_RUN_ANIMATION_NAME];
+    
+    // Bat Fly animation animation
+    NSMutableArray *batFlyFrames = [NSMutableArray array];
+    [batFlyFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"bat.png"]];
+    [batFlyFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"bat_fly.png"]];
+    animation = [CCAnimation animationWithSpriteFrames:batFlyFrames delay:BAT_FLY_ANIMATION_DELAY];
+    [[CCAnimationCache sharedAnimationCache] addAnimation:animation name:BAT_FLY_ANIMATION_NAME];
+    
+    // Bat Fly animation animation
+    NSMutableArray *batDieFrames = [NSMutableArray array];
+    [batDieFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"bat_hit.png"]];
+    [batDieFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"bat_dead.png"]];
+    animation = [CCAnimation animationWithSpriteFrames:batDieFrames delay:BAT_DIE_ANIMATION_DELAY];
+    [[CCAnimationCache sharedAnimationCache] addAnimation:animation name:BAT_DIE_ANIMATION_NAME];
+    
     
 	return YES;
 }

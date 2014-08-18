@@ -8,19 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-
-typedef NS_ENUM(NSInteger, SpikeOrientation)
-{
-    FacingUp,
-    FacingRight,
-    FacingDown,
-    FacingLeft
-};
+#import "Constants.h"
 
 @interface Spike : CCSprite {
     
 }
 
-+ (Spike *)createSpike: (CGPoint)position orientation:(SpikeOrientation)orientation;
++ (Spike *)createSpike: (CGPoint)position orientation:(Orientation)orientation;
 
 @end
