@@ -44,8 +44,16 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     if (!self) return(nil);
     
     // Create a colored background (Dark Grey)
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
+    CCColor *startColor = [CCColor colorWithRed:76.0/255.0f green:180.0f/255.0f blue:224.0f/255.0f];
+    CCColor *endColor = [CCColor colorWithRed:42.0f/255.0f green:117.0f/255.0f blue:166.0f/255.0f];
+    
+    CCNodeGradient *background = [CCNodeGradient nodeWithColor:startColor fadingTo:endColor];
     [self addChild:background];
+    
+    CCNodeColor *opaqueBox = [CCNodeColor nodeWithColor:[CCColor blackColor] width:self.contentSize.width height:self.contentSize.height*.9];
+    opaqueBox.position = ccp(0, self.contentSize.height*.05);
+    opaqueBox.opacity = 0.8f;
+    [self addChild:opaqueBox];
     
     // Hello world
     CCLabelTTF *title = [CCLabelTTF labelWithString:@"WORLD SELECT" fontName:@"Chalkduster" fontSize:36.0f];
@@ -74,7 +82,7 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     play2Button.positionType = CCPositionTypeNormalized;
     play2Button.position = ccp(0.75f, 0.35f);
     [play2Button setTarget:self selector:@selector(onPlayClicked:)];
-    [play2Button setName:@"level-2.tmx"];
+    [play2Button setName:@"w1-level2.tmx"];
     [self addChild:play2Button];
 
     
@@ -89,8 +97,7 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
 - (void)onReturnClicked:(id)sender
 {
     // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[IntroScene sharedIntroScene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+    [[CCDirector sharedDirector] replaceScene:[IntroScene sharedIntroScene]];
 }
 
 - (void)onPlayClicked:(id)sender

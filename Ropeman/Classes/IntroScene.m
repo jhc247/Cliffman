@@ -46,7 +46,12 @@ static IntroScene *_sharedIntroScene = nil;
     if (!self) return(nil);
     
     // Create a colored background (Dark Grey)
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
+    // 91-89-60 = dirt color
+    // 48-102-70 = green color
+    CCColor *startColor = [CCColor colorWithRed:76.0/255.0f green:180.0f/255.0f blue:224.0f/255.0f];
+    CCColor *endColor = [CCColor colorWithRed:42.0f/255.0f green:117.0f/255.0f blue:166.0f/255.0f];
+    
+    CCNodeGradient *background = [CCNodeGradient nodeWithColor:startColor fadingTo:endColor];
     [self addChild:background];
     
     // Hello world
@@ -87,8 +92,7 @@ static IntroScene *_sharedIntroScene = nil;
 - (void)onPlayClicked:(id)sender
 {
     // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[WorldSelectScene sharedWorldSelectScene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+    [[CCDirector sharedDirector] replaceScene:[WorldSelectScene sharedWorldSelectScene]];
 }
 
 // Callback for the Mute button

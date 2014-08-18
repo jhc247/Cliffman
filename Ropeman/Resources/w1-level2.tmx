@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="13" tilewidth="120" tileheight="120">
+ <tileset firstgid="1" name="entryWay" tilewidth="120" tileheight="120">
+  <image source="entryWay.png" width="1467" height="1560"/>
+ </tileset>
+ <tileset firstgid="157" name="ceiling" tilewidth="120" tileheight="120">
+  <image source="ceiling.png" width="2048" height="240"/>
+ </tileset>
+ <layer name="entryWay" width="60" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA93OV0sWYACA0c9SywtnJZgrBVda4CgHuEqDUksFNbOCcgcNJ1hu0LRUsGz5az0/4v14oQfO/ZOSSCQucZlU0kjnClfJSPxfZZJFNjnkksc1rnOD/Gh34SvgJoUUUUwJpdyijPJYc0mogkqqqKaG29RSxx3uRrsLXz0NNNLEPe7TTAuttEW7C187HXTSRTcPeEgPvTyKNZeEHvOEPvoZ4CnPGGSI4Wh34RthlDGeM84LJnjJK15HuwvfG94yyRTTzDDLHPO8i3YXvvd84COfWGCRJZZZYTXaXfjW+MwX1tlgky222WE31lwS2mOfrxxwyDe+c8QxJ9HuwnfKD35yxi9+84e//OM82l34LgDNfskKMAwAAA==
+  </data>
+ </layer>
+ <layer name="Ceiling-1" width="60" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3OtxGDAAAEQfrvAe+NhHfC1MY1wECCSP5mNv43jOtMWLDhwIUHHwFCRIiRIEWGHAU++KJEhRoN2hvbb3T2tUOPASMmzPhhwYoN+/8vK6WUUkop9UgH/oJTbzAMAAA=
+  </data>
+ </layer>
+ <objectgroup name="player" width="60" height="13">
+  <object name="player" x="-120" y="446" width="94" height="147"/>
+ </objectgroup>
+ <objectgroup name="walls" width="60" height="13">
+  <object name="floor-1" x="0" y="600" width="720" height="960"/>
+  <object name="ledge-1" x="720" y="600">
+   <polygon points="0,0 0,240 321,238 432,68 428,38 391,1"/>
+  </object>
+ </objectgroup>
+</map>

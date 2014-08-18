@@ -203,6 +203,9 @@
 		F11D79D21994122D000EC80A /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79D11994122D000EC80A /* IntroScene.m */; };
 		F11D79DD19941D85000EC80A /* Spear.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79DC19941D85000EC80A /* Spear.m */; };
 		F11D79E119941EB1000EC80A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = F11D79E019941EB1000EC80A /* Player.m */; };
+		F12ED84C19A1D5CE00CE1FFB /* w1-level2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = F12ED84B19A1D5CE00CE1FFB /* w1-level2.tmx */; };
+		F12ED84F19A1D5DC00CE1FFB /* ceiling.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED84D19A1D5DC00CE1FFB /* ceiling.png */; };
+		F12ED85019A1D5DC00CE1FFB /* entryWay.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED84E19A1D5DC00CE1FFB /* entryWay.png */; };
 		F1571475199BEED400BA57C9 /* Spike.m in Sources */ = {isa = PBXBuildFile; fileRef = F1571474199BEED400BA57C9 /* Spike.m */; };
 		F1A45B3E19A11D1000432B8A /* WorldSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A45B3D19A11D1000432B8A /* WorldSelectScene.m */; };
 		F1A45B6219A12DF500432B8A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B5E19A12DF500432B8A /* background.png */; };
@@ -219,6 +222,14 @@
 		F1A45B9B19A150F100432B8A /* sprites-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9919A150F100432B8A /* sprites-ipad.plist */; };
 		F1A45B9C19A150F100432B8A /* sprites-ipad.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9A19A150F100432B8A /* sprites-ipad.pvr.ccz */; };
 		F1A45B9F19A19A5800432B8A /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A45B9E19A19A5800432B8A /* Star.m */; };
+		F1A45BA719A19F4E00432B8A /* sprites-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BA319A19F4E00432B8A /* sprites-hd.plist */; };
+		F1A45BA819A19F4E00432B8A /* sprites-hd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BA419A19F4E00432B8A /* sprites-hd.pvr.ccz */; };
+		F1A45BA919A19F4E00432B8A /* sprites.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BA519A19F4E00432B8A /* sprites.plist */; };
+		F1A45BAA19A19F4E00432B8A /* sprites.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BA619A19F4E00432B8A /* sprites.pvr.ccz */; };
+		F1A45BAF19A1A32E00432B8A /* snow_background.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BAB19A1A32E00432B8A /* snow_background.png */; };
+		F1A45BB019A1A32E00432B8A /* snow_background-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BAC19A1A32E00432B8A /* snow_background-hd.png */; };
+		F1A45BB119A1A32E00432B8A /* snow_background-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BAD19A1A32E00432B8A /* snow_background-ipad.png */; };
+		F1A45BB219A1A32E00432B8A /* snow_background-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BAE19A1A32E00432B8A /* snow_background-ipadhd.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -656,6 +667,9 @@
 		F11D79DF19941EB1000EC80A /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		F11D79E019941EB1000EC80A /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		F11D79E319943148000EC80A /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		F12ED84B19A1D5CE00CE1FFB /* w1-level2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "w1-level2.tmx"; path = "Resources/w1-level2.tmx"; sourceTree = "<group>"; };
+		F12ED84D19A1D5DC00CE1FFB /* ceiling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ceiling.png; path = Resources/ceiling.png; sourceTree = "<group>"; };
+		F12ED84E19A1D5DC00CE1FFB /* entryWay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = entryWay.png; path = Resources/entryWay.png; sourceTree = "<group>"; };
 		F1571473199BEED400BA57C9 /* Spike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spike.h; sourceTree = "<group>"; };
 		F1571474199BEED400BA57C9 /* Spike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spike.m; sourceTree = "<group>"; };
 		F1A45B3C19A11D1000432B8A /* WorldSelectScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldSelectScene.h; sourceTree = "<group>"; };
@@ -676,6 +690,14 @@
 		F1A45B9A19A150F100432B8A /* sprites-ipad.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites-ipad.pvr.ccz"; path = "Resources/sprites-ipad.pvr.ccz"; sourceTree = "<group>"; };
 		F1A45B9D19A19A5800432B8A /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
 		F1A45B9E19A19A5800432B8A /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
+		F1A45BA319A19F4E00432B8A /* sprites-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "sprites-hd.plist"; path = "Resources/sprites-hd.plist"; sourceTree = "<group>"; };
+		F1A45BA419A19F4E00432B8A /* sprites-hd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites-hd.pvr.ccz"; path = "Resources/sprites-hd.pvr.ccz"; sourceTree = "<group>"; };
+		F1A45BA519A19F4E00432B8A /* sprites.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = sprites.plist; path = Resources/sprites.plist; sourceTree = "<group>"; };
+		F1A45BA619A19F4E00432B8A /* sprites.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = sprites.pvr.ccz; path = Resources/sprites.pvr.ccz; sourceTree = "<group>"; };
+		F1A45BAB19A1A32E00432B8A /* snow_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = snow_background.png; path = Ropeman/Resources/Backgrounds/snow_background.png; sourceTree = SOURCE_ROOT; };
+		F1A45BAC19A1A32E00432B8A /* snow_background-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "snow_background-hd.png"; path = "Ropeman/Resources/Backgrounds/snow_background-hd.png"; sourceTree = SOURCE_ROOT; };
+		F1A45BAD19A1A32E00432B8A /* snow_background-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "snow_background-ipad.png"; path = "Ropeman/Resources/Backgrounds/snow_background-ipad.png"; sourceTree = SOURCE_ROOT; };
+		F1A45BAE19A1A32E00432B8A /* snow_background-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "snow_background-ipadhd.png"; path = "Ropeman/Resources/Backgrounds/snow_background-ipadhd.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -703,6 +725,10 @@
 			isa = PBXGroup;
 			children = (
 				F1A45B5E19A12DF500432B8A /* background.png */,
+				F1A45BAB19A1A32E00432B8A /* snow_background.png */,
+				F1A45BAC19A1A32E00432B8A /* snow_background-hd.png */,
+				F1A45BAD19A1A32E00432B8A /* snow_background-ipad.png */,
+				F1A45BAE19A1A32E00432B8A /* snow_background-ipadhd.png */,
 				F1A45B5F19A12DF500432B8A /* background-hd.png */,
 				F1A45B6019A12DF500432B8A /* background-ipad.png */,
 				F1A45B6119A12DF500432B8A /* background-ipadhd.png */,
@@ -1596,6 +1622,10 @@
 		F1A45B4019A129A100432B8A /* Spritesheets */ = {
 			isa = PBXGroup;
 			children = (
+				F1A45BA319A19F4E00432B8A /* sprites-hd.plist */,
+				F1A45BA419A19F4E00432B8A /* sprites-hd.pvr.ccz */,
+				F1A45BA519A19F4E00432B8A /* sprites.plist */,
+				F1A45BA619A19F4E00432B8A /* sprites.pvr.ccz */,
 				F1A45B9919A150F100432B8A /* sprites-ipad.plist */,
 				F1A45B9A19A150F100432B8A /* sprites-ipad.pvr.ccz */,
 				F1A45B9519A14B3700432B8A /* sprites-ipadhd.plist */,
@@ -1608,6 +1638,8 @@
 		F1A45B4219A129E800432B8A /* Tiles */ = {
 			isa = PBXGroup;
 			children = (
+				F12ED84D19A1D5DC00CE1FFB /* ceiling.png */,
+				F12ED84E19A1D5DC00CE1FFB /* entryWay.png */,
 				F1A45B6819A1320500432B8A /* tiles_snow.plist */,
 				F1A45B6919A1320500432B8A /* tiles_snow.png */,
 			);
@@ -1617,6 +1649,7 @@
 		F1A45B4719A12CD400432B8A /* World 1 */ = {
 			isa = PBXGroup;
 			children = (
+				F12ED84B19A1D5CE00CE1FFB /* w1-level2.tmx */,
 				F1A45B6619A131E100432B8A /* w1-level1.tmx */,
 			);
 			name = "World 1";
@@ -1696,28 +1729,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1A45B9419A143D100432B8A /* Credits in Resources */,
+				F1A45BA919A19F4E00432B8A /* sprites.plist in Resources */,
 				F1A45B6B19A1320500432B8A /* tiles_snow.png in Resources */,
 				F11D773F19941229000EC80A /* Default@2x.png in Resources */,
 				F11D79561994122D000EC80A /* LICENSE_CCBReader.txt in Resources */,
 				F11D773D19941229000EC80A /* Default.png in Resources */,
 				F11D774319941229000EC80A /* Default-Landscape~ipad.png in Resources */,
 				F11D793F1994122D000EC80A /* LICENSE_Kazmath.txt in Resources */,
+				F1A45BA819A19F4E00432B8A /* sprites-hd.pvr.ccz in Resources */,
 				F1A45B6719A131E100432B8A /* w1-level1.tmx in Resources */,
+				F1A45BB219A1A32E00432B8A /* snow_background-ipadhd.png in Resources */,
 				F11D78981994122B000EC80A /* LICENSE_cocos2d.txt in Resources */,
+				F12ED85019A1D5DC00CE1FFB /* entryWay.png in Resources */,
 				F1A45B6319A12DF500432B8A /* background-hd.png in Resources */,
 				F1A45B9C19A150F100432B8A /* sprites-ipad.pvr.ccz in Resources */,
 				F11D774119941229000EC80A /* Default-568h@2x.png in Resources */,
+				F1A45BB119A1A32E00432B8A /* snow_background-ipad.png in Resources */,
+				F12ED84F19A1D5DC00CE1FFB /* ceiling.png in Resources */,
 				F1A45B9719A14B3700432B8A /* sprites-ipadhd.plist in Resources */,
 				F11D77611994122A000EC80A /* iTunesArtwork in Resources */,
+				F1A45BAF19A1A32E00432B8A /* snow_background.png in Resources */,
+				F12ED84C19A1D5CE00CE1FFB /* w1-level2.tmx in Resources */,
 				F11D79C41994122D000EC80A /* LICENSE_Chipmunk.txt in Resources */,
 				F1A45B9819A14B3700432B8A /* sprites-ipadhd.pvr.ccz in Resources */,
+				F1A45BB019A1A32E00432B8A /* snow_background-hd.png in Resources */,
 				F1A45B9B19A150F100432B8A /* sprites-ipad.plist in Resources */,
 				F1A45B6A19A1320500432B8A /* tiles_snow.plist in Resources */,
 				F1A45B6419A12DF500432B8A /* background-ipad.png in Resources */,
 				F11D79241994122C000EC80A /* ChangeLog in Resources */,
 				F11D77631994122A000EC80A /* iTunesArtwork@2x in Resources */,
+				F1A45BA719A19F4E00432B8A /* sprites-hd.plist in Resources */,
 				F1A45B6219A12DF500432B8A /* background.png in Resources */,
 				F1A45B6519A12DF500432B8A /* background-ipadhd.png in Resources */,
+				F1A45BAA19A19F4E00432B8A /* sprites.pvr.ccz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

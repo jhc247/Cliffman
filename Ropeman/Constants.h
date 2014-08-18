@@ -33,7 +33,7 @@ static const float PLAYER_ARM_LENGTH = 20;
 
 // Player start Sequence
 static const float PLAYER_RUN_SPEED = 300;
-static const float PLAYER_RUN_DISTANCE = 400;
+static const float PLAYER_RUN_DISTANCE = 530;
 static const float PLAYER_JUMP_IMPULSE = 300;
 static const float PLAYER_JUMP_ANGLE = 0;
 

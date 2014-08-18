@@ -53,14 +53,24 @@
     // Create a colored background (Dark Grey)
     // 91-89-60 = dirt color
     // 48-102-70 = green color
-    CCColor *startColor = [CCColor colorWithRed:91.0/255.0f green:89.0f/255.0f blue:60.0f/255.0f];
-    CCColor *endColor = [CCColor colorWithRed:84.0f/255.0f green:164.0f/255.0f blue:255.0f/255.0f];
+    CCColor *startColor = [CCColor colorWithRed:76.0/255.0f green:180.0f/255.0f blue:224.0f/255.0f];
+    CCColor *endColor = [CCColor colorWithRed:42.0f/255.0f green:117.0f/255.0f blue:166.0f/255.0f];
     
-    CCNodeGradient *background = [CCNodeGradient nodeWithColor:startColor fadingTo:startColor];
+    CCNodeGradient *background = [CCNodeGradient nodeWithColor:startColor fadingTo:endColor];
     [background setContentSize:CGSizeMake(level_width, height)];
     [self addChild:background];
-    
-    
+    /*
+    // Create background
+    CCTexture *backgroundTexture = [CCTexture textureWithFile:@"snow_background.png"];
+    int numRepetitions = (int)(ceilf(level_width / backgroundTexture.contentSize.width));
+    numRepetitions = numRepetitions < 1 ? 1 : numRepetitions;
+    for (int i = 0; i < numRepetitions; i++) {
+        CCSprite* background = [CCSprite spriteWithTexture:backgroundTexture];
+        background.anchorPoint = ccp(0,0);
+        background.position = ccp(background.contentSize.width * i, 0);
+        [self addChild:background];
+    }
+    */
     // Set-up game elements extraction from TiledMap
     CCTiledMap *tilemap = [CCTiledMap tiledMapWithFile:level_name];
     
@@ -89,22 +99,9 @@
     [tilemap setScale:coordinateMultiplier];
     [self addChild:tilemap];
     
-    /*
-    // Create background
-    CCTexture *backgroundTexture = [CCTexture textureWithFile:@"background.png"];
-    int numRepetitions = (int)(ceilf(level_width / backgroundTexture.contentSize.width));
-    numRepetitions = numRepetitions < 1 ? 1 : numRepetitions;
-    for (int i = 0; i < numRepetitions; i++) {
-        CCSprite* background = [CCSprite spriteWithTexture:backgroundTexture];
-        background.anchorPoint = ccp(0,0);
-        background.position = ccp(background.contentSize.width * i, 0);
-        [self addChild:background];
-    }
-    */
-    
     // Create physics
     _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.debugDraw = YES;
+    //_physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     float x_grav = [CCDirector is_iPad] ? GRAVITY_X : GRAVITY_X / IPAD_TO_IPHONE_HEIGHT_RATIO;
     float y_grav = [CCDirector is_iPad] ? GRAVITY_Y : GRAVITY_Y / IPAD_TO_IPHONE_HEIGHT_RATIO;

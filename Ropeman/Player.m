@@ -144,6 +144,7 @@
     }
     self.flipX = !(target.x >= self.position.x);
     self.rotation = 0;
+    self.physicsBody.torque = 0;
     _state = Throwing;
     helper_throwTarget = target;
     
