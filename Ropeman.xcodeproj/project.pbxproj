@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F100AAAE19948B1D0066E5BE /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = F100AAAD19948B1D0066E5BE /* Wall.m */; };
 		F100AAB11995B91A0066E5BE /* TouchLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F100AAB01995B91A0066E5BE /* TouchLayer.m */; };
 		F11D772319941229000EC80A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11D772219941229000EC80A /* QuartzCore.framework */; };
 		F11D772519941229000EC80A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11D772419941229000EC80A /* OpenGLES.framework */; };
@@ -206,7 +205,14 @@
 		F12ED84C19A1D5CE00CE1FFB /* w1-level2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = F12ED84B19A1D5CE00CE1FFB /* w1-level2.tmx */; };
 		F12ED84F19A1D5DC00CE1FFB /* ceiling.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED84D19A1D5DC00CE1FFB /* ceiling.png */; };
 		F12ED85019A1D5DC00CE1FFB /* entryWay.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED84E19A1D5DC00CE1FFB /* entryWay.png */; };
-		F1571475199BEED400BA57C9 /* Spike.m in Sources */ = {isa = PBXBuildFile; fileRef = F1571474199BEED400BA57C9 /* Spike.m */; };
+		F12ED85219A2A46800CE1FFB /* exitPlatform.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED85119A2A46700CE1FFB /* exitPlatform.png */; };
+		F12ED85419A2A4F700CE1FFB /* wall.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED85319A2A4F700CE1FFB /* wall.png */; };
+		F12ED85D19A2E8D800CE1FFB /* introscreen-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED85819A2E8D800CE1FFB /* introscreen-hd.png */; };
+		F12ED85E19A2E8D800CE1FFB /* introscreen-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED85919A2E8D800CE1FFB /* introscreen-ipad.png */; };
+		F12ED85F19A2E8D800CE1FFB /* introscreen-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED85A19A2E8D800CE1FFB /* introscreen-ipadhd.png */; };
+		F12ED86019A2E8D800CE1FFB /* introscreen-widehd.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED85B19A2E8D800CE1FFB /* introscreen-widehd.png */; };
+		F12ED86119A2E8D800CE1FFB /* introscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = F12ED85C19A2E8D800CE1FFB /* introscreen.png */; };
+		F1571475199BEED400BA57C9 /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = F1571474199BEED400BA57C9 /* Sensor.m */; };
 		F1A45B3E19A11D1000432B8A /* WorldSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A45B3D19A11D1000432B8A /* WorldSelectScene.m */; };
 		F1A45B6219A12DF500432B8A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B5E19A12DF500432B8A /* background.png */; };
 		F1A45B6319A12DF500432B8A /* background-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B5F19A12DF500432B8A /* background-hd.png */; };
@@ -221,7 +227,6 @@
 		F1A45B9819A14B3700432B8A /* sprites-ipadhd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9619A14B3700432B8A /* sprites-ipadhd.pvr.ccz */; };
 		F1A45B9B19A150F100432B8A /* sprites-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9919A150F100432B8A /* sprites-ipad.plist */; };
 		F1A45B9C19A150F100432B8A /* sprites-ipad.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45B9A19A150F100432B8A /* sprites-ipad.pvr.ccz */; };
-		F1A45B9F19A19A5800432B8A /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A45B9E19A19A5800432B8A /* Star.m */; };
 		F1A45BA719A19F4E00432B8A /* sprites-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BA319A19F4E00432B8A /* sprites-hd.plist */; };
 		F1A45BA819A19F4E00432B8A /* sprites-hd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BA419A19F4E00432B8A /* sprites-hd.pvr.ccz */; };
 		F1A45BA919A19F4E00432B8A /* sprites.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1A45BA519A19F4E00432B8A /* sprites.plist */; };
@@ -243,8 +248,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F100AAAC19948B1D0066E5BE /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
-		F100AAAD19948B1D0066E5BE /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
 		F100AAAF1995B91A0066E5BE /* TouchLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchLayer.h; sourceTree = "<group>"; };
 		F100AAB01995B91A0066E5BE /* TouchLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchLayer.m; sourceTree = "<group>"; };
 		F11D771F19941229000EC80A /* Ropeman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ropeman.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -670,8 +673,15 @@
 		F12ED84B19A1D5CE00CE1FFB /* w1-level2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "w1-level2.tmx"; path = "Resources/w1-level2.tmx"; sourceTree = "<group>"; };
 		F12ED84D19A1D5DC00CE1FFB /* ceiling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ceiling.png; path = Resources/ceiling.png; sourceTree = "<group>"; };
 		F12ED84E19A1D5DC00CE1FFB /* entryWay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = entryWay.png; path = Resources/entryWay.png; sourceTree = "<group>"; };
-		F1571473199BEED400BA57C9 /* Spike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spike.h; sourceTree = "<group>"; };
-		F1571474199BEED400BA57C9 /* Spike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spike.m; sourceTree = "<group>"; };
+		F12ED85119A2A46700CE1FFB /* exitPlatform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = exitPlatform.png; path = Resources/exitPlatform.png; sourceTree = "<group>"; };
+		F12ED85319A2A4F700CE1FFB /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wall.png; path = Resources/wall.png; sourceTree = "<group>"; };
+		F12ED85819A2E8D800CE1FFB /* introscreen-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "introscreen-hd.png"; path = "Ropeman/Resources/Backgrounds/introscreen-hd.png"; sourceTree = SOURCE_ROOT; };
+		F12ED85919A2E8D800CE1FFB /* introscreen-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "introscreen-ipad.png"; path = "Ropeman/Resources/Backgrounds/introscreen-ipad.png"; sourceTree = SOURCE_ROOT; };
+		F12ED85A19A2E8D800CE1FFB /* introscreen-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "introscreen-ipadhd.png"; path = "Ropeman/Resources/Backgrounds/introscreen-ipadhd.png"; sourceTree = SOURCE_ROOT; };
+		F12ED85B19A2E8D800CE1FFB /* introscreen-widehd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "introscreen-widehd.png"; path = "Ropeman/Resources/Backgrounds/introscreen-widehd.png"; sourceTree = SOURCE_ROOT; };
+		F12ED85C19A2E8D800CE1FFB /* introscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = introscreen.png; path = Ropeman/Resources/Backgrounds/introscreen.png; sourceTree = SOURCE_ROOT; };
+		F1571473199BEED400BA57C9 /* Sensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sensor.h; sourceTree = "<group>"; };
+		F1571474199BEED400BA57C9 /* Sensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sensor.m; sourceTree = "<group>"; };
 		F1A45B3C19A11D1000432B8A /* WorldSelectScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldSelectScene.h; sourceTree = "<group>"; };
 		F1A45B3D19A11D1000432B8A /* WorldSelectScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldSelectScene.m; sourceTree = "<group>"; };
 		F1A45B5E19A12DF500432B8A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Ropeman/Resources/Backgrounds/background.png; sourceTree = SOURCE_ROOT; };
@@ -688,8 +698,6 @@
 		F1A45B9619A14B3700432B8A /* sprites-ipadhd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites-ipadhd.pvr.ccz"; path = "Resources/sprites-ipadhd.pvr.ccz"; sourceTree = "<group>"; };
 		F1A45B9919A150F100432B8A /* sprites-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "sprites-ipad.plist"; path = "Resources/sprites-ipad.plist"; sourceTree = "<group>"; };
 		F1A45B9A19A150F100432B8A /* sprites-ipad.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites-ipad.pvr.ccz"; path = "Resources/sprites-ipad.pvr.ccz"; sourceTree = "<group>"; };
-		F1A45B9D19A19A5800432B8A /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
-		F1A45B9E19A19A5800432B8A /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
 		F1A45BA319A19F4E00432B8A /* sprites-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "sprites-hd.plist"; path = "Resources/sprites-hd.plist"; sourceTree = "<group>"; };
 		F1A45BA419A19F4E00432B8A /* sprites-hd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sprites-hd.pvr.ccz"; path = "Resources/sprites-hd.pvr.ccz"; sourceTree = "<group>"; };
 		F1A45BA519A19F4E00432B8A /* sprites.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = sprites.plist; path = Resources/sprites.plist; sourceTree = "<group>"; };
@@ -724,6 +732,11 @@
 		F1070614199F102800F67E64 /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				F12ED85819A2E8D800CE1FFB /* introscreen-hd.png */,
+				F12ED85919A2E8D800CE1FFB /* introscreen-ipad.png */,
+				F12ED85A19A2E8D800CE1FFB /* introscreen-ipadhd.png */,
+				F12ED85B19A2E8D800CE1FFB /* introscreen-widehd.png */,
+				F12ED85C19A2E8D800CE1FFB /* introscreen.png */,
 				F1A45B5E19A12DF500432B8A /* background.png */,
 				F1A45BAB19A1A32E00432B8A /* snow_background.png */,
 				F1A45BAC19A1A32E00432B8A /* snow_background-hd.png */,
@@ -1588,14 +1601,12 @@
 				F11D79CB1994122D000EC80A /* AppDelegate.m */,
 				F11D79CD1994122D000EC80A /* HelloWorldScene.h */,
 				F11D79CE1994122D000EC80A /* HelloWorldScene.m */,
-				F1571473199BEED400BA57C9 /* Spike.h */,
-				F1571474199BEED400BA57C9 /* Spike.m */,
+				F1571473199BEED400BA57C9 /* Sensor.h */,
+				F1571474199BEED400BA57C9 /* Sensor.m */,
 				F100AAAF1995B91A0066E5BE /* TouchLayer.h */,
 				F100AAB01995B91A0066E5BE /* TouchLayer.m */,
 				F11D79DF19941EB1000EC80A /* Player.h */,
 				F11D79E019941EB1000EC80A /* Player.m */,
-				F1A45B9D19A19A5800432B8A /* Star.h */,
-				F1A45B9E19A19A5800432B8A /* Star.m */,
 				F11D79DB19941D85000EC80A /* Spear.h */,
 				F11D79DC19941D85000EC80A /* Spear.m */,
 				F11D79D01994122D000EC80A /* IntroScene.h */,
@@ -1603,8 +1614,6 @@
 				F1A45B3C19A11D1000432B8A /* WorldSelectScene.h */,
 				F1A45B3D19A11D1000432B8A /* WorldSelectScene.m */,
 				F11D79E319943148000EC80A /* Constants.h */,
-				F100AAAC19948B1D0066E5BE /* Wall.h */,
-				F100AAAD19948B1D0066E5BE /* Wall.m */,
 				F1A45B8C19A13F1100432B8A /* Bat.h */,
 				F1A45B8D19A13F1100432B8A /* Bat.m */,
 			);
@@ -1638,6 +1647,8 @@
 		F1A45B4219A129E800432B8A /* Tiles */ = {
 			isa = PBXGroup;
 			children = (
+				F12ED85319A2A4F700CE1FFB /* wall.png */,
+				F12ED85119A2A46700CE1FFB /* exitPlatform.png */,
 				F12ED84D19A1D5DC00CE1FFB /* ceiling.png */,
 				F12ED84E19A1D5DC00CE1FFB /* entryWay.png */,
 				F1A45B6819A1320500432B8A /* tiles_snow.plist */,
@@ -1739,6 +1750,8 @@
 				F1A45BA819A19F4E00432B8A /* sprites-hd.pvr.ccz in Resources */,
 				F1A45B6719A131E100432B8A /* w1-level1.tmx in Resources */,
 				F1A45BB219A1A32E00432B8A /* snow_background-ipadhd.png in Resources */,
+				F12ED85419A2A4F700CE1FFB /* wall.png in Resources */,
+				F12ED85F19A2E8D800CE1FFB /* introscreen-ipadhd.png in Resources */,
 				F11D78981994122B000EC80A /* LICENSE_cocos2d.txt in Resources */,
 				F12ED85019A1D5DC00CE1FFB /* entryWay.png in Resources */,
 				F1A45B6319A12DF500432B8A /* background-hd.png in Resources */,
@@ -1753,15 +1766,20 @@
 				F11D79C41994122D000EC80A /* LICENSE_Chipmunk.txt in Resources */,
 				F1A45B9819A14B3700432B8A /* sprites-ipadhd.pvr.ccz in Resources */,
 				F1A45BB019A1A32E00432B8A /* snow_background-hd.png in Resources */,
+				F12ED85E19A2E8D800CE1FFB /* introscreen-ipad.png in Resources */,
+				F12ED85219A2A46800CE1FFB /* exitPlatform.png in Resources */,
 				F1A45B9B19A150F100432B8A /* sprites-ipad.plist in Resources */,
 				F1A45B6A19A1320500432B8A /* tiles_snow.plist in Resources */,
 				F1A45B6419A12DF500432B8A /* background-ipad.png in Resources */,
 				F11D79241994122C000EC80A /* ChangeLog in Resources */,
 				F11D77631994122A000EC80A /* iTunesArtwork@2x in Resources */,
+				F12ED86119A2E8D800CE1FFB /* introscreen.png in Resources */,
 				F1A45BA719A19F4E00432B8A /* sprites-hd.plist in Resources */,
 				F1A45B6219A12DF500432B8A /* background.png in Resources */,
+				F12ED85D19A2E8D800CE1FFB /* introscreen-hd.png in Resources */,
 				F1A45B6519A12DF500432B8A /* background-ipadhd.png in Resources */,
 				F1A45BAA19A19F4E00432B8A /* sprites.pvr.ccz in Resources */,
+				F12ED86019A2E8D800CE1FFB /* introscreen-widehd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1790,7 +1808,6 @@
 				F11D78201994122B000EC80A /* CCSpriteBatchNode.m in Sources */,
 				F11D78441994122B000EC80A /* CCTransition.m in Sources */,
 				F11D78231994122B000EC80A /* CCSpriteFrame.m in Sources */,
-				F100AAAE19948B1D0066E5BE /* Wall.m in Sources */,
 				F11D77B71994122A000EC80A /* CCNodeColor.m in Sources */,
 				F11D78901994122B000EC80A /* TransformUtils.m in Sources */,
 				F11D78311994122B000EC80A /* CCTextureCache.m in Sources */,
@@ -1894,7 +1911,7 @@
 				F11D79461994122D000EC80A /* CCBKeyframe.m in Sources */,
 				F11D79001994122C000EC80A /* CCControlTextureFactory.m in Sources */,
 				F11D77851994122A000EC80A /* CCAnimationCache.m in Sources */,
-				F1571475199BEED400BA57C9 /* Spike.m in Sources */,
+				F1571475199BEED400BA57C9 /* Sensor.m in Sources */,
 				F11D79091994122C000EC80A /* CCTableView.m in Sources */,
 				F11D79CC1994122D000EC80A /* AppDelegate.m in Sources */,
 				F11D779C1994122A000EC80A /* CCDrawingPrimitives.m in Sources */,
@@ -1913,7 +1930,6 @@
 				F11D77D81994122A000EC80A /* CCParticleSystem.m in Sources */,
 				F11D77FD1994122B000EC80A /* CCScene.m in Sources */,
 				F11D782B1994122B000EC80A /* CCTexture.m in Sources */,
-				F1A45B9F19A19A5800432B8A /* Star.m in Sources */,
 				F11D78BD1994122C000EC80A /* ALCaptureDevice.m in Sources */,
 				F11D77F91994122B000EC80A /* CCResponderManager.m in Sources */,
 				F11D77911994122A000EC80A /* CCConfiguration.m in Sources */,

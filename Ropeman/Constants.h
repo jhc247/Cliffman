@@ -48,8 +48,12 @@ static const float BAT_FLY_ANIMATION_DELAY = 0.075f;
 static NSString* const BAT_DIE_ANIMATION_NAME = @"bat_die";
 static const float BAT_DIE_ANIMATION_DELAY = 0.3f;
 
+// Star Constants
+static const float STAR_WIDTH = 70;
+static const float STAR_HEIGHT = 70;
+
 static const float ROPE_ACCEL = 3000;
-static const float ROPE_THICKNESS = 10;
+static const float ROPE_THICKNESS = 5;
 static const float ROPE_MINMAX_LENGTH = 50;
 static const float ROPE_BUFFER = 50;
 static const float ROPE_PULL_FORCE = 500;

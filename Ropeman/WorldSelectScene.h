@@ -18,6 +18,8 @@
 + (WorldSelectScene *)sharedWorldSelectScene;
 + (WorldSelectScene *)scene;
 
+- (void)resetScene;
+
 // -----------------------------------------------------------------------
 
 @end

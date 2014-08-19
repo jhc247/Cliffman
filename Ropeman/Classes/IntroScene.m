@@ -51,33 +51,33 @@ static IntroScene *_sharedIntroScene = nil;
     CCColor *startColor = [CCColor colorWithRed:76.0/255.0f green:180.0f/255.0f blue:224.0f/255.0f];
     CCColor *endColor = [CCColor colorWithRed:42.0f/255.0f green:117.0f/255.0f blue:166.0f/255.0f];
     
-    CCNodeGradient *background = [CCNodeGradient nodeWithColor:startColor fadingTo:endColor];
+    CCSprite *background = [CCSprite spriteWithImageNamed:@"introscreen.png"];
+    background.anchorPoint = ccp(0,0);
     [self addChild:background];
     
-    // Hello world
-    CCLabelTTF *title = [CCLabelTTF labelWithString:@"S VIKING" fontName:@"Verdana-Bold" fontSize:36.0f];
-    title.positionType = CCPositionTypeNormalized;
-    title.position = ccp(0.5f, 0.9f); // Middle of screen
-    [self addChild:title];
+    CCColor *brown = [CCColor colorWithRed:0.54f green:0.39f blue:0.13f];
     
     // Play button
     CCButton *playButton = [CCButton buttonWithTitle:@"Play" fontName:@"Verdana-Bold" fontSize:40.0f];
     playButton.positionType = CCPositionTypeNormalized;
-    playButton.position = ccp(0.5f, 0.35f);
+    [playButton setColor:brown];
+    playButton.position = ccp(0.85f, 0.05f);
     [playButton setTarget:self selector:@selector(onPlayClicked:)];
     [self addChild:playButton];
     
     // Mute button
     CCButton *mute = [CCButton buttonWithTitle:@"Mute [  ]" fontName:@"Verdana-Bold" fontSize:30.0f];
     mute.positionType = CCPositionTypeNormalized;
-    mute.position = ccp(0.9f, 0.05f);
+    mute.position = ccp(0.1f, 0.05f);
+    [mute setColor:brown];
     [mute setTarget:self selector:@selector(onMuteButtonClicked:)];
     [self addChild:mute];
     
     // Credits button
     CCButton *credits = [CCButton buttonWithTitle:@"Credits" fontName:@"Verdana-Bold" fontSize:30.0f];
     credits.positionType = CCPositionTypeNormalized;
-    credits.position = ccp(0.1f, 0.05f);
+    credits.position = ccp(0.5f, 0.05f);
+    [credits setColor:brown];
     [credits setTarget:self selector:@selector(onCreditButtonClicked:)];
     [self addChild:credits];
     

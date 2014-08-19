@@ -37,14 +37,14 @@
     // Create a back button
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
     backButton.positionType = CCPositionTypeNormalized;
-    backButton.position = ccp(0.90f, 0.95f); // Top Right of screen
+    backButton.position = ccp(0.45f, 0.05f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
     // Create a pull button    
     CCButton *pullButton = [CCButton buttonWithTitle:@"Pull" fontName:@"Verdana-Bold" fontSize:26.0f];
     pullButton.positionType = CCPositionTypeNormalized;
-    pullButton.position = ccp(0.90f, 0.05f); // Bottom Right of screen
+    pullButton.position = ccp(0.1f, 0.05f); // Bottom Right of screen
     [pullButton setTarget:self selector:@selector(onPullClicked:)];
     [self addChild:pullButton];
     

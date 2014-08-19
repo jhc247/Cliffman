@@ -1,28 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="60" height="13" tilewidth="120" tileheight="120">
+<map version="1.0" orientation="orthogonal" width="46" height="13" tilewidth="120" tileheight="120">
  <tileset firstgid="1" name="entryWay" tilewidth="120" tileheight="120">
   <image source="entryWay.png" width="1467" height="1560"/>
  </tileset>
  <tileset firstgid="157" name="ceiling" tilewidth="120" tileheight="120">
   <image source="ceiling.png" width="2048" height="240"/>
  </tileset>
- <layer name="entryWay" width="60" height="13">
+ <tileset firstgid="191" name="wall" tilewidth="120" tileheight="120">
+  <image source="wall.png" width="480" height="1560"/>
+ </tileset>
+ <tileset firstgid="243" name="exitPlatform" tilewidth="120" tileheight="120">
+  <image source="exitPlatform.png" width="969" height="856"/>
+ </tileset>
+ <layer name="entryWay" width="46" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA93OV0sWYACA0c9SywtnJZgrBVda4CgHuEqDUksFNbOCcgcNJ1hu0LRUsGz5az0/4v14oQfO/ZOSSCQucZlU0kjnClfJSPxfZZJFNjnkksc1rnOD/Gh34SvgJoUUUUwJpdyijPJYc0mogkqqqKaG29RSxx3uRrsLXz0NNNLEPe7TTAuttEW7C187HXTSRTcPeEgPvTyKNZeEHvOEPvoZ4CnPGGSI4Wh34RthlDGeM84LJnjJK15HuwvfG94yyRTTzDDLHPO8i3YXvvd84COfWGCRJZZZYTXaXfjW+MwX1tlgky222WE31lwS2mOfrxxwyDe+c8QxJ9HuwnfKD35yxi9+84e//OM82l34LgDNfskKMAwAAA==
+   H4sIAAAAAAAAA83OV0sWUACA4c9SywtnJZgrBVda4CgHuEqDUksFNbOCcgcNJ1hu0LRUsGz5a33+wPluTy88929KIpG4xGVSSSOdK1wlI/F/lkkW2eSQSx7XuM4N8qPdhSvgJoUUUUwJpdyijPJYc0mqoJIqqqnhNrXUcYe70e7C1dNAI03c4z7NtNBKW7S7cO100EkX3TzgIT308ijWXJIe84Q++hngKc8YZIjhaHfhRhhljOeM84IJXvKK19Huwr3hLZNMMc0Ms8wxz7tod+He84GPfGKBRZZYZoXVaHfh1vjMF9bZYJMtttlhN9ZckvbY5ysHHPKN7xxxzEm0u3Cn/OAnZ/ziN3/4yz/Oo92FuwBR/JFuWAkAAA==
   </data>
  </layer>
- <layer name="Ceiling-1" width="60" height="13">
+ <layer name="Ceiling-1" width="46" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3OtxGDAAAEQfrvAe+NhHfC1MY1wECCSP5mNv43jOtMWLDhwIUHHwFCRIiRIEWGHAU++KJEhRoN2hvbb3T2tUOPASMmzPhhwYoN+/8vK6WUUkop9UgH/oJTbzAMAAA=
+   H4sIAAAAAAAAA+3OWYrCQBSG0Vr6vxHj3M5jO2v32jzgo6D4bH1wICSVe6uU17VKCaWhTYcuPfoMGPLDiDETpsyYs3iI53gX3+JMnI1/4t+YEbNiZsyOHbErdqZ53CFvrvrUkhVrNmz5ZceeA0dOnLlw5cYf/58urNVqtVqt9tXdAez3VGVYCQAA
   </data>
  </layer>
- <objectgroup name="player" width="60" height="13">
-  <object name="player" x="-120" y="446" width="94" height="147"/>
+ <layer name="rightwall" width="46" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3Oxw2DUBAAUfpvihxbIAebjA0VMBIV7GmF9Ed697Gsd2TDgQtPd0WUjwAhIuUXSTESpMiUX0wm01OOAiUq5RdJNRq06HRXRPUY8MFX+UXSiAkzFuUXSSs27DiUXyT98MeJCzfLydLUWAkAAA==
+  </data>
+ </layer>
+ <layer name="exitPlatform" width="46" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3OyQ6CMBgA4RIVF8RdUcB99yn71goKOkmvJfH2R9NJvvso5XL9T3c8kCEXfqnqiRcKlHjL7nxdzVOqjgZ8NNFCGx1DSz/aCnjrIkQPfQwwxMjQ0o+2xrxNMMUMEeZYIDa09KOthLcUS6ywxgZb7Awt/Whrz9sBR5xwxgVX3DzpO9cv9QEf7/s2WAkAAA==
+  </data>
+ </layer>
+ <objectgroup name="player" width="46" height="13">
+  <object name="player" x="-120" y="360" width="94" height="147"/>
  </objectgroup>
- <objectgroup name="walls" width="60" height="13">
+ <objectgroup name="walls" width="46" height="13">
   <object name="floor-1" x="0" y="600" width="720" height="960"/>
   <object name="ledge-1" x="720" y="600">
    <polygon points="0,0 0,240 321,238 432,68 428,38 391,1"/>
   </object>
+  <object name="ceiling" x="600" y="0" width="4560" height="120"/>
+  <object name="right-overhang" x="5520" y="0">
+   <polygon points="0,0 -360,0 -433,471 0,480"/>
+  </object>
+  <object name="right-ledge" x="4442" y="804" width="1081" height="156"/>
+  <object name="right-ledge-2" x="5051" y="1563">
+   <polygon points="0,0 464,0 467,-593 57,-598"/>
+  </object>
+  <object name="right-ledge-3" x="4440" y="960">
+   <polygon points="0,0 38,144 166,166 650,-3"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="stars" width="46" height="13">
+  <object name="star-1" x="1560" y="360"/>
+  <object name="star-2" x="3000" y="1320"/>
+  <object name="star-3" x="4680" y="1200" width="120" height="120"/>
+ </objectgroup>
+ <objectgroup name="winZones" width="46" height="13">
+  <object name="win-1" x="5040" y="480" width="480" height="360"/>
  </objectgroup>
 </map>

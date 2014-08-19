@@ -12,7 +12,9 @@
 #pragma mark - WorldSelectScene
 // -----------------------------------------------------------------------
 
-@implementation WorldSelectScene 
+@implementation WorldSelectScene {
+    NSString* currentLevel;
+}
 
 static WorldSelectScene *_sharedWorldSelectScene = nil;
 
@@ -47,8 +49,12 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     CCColor *startColor = [CCColor colorWithRed:76.0/255.0f green:180.0f/255.0f blue:224.0f/255.0f];
     CCColor *endColor = [CCColor colorWithRed:42.0f/255.0f green:117.0f/255.0f blue:166.0f/255.0f];
     
-    CCNodeGradient *background = [CCNodeGradient nodeWithColor:startColor fadingTo:endColor];
+    CCSprite *background = [CCSprite spriteWithImageNamed:@"introscreen.png"];
+    background.anchorPoint = ccp(0,0);
     [self addChild:background];
+    
+    /*CCNodeGradient *background = [CCNodeGradient nodeWithColor:startColor fadingTo:endColor];
+    [self addChild:background];*/
     
     CCNodeColor *opaqueBox = [CCNodeColor nodeWithColor:[CCColor blackColor] width:self.contentSize.width height:self.contentSize.height*.9];
     opaqueBox.position = ccp(0, self.contentSize.height*.05);
@@ -63,7 +69,7 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     [self addChild:title];
     
     // Return button
-    CCButton *returnButton = [CCButton buttonWithTitle:@"<--" fontName:@"Verdana-Bold" fontSize:36.0f];
+    CCButton *returnButton = [CCButton buttonWithTitle:@"X" fontName:@"Verdana-Bold" fontSize:50.0f];
     returnButton.positionType = CCPositionTypeNormalized;
     returnButton.position = ccp(0.1f, 0.9f);
     [returnButton setTarget:self selector:@selector(onReturnClicked:)];
@@ -85,6 +91,7 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     [play2Button setName:@"w1-level2.tmx"];
     [self addChild:play2Button];
 
+    currentLevel = @"";
     
     // done
 	return self;
@@ -103,11 +110,16 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
 - (void)onPlayClicked:(id)sender
 {
     CCButton *button = (CCButton*)sender;
-    NSString *name = [button name];
+    currentLevel = [button name];
     // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:[button name]]
+    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:currentLevel]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
 }
 
+- (void)resetScene {
+    if (![currentLevel isEqual: @""]) {
+        [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:currentLevel]];
+    }
+}
 
 @end

@@ -12,13 +12,11 @@
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
 #import "Player.h"
-#import "Spike.h"
-#import "Wall.h"
+#import "Sensor.h"
 #import "Constants.h"
 #import "IntroScene.h"
 #import "TouchLayer.h"
 #import "Bat.h"
-#import "Star.h"
 
 // -----------------------------------------------------------------------
 
@@ -26,7 +24,6 @@
  *  The main scene
  */
 @interface HelloWorldScene : CCScene <CCPhysicsCollisionDelegate>
-
 
 // -----------------------------------------------------------------------
 

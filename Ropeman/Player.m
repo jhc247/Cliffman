@@ -11,6 +11,7 @@
 
 @implementation Player {
     Spear* currentSpear;
+    CCNodeColor* _rope;
     
     CGPoint helper_throwTarget;
     
@@ -22,11 +23,11 @@
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (Player *)createPlayer: (CGPoint)position {
-    return [[self alloc] init:position];
++ (Player *)createPlayer: (CGPoint)position rope:(CCNodeColor *)rope {
+    return [[self alloc] init:position rope:rope];
 }
 
-- (id)init: (CGPoint)position {
+- (id)init: (CGPoint)position rope:(CCNodeColor *)rope {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
@@ -45,6 +46,7 @@
     //self.physicsBody.allowsRotation = NO;
     
     currentSpear = NULL;
+    _rope = rope;
     
     CCAnimation *animation = [[CCAnimationCache sharedAnimationCache] animationByName:PLAYER_RUN_ANIMATION_NAME];
     CCActionAnimate *throwAnimation = [CCActionAnimate actionWithAnimation:animation];
@@ -65,6 +67,25 @@
 - (void)update:(CCTime)delta {
     float xVel;
     float xLimit;
+    
+    if (currentSpear != NULL) {
+        float target_x = currentSpear.position.x - sinf(CC_DEGREES_TO_RADIANS(currentSpear.rotation)) *currentSpear.contentSize.height*.35;
+        float target_y = currentSpear.position.y - cosf(CC_DEGREES_TO_RADIANS(currentSpear.rotation)) *currentSpear.contentSize.height*.35;
+        
+        CGPoint target = ccp(target_x, target_y);
+        
+        float length = ccpDistance(self.position, target);
+        float angle = [Spear getAngle:self.position target:target];
+        float ropeThickness = [CCDirector is_iPad] ? ROPE_THICKNESS : ROPE_THICKNESS / IPAD_TO_IPHONE_HEIGHT_RATIO;
+        [_rope setContentSize:CGSizeMake(ropeThickness, length)];
+        _rope.position = self.position;
+        _rope.rotation = angle;
+        _rope.opacity = ([currentSpear state] == Attached) ? 1.0f : 0.3f;
+    }
+    else {
+        _rope.opacity = 0;
+    }
+    
     switch (_state) {
         case Starting:
             xLimit = [CCDirector is_iPad] ? PLAYER_RUN_DISTANCE : PLAYER_RUN_DISTANCE / IPAD_TO_IPHONE_HEIGHT_RATIO;
@@ -144,7 +165,7 @@
     }
     self.flipX = !(target.x >= self.position.x);
     self.rotation = 0;
-    self.physicsBody.torque = 0;
+    [self.physicsBody setAngularVelocity:0];
     _state = Throwing;
     helper_throwTarget = target;
     

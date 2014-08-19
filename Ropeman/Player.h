@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, PlayerState)
 
 @property (assign) PlayerState state;
 
-+ (Player*)createPlayer: (CGPoint)position;
++ (Player*)createPlayer: (CGPoint)position rope:(CCNodeColor*)rope;
 
 - (void)throwSpear: (CGPoint)target;
 - (BOOL)pull;

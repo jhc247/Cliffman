@@ -21,6 +21,8 @@
     float width, height;
     TouchLayer *touchLayer;
     
+    CCNodeColor* rope;
+    
     float level_width;
     
     BOOL game_over;
@@ -46,9 +48,16 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = NO;
     
+    // Set-up game elements extraction from TiledMap
+    CCTiledMap *tilemap = [CCTiledMap tiledMapWithFile:level_name];
+    
     width = [CCDirector is_iPad] ? self.contentSize.width : (426 + (2/3));
-    height = self.contentSize.height;
-    level_width = width * 3;
+    height = [tilemap mapSize].height * [tilemap tileSize].height / 2;
+    level_width = [tilemap mapSize].width * [tilemap tileSize].width / 2;
+    if (![CCDirector is_iPad]) {
+        height = height / IPAD_TO_IPHONE_HEIGHT_RATIO;
+        level_width = level_width / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    }
     
     // Create a colored background (Dark Grey)
     // 91-89-60 = dirt color
@@ -71,8 +80,10 @@
         [self addChild:background];
     }
     */
-    // Set-up game elements extraction from TiledMap
-    CCTiledMap *tilemap = [CCTiledMap tiledMapWithFile:level_name];
+    
+    rope = [CCNodeColor nodeWithColor:[CCColor blackColor] width:10 height:50];
+    rope.opacity = 0;
+    [self addChild:rope];
     
     float coordinateMultiplier;
     switch ([CCDirector sharedDirector].device) {
@@ -116,19 +127,19 @@
     NSMutableDictionary *p = [[playerGroup objects] objectAtIndex:0];
     float x = ([[p valueForKey:@"x"] floatValue] + 48) * coordinateMultiplier;
     float y = ([[p valueForKey:@"y"] floatValue] + 116) * coordinateMultiplier;
-    _player = [Player createPlayer:ccp(x,y)];
+    _player = [Player createPlayer:ccp(x,y) rope:rope];
     [spritesBatchNode addChild:_player];
     
     // Create walls
     CCTiledMapObjectGroup *wallGroup = [tilemap objectGroupNamed:@"walls"];
     NSMutableArray *walls = [wallGroup objects];
     for (NSMutableDictionary *wall in walls) {
-        float x = [[wall valueForKey:@"x"] floatValue] * coordinateMultiplier;
-        float y = [[wall valueForKey:@"y"] floatValue] * coordinateMultiplier;
-        float wid = [[wall valueForKey:@"width"] floatValue] * coordinateMultiplier;
-        float hei = [[wall valueForKey:@"height"] floatValue] * coordinateMultiplier;
+        float x = [[wall valueForKey:@"x"] floatValue];
+        float y = [[wall valueForKey:@"y"] floatValue];
+        float wid = [[wall valueForKey:@"width"] floatValue];
+        float hei = [[wall valueForKey:@"height"] floatValue];
         NSString *points = [wall valueForKey:@"polygonPoints"];
-        Wall* w = [Wall createWall:x y:y width:wid height:hei points:points mult:coordinateMultiplier];
+        Sensor* w = [Sensor createSensor:ccp(x,y) type:Wall width:wid height:hei points:points mult:coordinateMultiplier];
         [_physicsWorld addChild:w];
     }
     
@@ -136,12 +147,13 @@
     CCTiledMapObjectGroup *spikeGroup = [tilemap objectGroupNamed:@"spikes"];
     NSMutableArray *spikes = [spikeGroup objects];
     for (NSMutableDictionary *spike in spikes) {
-        float x = [[spike valueForKey:@"x"] floatValue] * coordinateMultiplier;
-        float y = [[spike valueForKey:@"y"] floatValue] * coordinateMultiplier;
-        Orientation orientation = [[spike valueForKey:@"orientation"] intValue];
-        
-        Spike *s = [Spike createSpike:ccp(x, y) orientation:orientation];
-        [spritesBatchNode addChild:s];
+        float x = [[spike valueForKey:@"x"] floatValue];
+        float y = [[spike valueForKey:@"y"] floatValue];
+        float wid = [[spike valueForKey:@"width"] floatValue];
+        float hei = [[spike valueForKey:@"height"] floatValue];
+
+        Sensor *s = [Sensor createSensor:ccp(x,y) type:Spike width:wid height:hei points:NULL mult:coordinateMultiplier];
+        [_physicsWorld addChild:s];
     }
     
     // Create bats
@@ -160,11 +172,24 @@
     CCTiledMapObjectGroup *starGroup = [tilemap objectGroupNamed:@"stars"];
     NSMutableArray *stars = [starGroup objects];
     for (NSMutableDictionary *star in stars) {
-        float x = [[star valueForKey:@"x"] floatValue] * coordinateMultiplier;
-        float y = [[star valueForKey:@"y"] floatValue] * coordinateMultiplier;
+        float x = [[star valueForKey:@"x"] floatValue];
+        float y = [[star valueForKey:@"y"] floatValue];
         
-        Star *s = [Star createStar:ccp(x, y)];
+        Sensor *s = [Sensor createSensor:ccp(x,y) type:Star width:STAR_WIDTH height:STAR_HEIGHT points:NULL mult:coordinateMultiplier];
         [spritesBatchNode addChild:s];
+    }
+    
+    // Create win-zone(s)
+    CCTiledMapObjectGroup *winZoneGroup = [tilemap objectGroupNamed:@"winZones"];
+    NSMutableArray *winZones = [winZoneGroup objects];
+    for (NSMutableDictionary *winZone in winZones) {
+        float x = [[winZone valueForKey:@"x"] floatValue];
+        float y = [[winZone valueForKey:@"y"] floatValue];
+        float wid = [[winZone valueForKey:@"width"] floatValue];
+        float hei = [[winZone valueForKey:@"height"] floatValue];
+        
+        Sensor *w = [Sensor createSensor:ccp(x,y) type:Win width:wid height:hei points:NULL mult:coordinateMultiplier];
+        [_physicsWorld addChild:w];
     }
     
     // Set-up camera
@@ -172,7 +197,7 @@
     [self addChild:touchLayer];
     
     cameraLeft = 0;
-    
+    game_over = NO;
     return self;
 }
 
@@ -259,36 +284,73 @@
     return game_over ? NO : [_player pull];
 }
 
-// Spear-Wall
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(Wall *)wall spearCollision:(Spear *)spear {
-    [spear attach:wall.position.x y:wall.position.y width:wall.getWidth height:wall.getHeight];
+- (void)win {
+    [[WorldSelectScene sharedWorldSelectScene] resetScene];
+}
+
+// Player-Sensor
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair sensorCollision:(Sensor *)sensor playerCollision:(Player *)player {
+    CCLOG(@"Sensor-Player collision");
+    switch ([sensor type]) {
+        case Spike:
+            CCLOG(@"Player hit spike");
+            return NO;
+            
+        case Star:
+            CCLOG(@"Player hit star");
+            [sensor collectStar];
+            return NO;
+            
+        case Wall:
+            CCLOG(@"Player hit wall");
+            self.physicsBody.collisionGroup = @"wallGroup";
+            self.physicsBody.collisionType = @"wallCollision";
+            self.physicsBody.affectedByGravity = NO;
+            self.physicsBody.type = CCPhysicsBodyTypeStatic;
+            return YES;
+        case Win:
+            CCLOG(@"Player hit win sensor");
+            [self win];
+            return NO;
+        default:
+            return YES;
+            
+    }
+}
+
+// Spear-Sensor
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair sensorCollision:(Sensor *)sensor spearCollision:(Spear *)spear {
+    CCLOG(@"Sensor-spear collision");
+    switch ([sensor type]) {
+        case Spike:
+            CCLOG(@"Spear hit spike");
+            return YES;
+            
+        case Star:
+            CCLOG(@"Spear hit star");
+            return NO;
     
-    // Create the physics joint
-    float ropeLength = ccpDistance(_player.position, spear.position) + ROPE_INITIAL_SLACK;
-    ropeLength = (ropeLength >= ROPE_MINMAX_LENGTH) ? ropeLength : ROPE_MINMAX_LENGTH;
-    [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:spear.physicsBody anchorA:ccp(_player.contentSize.width*.5, _player.contentSize.height*.5) anchorB:ccp(spear.contentSize.width/2,spear.contentSize.height*.2) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
-    
-    return YES;
+        case Wall:
+            CCLOG(@"Spear hit wall");
+            [spear attach:sensor.position.x y:sensor.position.y width:sensor.getWallWidth height:sensor.getWallHeight];
+            // Create the physics joint
+            float ropeLength = ccpDistance(_player.position, spear.position) + ROPE_INITIAL_SLACK;
+            ropeLength = (ropeLength >= ROPE_MINMAX_LENGTH) ? ropeLength : ROPE_MINMAX_LENGTH;
+            [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:spear.physicsBody anchorA:ccp(_player.contentSize.width*.5, _player.contentSize.height*.5) anchorB:ccp(spear.contentSize.width/2,spear.contentSize.height*.2) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
+            return YES;
+            
+        case Win:
+            return NO;
+        default:
+            return YES;
+            
+    }
 }
 
 // Spear-Bat
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair batCollision:(Bat *)bat spearCollision:(Spear *)spear {
     
     [bat killBat];
-    return NO;
-}
-
-// Player-Spike
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair spikeCollision:(Spike *)spike playerCollision:(Player *)player {
-    CCLOG(@"Hit spike");
-    
-    return NO;
-}
-
-// Player-Star
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair starCollision:(Star *)star playerCollision:(Player *)player {
-    CCLOG(@"Hit star");
-    [star collect];
     return NO;
 }
 @end

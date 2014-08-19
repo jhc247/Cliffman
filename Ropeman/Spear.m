@@ -158,7 +158,7 @@
     _pullState = Pulling;
     
     float acceleration_pull = [CCDirector is_iPad] ? ROPE_PULL_FORCE : ROPE_PULL_FORCE / IPAD_TO_IPHONE_HEIGHT_RATIO;
-    float angle = [Spear getAngle:playerPosition target:_target];
+    float angle = [Spear getAngle:playerPosition target:self.position];
     float xForce = acceleration_pull * sinf(CC_DEGREES_TO_RADIANS(angle));
     float yForce = acceleration_pull * cosf(CC_DEGREES_TO_RADIANS(angle));
     
