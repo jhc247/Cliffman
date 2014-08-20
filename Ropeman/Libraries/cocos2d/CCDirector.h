@@ -216,6 +216,8 @@ and when to execute the Scenes.
 
 + (BOOL) is_iPad;
 
+- (NSDictionary*) getLevelStructure;
+
 #pragma mark Director - Stats
 
 #pragma mark Director - View Size

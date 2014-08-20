@@ -10,6 +10,8 @@
 #import "cocos2d-ui.h"
 #import "IntroScene.h"
 #import "HelloWorldScene.h"
+#import "Carousel.h"
+#import "Constants.h"
 
 @interface WorldSelectScene : CCScene
 
@@ -18,6 +20,7 @@
 + (WorldSelectScene *)sharedWorldSelectScene;
 + (WorldSelectScene *)scene;
 
+- (void)playScene: (NSString*)levelName;
 - (void)resetScene;
 
 // -----------------------------------------------------------------------

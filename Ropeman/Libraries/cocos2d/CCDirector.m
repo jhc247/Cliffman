@@ -116,6 +116,8 @@ extern NSString * cocos2dVersion(void);
 //
 static CCDirector *_sharedDirector = nil;
 
+NSDictionary* _theDict;
+
 + (CCDirector *)sharedDirector
 {
 	if (!_sharedDirector) {
@@ -194,6 +196,10 @@ static CCDirector *_sharedDirector = nil;
 		
 		__ccContentScaleFactor = 1;
 		self.UIScaleFactor = 1;
+        
+        NSString* path = [[NSBundle mainBundle] pathForResource:@"levelStructure" ofType:@"plist"];
+        _theDict = [NSDictionary dictionaryWithContentsOfFile:path];
+
         
         if ([UIScreen mainScreen].scale == 2.0) {
             if ([CCDirector is_iPad]) { // iPad Retina
@@ -384,6 +390,9 @@ static CCDirector *_sharedDirector = nil;
 	return  __view;
 }
 
+- (NSDictionary*) getLevelStructure {
+    return _theDict;
+}
 
 #pragma mark Director Scene Landscape
 

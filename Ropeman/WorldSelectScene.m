@@ -45,51 +45,87 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     self = [super init];
     if (!self) return(nil);
     
+    self.userInteractionEnabled = NO;
+    
     // Create a colored background (Dark Grey)
-    CCColor *startColor = [CCColor colorWithRed:76.0/255.0f green:180.0f/255.0f blue:224.0f/255.0f];
-    CCColor *endColor = [CCColor colorWithRed:42.0f/255.0f green:117.0f/255.0f blue:166.0f/255.0f];
+    CCColor *startColor = [CCColor colorWithRed:138.0/255.0f green:100.0f/255.0f blue:34.0f/255.0f];
+    CCColor *endColor = [CCColor colorWithRed:25.0f/255.0f green:6.0f/255.0f blue:11.0f/255.0f];
+    CCColor *backgroundColor = [CCColor colorWithRed:34.0f/255.0f green:41.0f/255.0f blue:48.0f/255.0f];
+    CCColor *whiteColor = [CCColor colorWithRed:233.0f/255.0f green:233.0f/255.0f blue:233.0f/255.0f];
+    CCColor *blueColor = [CCColor colorWithRed:78.0f/255.0f green:177.0f/255.0f blue:186.0f/255.0f];
     
-    CCSprite *background = [CCSprite spriteWithImageNamed:@"introscreen.png"];
-    background.anchorPoint = ccp(0,0);
+    
+    CCNodeColor *background = [CCNodeColor nodeWithColor:backgroundColor];
     [self addChild:background];
-    
     /*CCNodeGradient *background = [CCNodeGradient nodeWithColor:startColor fadingTo:endColor];
     [self addChild:background];*/
     
-    CCNodeColor *opaqueBox = [CCNodeColor nodeWithColor:[CCColor blackColor] width:self.contentSize.width height:self.contentSize.height*.9];
-    opaqueBox.position = ccp(0, self.contentSize.height*.05);
-    opaqueBox.opacity = 0.8f;
-    [self addChild:opaqueBox];
+    //CCNodeGradient *topCover = [CCNodeGradient nodeWithColor:endColor fadingTo:startColor];
+    CCNodeColor *topCover = [CCNodeColor nodeWithColor:backgroundColor width:self.contentSize.width height:self.contentSize.height * (1-CAROUSEL_VERTICAL_MAX_HEIGHT_PERCENT)];
+    //[topCover setContentSize:CGSizeMake(self.contentSize.width, self.contentSize.height * (1-CAROUSEL_VERTICAL_MAX_HEIGHT_PERCENT))];
+    topCover.positionType = CCPositionTypeNormalized;
+    topCover.anchorPoint = ccp(0,0);
+    topCover.position = ccp(0, CAROUSEL_VERTICAL_MAX_HEIGHT_PERCENT);
+    [self addChild:topCover z:3];
     
-    // Hello world
-    CCLabelTTF *title = [CCLabelTTF labelWithString:@"WORLD SELECT" fontName:@"Chalkduster" fontSize:36.0f];
+    // Top border
+    float thickness = [CCDirector is_iPad] ? LEVEL_SCREEN_BORDER_THICKNESS : LEVEL_SCREEN_BORDER_THICKNESS / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    CCNodeColor *topBorder = [CCNodeColor nodeWithColor:blueColor width:self.contentSize.width height:thickness];
+    topBorder.anchorPoint = ccp(0, 0.5f);
+    topBorder.positionType = CCPositionTypeNormalized;
+    topBorder.position = ccp(0, CAROUSEL_VERTICAL_MAX_HEIGHT_PERCENT);
+    topBorder.opacity = 0.6;
+    [self addChild:topBorder z:3];
+    
+    // Middle border
+    CCNodeColor *middleBorder = [CCNodeColor nodeWithColor:blueColor width:thickness height:self.contentSize.height * .8];
+    middleBorder.anchorPoint = ccp (0.5, 0);
+    float x = CAROUSEL_VERTICAL_OFFSET_X + CAROUSEL_VERTICAL_WIDTH + CAROUSEL_HORIZONTAL_OFFSET_X/2;
+    x = [CCDirector is_iPad] ? x : x / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    middleBorder.position = ccp(x, self.contentSize.height*.05);
+    middleBorder.opacity = 0.6;
+    [self addChild:middleBorder z:3];
+    
+    // Level Selection title
+    float font_size = [CCDirector is_iPad] ? FONT_SIZE_LEVEL_SELECTION : FONT_SIZE_LEVEL_SELECTION / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    CCLabelTTF *title = [CCLabelTTF labelWithString:@"Level Selection" fontName:@"Viking-Normal" fontSize:font_size];
     title.positionType = CCPositionTypeNormalized;
-    title.color = [CCColor redColor];
-    title.position = ccp(0.5f, 0.9f); // Middle of screen
-    [self addChild:title];
+    title.color = [CCColor whiteColor];
+    title.position = ccp(0.5f, 0); // Middle of screen
+    title.anchorPoint = ccp(0.5,0);
+    [topCover addChild:title];
     
     // Return button
     CCButton *returnButton = [CCButton buttonWithTitle:@"X" fontName:@"Verdana-Bold" fontSize:50.0f];
     returnButton.positionType = CCPositionTypeNormalized;
-    returnButton.position = ccp(0.1f, 0.9f);
+    returnButton.position = ccp(0.1f, 0);
+    returnButton.anchorPoint = ccp(0.5,0);
     [returnButton setTarget:self selector:@selector(onReturnClicked:)];
-    [self addChild:returnButton];
+    [topCover addChild:returnButton];
     
-    // Level 1 button
-    CCButton *playButton = [CCButton buttonWithTitle:@"Level 1" fontName:@"Verdana-Bold" fontSize:18.0f];
-    playButton.positionType = CCPositionTypeNormalized;
-    playButton.position = ccp(0.25f, 0.35f);
-    [playButton setTarget:self selector:@selector(onPlayClicked:)];
-    [playButton setName:@"w1-level1.tmx"];
-    [self addChild:playButton];
+
+    int numWorlds = [[[[CCDirector sharedDirector] getLevelStructure] objectForKey:@"numWorlds"] intValue];
+
+    float verticalWidth = [CCDirector is_iPad] ? CAROUSEL_VERTICAL_WIDTH : CAROUSEL_VERTICAL_WIDTH / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    float verticalHeight = (CAROUSEL_VERTICAL_ELEMENT_HEIGHT + CAROUSEL_VERTICAL_ELEMENT_BUFFER) * numWorlds + 2*CAROUSEL_VERTICAL_ELEMENT_BUFFER;
+    verticalHeight = [CCDirector is_iPad] ? verticalHeight : verticalHeight / IPAD_TO_IPHONE_HEIGHT_RATIO;
     
-    // Level 2 button
-    CCButton *play2Button = [CCButton buttonWithTitle:@"Level 2" fontName:@"Verdana-Bold" fontSize:18.0f];
-    play2Button.positionType = CCPositionTypeNormalized;
-    play2Button.position = ccp(0.75f, 0.35f);
-    [play2Button setTarget:self selector:@selector(onPlayClicked:)];
-    [play2Button setName:@"w1-level2.tmx"];
-    [self addChild:play2Button];
+    float vertical_offsetX = [CCDirector is_iPad] ? CAROUSEL_VERTICAL_OFFSET_X : CAROUSEL_VERTICAL_OFFSET_X / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    float vertical_offsetY = self.contentSize.height * CAROUSEL_VERTICAL_MAX_HEIGHT_PERCENT;
+    CGPoint position = ccp(vertical_offsetX,vertical_offsetY);
+    
+    Carousel *verticalCarousel = [Carousel createCarousel:position vertical:YES width:verticalWidth height:verticalHeight numElements:numWorlds elements:NULL];
+    [self addChild:verticalCarousel z:1];
+    
+    CCNodeColor* leftCover = [CCNodeColor nodeWithColor:backgroundColor width:vertical_offsetX height:self.contentSize.height];
+    [self addChild:leftCover z:2];
+    
+    float horizontal_offsetX = [CCDirector is_iPad] ? CAROUSEL_HORIZONTAL_OFFSET_X : CAROUSEL_HORIZONTAL_OFFSET_X / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    float middle_x = CAROUSEL_VERTICAL_OFFSET_X + CAROUSEL_VERTICAL_WIDTH;
+    middle_x = [CCDirector is_iPad] ? middle_x : middle_x / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    CCNodeColor* middleCover = [CCNodeColor nodeWithColor:backgroundColor width:horizontal_offsetX height:self.contentSize.height];
+    middleCover.position = ccp(middle_x, 0);
+    [self addChild:middleCover z:2];
 
     currentLevel = @"";
     
@@ -114,6 +150,11 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     // start spinning scene with transition
     [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:currentLevel]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+}
+
+- (void)playScene: (NSString*)levelName {
+    currentLevel = levelName;
+    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:currentLevel]];
 }
 
 - (void)resetScene {

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>numWorlds</key>
+	<integer>3</integer>
+	<key>World 1</key>
+	<dict>
+		<key>worldName</key>
+		<string>Fire World</string>
+		<key>worldPreviewFile</key>
+		<string>comingsoon.png</string>
+		<key>levels</key>
+		<array>
+			<dict>
+				<key>levelName</key>
+				<string>Level 1</string>
+				<key>levelFile</key>
+				<string>w1-level1.tmx</string>
+				<key>levelPreview</key>
+				<string>levelpreview.png</string>
+				<key>levelScore</key>
+				<string>0</string>
+				<key>levelScoreMax</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>levelName</key>
+				<string>Level 2</string>
+				<key>levelFile</key>
+				<string>w1-level2.tmx</string>
+				<key>levelPreview</key>
+				<string>w1-level2.png</string>
+				<key>levelScore</key>
+				<string>0</string>
+				<key>levelScoreMax</key>
+				<string>3</string>
+			</dict>
+			<dict>
+				<key>levelName</key>
+				<string>Level 3</string>
+				<key>levelFile</key>
+				<string>w1-level3.tmx</string>
+				<key>levelPreview</key>
+				<string>levelpreview.png</string>
+				<key>levelScore</key>
+				<string>0</string>
+				<key>levelScoreMax</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>levelName</key>
+				<string>Level 4</string>
+				<key>levelFile</key>
+				<string>w1-level4.tmx</string>
+				<key>levelPreview</key>
+				<string>levelpreview.png</string>
+				<key>levelScore</key>
+				<string>0</string>
+				<key>levelScoreMax</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>levelName</key>
+				<string>Level 5</string>
+				<key>levelFile</key>
+				<string>w1-level5.tmx</string>
+				<key>levelPreview</key>
+				<string>levelpreview.png</string>
+				<key>levelScore</key>
+				<string>0</string>
+				<key>levelScoreMax</key>
+				<string>0</string>
+			</dict>
+		</array>
+	</dict>
+	<key>World 2</key>
+	<dict>
+		<key>worldName</key>
+		<string>Water World</string>
+		<key>worldPreviewFile</key>
+		<string>comingsoon.png</string>
+		<key>levels</key>
+		<array>
+			<dict>
+				<key>levelName</key>
+				<string>Level 1</string>
+				<key>levelFile</key>
+				<string>w2-level1.tmx</string>
+				<key>levelPreview</key>
+				<string>levelpreview.png</string>
+				<key>levelScore</key>
+				<string>0</string>
+				<key>levelScoreMax</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>levelName</key>
+				<string>Level 2</string>
+				<key>levelFile</key>
+				<string>w2-level2.tmx</string>
+				<key>levelPreview</key>
+				<string>levelpreview.png</string>
+				<key>levelScore</key>
+				<string>0</string>
+				<key>levelScoreMax</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>levelName</key>
+				<string>Level 3</string>
+				<key>levelFile</key>
+				<string>w2-level3.tmx</string>
+				<key>levelPreview</key>
+				<string>levelpreview.png</string>
+				<key>levelScore</key>
+				<string>0</string>
+				<key>levelScoreMax</key>
+				<string>0</string>
+			</dict>
+		</array>
+	</dict>
+	<key>World 3</key>
+	<dict>
+		<key>worldName</key>
+		<string>Grass World</string>
+		<key>worldPreviewFile</key>
+		<string>comingsoon.png</string>
+		<key>levels</key>
+		<array>
+			<dict>
+				<key>levelName</key>
+				<string>Level 1</string>
+				<key>levelFile</key>
+				<string>w3-level1.tmx</string>
+				<key>levelPreview</key>
+				<string>levelpreview.png</string>
+				<key>levelScore</key>
+				<string>0</string>
+				<key>levelScoreMax</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>levelName</key>
+				<string>Level 2</string>
+				<key>levelFile</key>
+				<string>w3-level2.tmx</string>
+				<key>levelPreview</key>
+				<string>levelpreview.png</string>
+				<key>levelScore</key>
+				<string>0</string>
+				<key>levelScoreMax</key>
+				<string>0</string>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>
