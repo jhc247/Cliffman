@@ -24,6 +24,9 @@
     
     HorizontalElement* firstClicked;
     float maxDistance;
+    
+    BOOL topArrow;
+    BOOL bottomArrow;
 }
 
 + (Carousel*) createCarousel: (CGPoint)position vertical:(BOOL)vertical width:(float)width height:(float)height numElements:(int)numElements elements:(NSArray*)elements {
@@ -74,11 +77,23 @@
         }
     }
     
+    topArrow = NO;
+    bottomArrow = NO;
+    
     return self;
 }
 
 - (void)update:(CCTime)delta {
     
+    float buffer = [CCDirector is_iPad] ? LEVEL_SCREEN_ARROW_BUFFER : LEVEL_SCREEN_ARROW_BUFFER / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    if (_vertical) {
+        topArrow = (self.position.y > _maxHeight + buffer);
+        bottomArrow = ((self.position.y - _height) < _minHeight - buffer);
+        
+        
+        //newY = newY < _maxHeight ? _maxHeight : newY;
+        //newY = newY - _height > _minHeight ? self.position.y : newY;
+    }
     /*
     if (_vertical) {
         self.position = ccp(self.position.x, self.position.y + _velocity);
@@ -88,6 +103,8 @@
     }
     _velocity = _velocity * 1;
      */
+    
+    
 }
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -181,6 +198,14 @@
 -(void) touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
     //CCLOG(@"Touched TouchLayer");
     //[_parent touchCancelled:touch withEvent:event];
+}
+
+- (BOOL) topArrow {
+    return topArrow;
+}
+
+- (BOOL) bottomArrow {
+    return bottomArrow;
 }
 
 @end

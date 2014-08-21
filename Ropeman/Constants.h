@@ -74,7 +74,7 @@ static const float CAMERA_PANNING_PERCENT_LEFT = 0.1042f;
 static const float CAROUSEL_MAX_VELOCITY = 5;
 static const float CAROUSEL_VERTICAL_WIDTH = 240;
 static const float CAROUSEL_VERTICAL_ELEMENT_HEIGHT = 300;
-static const float CAROUSEL_VERTICAL_ELEMENT_BUFFER = 30;
+static const float CAROUSEL_VERTICAL_ELEMENT_BUFFER = 25;
 static const float CAROUSEL_VERTICAL_MAX_HEIGHT_PERCENT = 0.90f;
 static const float CAROUSEL_VERTICAL_OFFSET_X = 60;
 
@@ -94,10 +94,11 @@ static const int Z_ORDER_TILEMAP = 0;
 static const float LEVEL_SCREEN_BORDER_THICKNESS = 3.0f;
 
 static const float MAX_DELTA_LEVEL_SELECTION = 50;
+static const float LEVEL_SCREEN_ARROW_BUFFER = 30;
 
 // Fonts Sizes
-static const float FONT_SIZE_WORLD_NAME = 36.0f;
-static const float FONT_SIZE_LEVEL_SELECTION = 50.0f;
-static const float FONT_SIZE_INTRO_SCENE = 36.0f;
-static const float FONT_SIZE_INTRO_SCENE_PLAY = 70.0f;
+static const float FONT_SIZE_WORLD_NAME = 48.0f;
+static const float FONT_SIZE_LEVEL_SELECTION = 60.0f;
+static const float FONT_SIZE_INTRO_SCENE = 60.0f;
+static const float FONT_SIZE_INTRO_SCENE_PLAY = 110.0f;
 

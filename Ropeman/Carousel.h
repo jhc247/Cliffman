@@ -18,4 +18,7 @@
 
 + (Carousel*) createCarousel: (CGPoint)position vertical:(BOOL)vertical width:(float)width height:(float)height numElements:(int)numElements elements:(NSArray*)elements;
 
+- (BOOL) topArrow;
+- (BOOL) bottomArrow;
+
 @end

@@ -26,6 +26,7 @@
     if (!self) return(nil);
     
     CCColor *whiteColor = [CCColor colorWithRed:233.0f/255.0f green:233.0f/255.0f blue:233.0f/255.0f];
+    CCColor *blueColor = [CCColor colorWithRed:78.0f/255.0f green:177.0f/255.0f blue:186.0f/255.0f];
     
     NSString* levelName = [levelData objectForKey:@"levelName"];
     levelFile = [levelData objectForKey:@"levelFile"];
@@ -45,13 +46,13 @@
     float font_width = width;
     float font_height = height * (1.0f/6.0f);
     
-    CCLabelTTF *title = [CCLabelTTF labelWithString:levelName fontName:@"Viking-Normal" fontSize:font_size dimensions:CGSizeMake(font_width, font_height)];
+    CCLabelTTF *title = [CCLabelTTF labelWithString:levelName fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(font_width, font_height)];
     [title setHorizontalAlignment:CCTextAlignmentCenter];
     [title setVerticalAlignment:CCVerticalTextAlignmentCenter];
     title.adjustsFontSizeToFit = YES;
     title.positionType = CCPositionTypeNormalized;
     title.color = whiteColor;
-    title.position = ccp(0.5f, 1.05); // Middle of screen
+    title.position = ccp(0.5f, 1.02); // Middle of screen
     title.anchorPoint = ccp(0.5f, 1);
     [self addChild:title];
     
@@ -64,18 +65,28 @@
     preview.anchorPoint = ccp(0.5,0.5);
     [self addChild:preview];
     
+    // Add helmet icon
+    CCSprite *helmet = [CCSprite spriteWithImageNamed:@"helmet_preview_level.png"];
+    helmet.positionType = CCPositionTypeNormalized;
+    helmet.anchorPoint = ccp(0.5f, 1);
+    helmet.position = ccp(0.2f, 0.10f);
+    [self addChild:helmet];
+    
     // Add level count
-    /*
-    CCLabelTTF *count = [CCLabelTTF labelWithString:@"3 / 42" fontName:@"Chalkduster" fontSize:font_size dimensions:CGSizeMake(font_width*.75, font_height)];
+    // Add world count
+    int currentNum = 3;
+    int maxNum = 3;
+    NSString *countString = [NSString stringWithFormat:@"%d / %d",currentNum, maxNum];
+    CCLabelTTF *count = [CCLabelTTF labelWithString:countString fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(font_width*.6, font_height)];
     [count setHorizontalAlignment:CCTextAlignmentCenter];
     [count setVerticalAlignment:CCVerticalTextAlignmentCenter];
     count.adjustsFontSizeToFit = YES;
     count.positionType = CCPositionTypeNormalized;
-    count.color = [CCColor redColor];
-    count.position = ccp((5.0f/8.0f), 0.1f); // Middle of screen
+    count.color = (currentNum >= maxNum) ? blueColor : whiteColor;
+    count.position = ccp(0.7f, 0.13f); // Middle of screen
     count.anchorPoint = ccp(0.5f, 1);
     [self addChild:count];
-    */
+    
     
     return self;
 }

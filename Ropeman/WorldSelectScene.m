@@ -14,6 +14,12 @@
 
 @implementation WorldSelectScene {
     NSString* currentLevel;
+    
+    Carousel* verticalCarousel;
+    CCSprite* topArrow;
+    CCSprite* bottomArrow;
+    
+    
 }
 
 static WorldSelectScene *_sharedWorldSelectScene = nil;
@@ -88,20 +94,20 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     
     // Level Selection title
     float font_size = [CCDirector is_iPad] ? FONT_SIZE_LEVEL_SELECTION : FONT_SIZE_LEVEL_SELECTION / IPAD_TO_IPHONE_HEIGHT_RATIO;
-    CCLabelTTF *title = [CCLabelTTF labelWithString:@"Level Selection" fontName:@"Viking-Normal" fontSize:font_size];
+    CCLabelTTF *title = [CCLabelTTF labelWithString:@"Level Selection" fontName:@"UnZialish" fontSize:font_size];
     title.positionType = CCPositionTypeNormalized;
-    title.color = [CCColor whiteColor];
+    title.color = whiteColor;
     title.position = ccp(0.5f, 0); // Middle of screen
     title.anchorPoint = ccp(0.5,0);
     [topCover addChild:title];
     
     // Return button
-    CCButton *returnButton = [CCButton buttonWithTitle:@"X" fontName:@"Verdana-Bold" fontSize:50.0f];
+    CCButton *returnButton = [CCButton buttonWithTitle:@"XX" fontName:@"UnZialish" fontSize:font_size*2];
     returnButton.positionType = CCPositionTypeNormalized;
-    returnButton.position = ccp(0.1f, 0);
-    returnButton.anchorPoint = ccp(0.5,0);
+    returnButton.position = ccp(0, 0);
+    returnButton.anchorPoint = ccp(0,0);
     [returnButton setTarget:self selector:@selector(onReturnClicked:)];
-    [topCover addChild:returnButton];
+    [topCover addChild:returnButton z:-1];
     
 
     int numWorlds = [[[[CCDirector sharedDirector] getLevelStructure] objectForKey:@"numWorlds"] intValue];
@@ -114,9 +120,10 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     float vertical_offsetY = self.contentSize.height * CAROUSEL_VERTICAL_MAX_HEIGHT_PERCENT;
     CGPoint position = ccp(vertical_offsetX,vertical_offsetY);
     
-    Carousel *verticalCarousel = [Carousel createCarousel:position vertical:YES width:verticalWidth height:verticalHeight numElements:numWorlds elements:NULL];
+    verticalCarousel = [Carousel createCarousel:position vertical:YES width:verticalWidth height:verticalHeight numElements:numWorlds elements:NULL];
     [self addChild:verticalCarousel z:1];
     
+    // Left and middle covers
     CCNodeColor* leftCover = [CCNodeColor nodeWithColor:backgroundColor width:vertical_offsetX height:self.contentSize.height];
     [self addChild:leftCover z:2];
     
@@ -127,11 +134,37 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     middleCover.position = ccp(middle_x, 0);
     [self addChild:middleCover z:2];
 
+    topArrow = [CCSprite spriteWithImageNamed:@"arrows.png"];
+    float xArrowPos = (vertical_offsetX - topArrow.contentSize.width) / 2.0f;
+    float buffer = [CCDirector is_iPad] ? CAROUSEL_VERTICAL_ELEMENT_BUFFER : CAROUSEL_VERTICAL_ELEMENT_BUFFER / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    topArrow.position = ccp(xArrowPos, vertical_offsetY - buffer);
+    topArrow.anchorPoint = ccp(0,1);
+    topArrow.opacity = 0.0f;
+    [self addChild:topArrow z:2];
+    
+    bottomArrow = [CCSprite spriteWithImageNamed:@"arrows.png"];
+    bottomArrow.flipY = YES;
+    bottomArrow.position = ccp(xArrowPos, 2.5*buffer);
+    bottomArrow.anchorPoint = ccp(0,1);
+    [self addChild:bottomArrow z:2];
+    
+    CCSprite* back = [CCSprite spriteWithImageNamed:@"backarrow.png"];
+    back.anchorPoint = ccp(0,0);
+    back.position = ccp(0, self.contentSize.height * .91);
+    
+    [self addChild:back z:4];
+    
     currentLevel = @"";
     
     // done
 	return self;
 }
+
+- (void)update:(CCTime)delta {
+    topArrow.opacity = [verticalCarousel topArrow] ? 1.0f : 0.0f;
+    bottomArrow.opacity = [verticalCarousel bottomArrow] ? 1.0f : 0.0f;
+}
+
 
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks

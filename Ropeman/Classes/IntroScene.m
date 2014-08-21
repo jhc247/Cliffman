@@ -60,26 +60,26 @@ static IntroScene *_sharedIntroScene = nil;
     float font_size_play = [CCDirector is_iPad] ? FONT_SIZE_INTRO_SCENE_PLAY : FONT_SIZE_INTRO_SCENE_PLAY / IPAD_TO_IPHONE_HEIGHT_RATIO;
     
     // Play button
-    CCButton *playButton = [CCButton buttonWithTitle:@"Play" fontName:@"Viking-Normal" fontSize:font_size_play];
+    CCButton *playButton = [CCButton buttonWithTitle:@"Play" fontName:@"UnZialish" fontSize:font_size_play];
     playButton.positionType = CCPositionTypeNormalized;
     [playButton setColor:brown];
-    playButton.position = ccp(0.85f, 0.05f);
+    playButton.position = ccp(0.87f, 0.08f);
     [playButton setTarget:self selector:@selector(onPlayClicked:)];
     [self addChild:playButton];
     
     // Mute button
-    NSString* muteString = [NSString stringWithFormat:@"[  ]\nMute"];
-    CCButton *mute = [CCButton buttonWithTitle:muteString fontName:@"Viking-Normal" fontSize:font_size];
+    NSString* muteString = [NSString stringWithFormat:@"[   ]\nMute"];
+    CCButton *mute = [CCButton buttonWithTitle:muteString fontName:@"UnZialish" fontSize:font_size];
     mute.positionType = CCPositionTypeNormalized;
-    mute.position = ccp(0.10f, 0.075f);
+    mute.position = ccp(0.10f, 0.1f);
     [mute setColor:brown];
     [mute setTarget:self selector:@selector(onMuteButtonClicked:)];
     [self addChild:mute];
     
     // Credits button
-    CCButton *credits = [CCButton buttonWithTitle:@"Credits" fontName:@"Viking-Normal" fontSize:font_size];
+    CCButton *credits = [CCButton buttonWithTitle:@"Credits" fontName:@"UnZialish" fontSize:font_size];
     credits.positionType = CCPositionTypeNormalized;
-    credits.position = ccp(0.5f, 0.05f);
+    credits.position = ccp(0.5f, 0.06f);
     [credits setColor:brown];
     [credits setTarget:self selector:@selector(onCreditButtonClicked:)];
     [self addChild:credits];
@@ -105,7 +105,7 @@ static IntroScene *_sharedIntroScene = nil;
     if ([audio muted]) {
         [audio setMuted:NO];
         CCButton *button = (CCButton*) sender;
-        NSString* muteString = [NSString stringWithFormat:@"[  ]\nMute"];
+        NSString* muteString = [NSString stringWithFormat:@"[   ]\nMute"];
         [button setTitle:muteString];
     }
     else {

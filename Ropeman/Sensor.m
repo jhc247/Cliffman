@@ -30,7 +30,8 @@
     if (!self) return(nil);
     
     if (type == Star) {
-        self = [super initWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"star.png"]];
+        //self = [super initWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"star.png"]];
+        self = [super initWithImageNamed:@"helmet.png"];
     }
     
     _height = height * mult;

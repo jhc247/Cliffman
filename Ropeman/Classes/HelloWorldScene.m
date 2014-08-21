@@ -176,7 +176,7 @@
         float y = [[star valueForKey:@"y"] floatValue];
         
         Sensor *s = [Sensor createSensor:ccp(x,y) type:Star width:STAR_WIDTH height:STAR_HEIGHT points:NULL mult:coordinateMultiplier];
-        [spritesBatchNode addChild:s];
+        [_physicsWorld addChild:s];
     }
     
     // Create win-zone(s)
