@@ -22,6 +22,8 @@
     float prevX2;
     float prevY2;
     
+    float ticks;
+    
 }
 
 
@@ -75,6 +77,8 @@
     prevX2 = 0;
     prevY2 = 0;
     
+    ticks = 0;
+    
     return self;
 }
 
@@ -104,10 +108,15 @@
     */
     switch (_state) {
         case Flying:
+            ticks++;
+            if (ticks > SPEAR_MAX_LIFE) {
+                [self detach];
+                break;
+            }
             acceleration_rope = [CCDirector is_iPad] ? ROPE_ACCEL : ROPE_ACCEL / IPAD_TO_IPHONE_HEIGHT_RATIO;
             xForce = acceleration_rope * sinf(CC_DEGREES_TO_RADIANS(originalAngle));
             yForce = acceleration_rope * cosf(CC_DEGREES_TO_RADIANS(originalAngle));
-            //[self.physicsBody applyForce:ccp(xForce, yForce)];
+            [self.physicsBody applyForce:ccp(xForce, yForce)];
             break;
         case Attached:
             /*_player.rotation = angle;

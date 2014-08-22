@@ -17,6 +17,7 @@
     
 }
 
-+ (VerticalElement*) createVerticalElement: (CGPoint)position worldNumber:(int)worldNumber;
++ (VerticalElement*) createVerticalElement: (CGPoint)position worldNumber:(int)worldNumber totalHelmets:(int)totalHelmets;
 
+- (int) getNumHelmets;
 @end

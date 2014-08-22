@@ -216,7 +216,8 @@ and when to execute the Scenes.
 
 + (BOOL) is_iPad;
 
-- (NSDictionary*) getLevelStructure;
+- (NSMutableDictionary*) getLevelStructure;
+- (NSString*) getLevelStructurePath;
 
 #pragma mark Director - Stats
 

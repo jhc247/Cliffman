@@ -10,6 +10,7 @@
 #import "cocos2d-ui.h"
 #import "IntroScene.h"
 #import "HelloWorldScene.h"
+#import "WorldSelectScene.h"
 
 @interface TouchLayer : CCNodeColor {
     
@@ -18,6 +19,8 @@
 // -----------------------------------------------------------------------
 
 + (TouchLayer*) createTouchLayer:(CGSize)size;
+
+- (void) createMenu: (BOOL)died collected:(int)collected;
 
 @end
 

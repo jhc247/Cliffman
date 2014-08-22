@@ -10,15 +10,15 @@
 
 
 @implementation VerticalElement {
-    
+    int currentNum;
 }
 
 
-+ (VerticalElement*) createVerticalElement: (CGPoint)position worldNumber:(int)worldNumber {
-    return [[self alloc] init:position worldNumber:worldNumber];
++ (VerticalElement*) createVerticalElement: (CGPoint)position worldNumber:(int)worldNumber totalHelmets:(int)totalHelmets{
+    return [[self alloc] init:position worldNumber:worldNumber totalHelmets:totalHelmets];
 }
 
-- (id) init: (CGPoint)position worldNumber:(int)worldNumber {
+- (id) init: (CGPoint)position worldNumber:(int)worldNumber totalHelmets:(int)totalHelmets{
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
@@ -35,6 +35,7 @@
     
     NSDictionary* world = [[[CCDirector sharedDirector] getLevelStructure] objectForKey:[NSString stringWithFormat:@"World %d", worldNumber]];
     NSString* worldName = [world objectForKey:@"worldName"];
+    int requiredHelmets = [[world objectForKey:@"requiredHelmets"] intValue];
     NSString* worldPreviewFile = [world objectForKey:@"worldPreviewFile"];
     NSArray* levels = [world objectForKey:@"levels"];
     
@@ -71,35 +72,60 @@
     helmet.anchorPoint = ccp(0.5f, 1);
     helmet.position = ccp(0.2f, 0.1f);
     [self addChild:helmet];
+
+    if (totalHelmets < requiredHelmets) {
+        preview.opacity = 0.3;
+        
+        // Add required helmets
+        NSString *countString = [NSString stringWithFormat:@"%d / %d",totalHelmets , requiredHelmets];
+        CCLabelTTF *count = [CCLabelTTF labelWithString:countString fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(font_width*.6, font_height)];
+        [count setHorizontalAlignment:CCTextAlignmentCenter];
+        [count setVerticalAlignment:CCVerticalTextAlignmentCenter];
+        count.adjustsFontSizeToFit = YES;
+        count.positionType = CCPositionTypeNormalized;
+        count.color = [CCColor redColor];
+        count.position = ccp(0.7f, 0.1f); // Middle of screen
+        count.anchorPoint = ccp(0.5f, 1);
+        [self addChild:count];
+    }
+    else {
+        
+        // Add world count
+        currentNum = 0;
+        int maxNum = 0;
+        for (NSDictionary* level in levels) {
+            currentNum += [[level objectForKey:@"levelScore"] intValue];
+            maxNum += [[level objectForKey:@"levelScoreMax"] intValue];
+        }
+        
+        NSString *countString = [NSString stringWithFormat:@"%d / %d",currentNum, maxNum];
+        CCLabelTTF *count = [CCLabelTTF labelWithString:countString fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(font_width*.6, font_height)];
+        [count setHorizontalAlignment:CCTextAlignmentCenter];
+        [count setVerticalAlignment:CCVerticalTextAlignmentCenter];
+        count.adjustsFontSizeToFit = YES;
+        count.positionType = CCPositionTypeNormalized;
+        count.color = (currentNum >= maxNum) ? blueColor : whiteColor;
+        count.position = ccp(0.7f, 0.1f); // Middle of screen
+        count.anchorPoint = ccp(0.5f, 1);
+        [self addChild:count];
+        
+        // Add level previews
+        int numLevels = [levels count];
+        float horizontalHeight = [CCDirector is_iPad] ? CAROUSEL_HORIZONTAL_HEIGHT : CAROUSEL_HORIZONTAL_HEIGHT / IPAD_TO_IPHONE_HEIGHT_RATIO;
+        float horizontalWidth = (CAROUSEL_HORIZONTAL_ELEMENT_WIDTH + CAROUSEL_HORIZONTAL_ELEMENT_BUFFER) * numLevels + 2*CAROUSEL_HORIZONTAL_ELEMENT_BUFFER;
+        horizontalWidth = [CCDirector is_iPad] ? horizontalWidth : horizontalWidth / IPAD_TO_IPHONE_HEIGHT_RATIO;
+        
+        float horizontal_offsetX = [CCDirector is_iPad] ? CAROUSEL_HORIZONTAL_OFFSET_X : CAROUSEL_HORIZONTAL_OFFSET_X / IPAD_TO_IPHONE_HEIGHT_RATIO;
+        
+        
+        //float vertical_offsetY = self.contentSize.height * CAROUSEL_VERTICAL_MAX_HEIGHT_PERCENT;
+        CGPoint horizontal_position = ccp(position.x + width + horizontal_offsetX, height*.9);
+        
+        Carousel *horizontalCarousel = [Carousel createCarousel:horizontal_position vertical:NO width:horizontalWidth height:horizontalHeight numElements:numLevels elements:levels worldNum:worldNumber];
+        [self addChild:horizontalCarousel z:-1];
+    }
     
-    // Add world count
-    int currentNum = 3;
-    int maxNum = 42;
-    NSString *countString = [NSString stringWithFormat:@"%d / %d",currentNum, maxNum];
-    CCLabelTTF *count = [CCLabelTTF labelWithString:countString fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(font_width*.6, font_height)];
-    [count setHorizontalAlignment:CCTextAlignmentCenter];
-    [count setVerticalAlignment:CCVerticalTextAlignmentCenter];
-    count.adjustsFontSizeToFit = YES;
-    count.positionType = CCPositionTypeNormalized;
-    count.color = (currentNum >= maxNum) ? blueColor : whiteColor;
-    count.position = ccp(0.7f, 0.1f); // Middle of screen
-    count.anchorPoint = ccp(0.5f, 1);
-    [self addChild:count];
     
-    // Add level previews
-    int numLevels = [levels count];
-    float horizontalHeight = [CCDirector is_iPad] ? CAROUSEL_HORIZONTAL_HEIGHT : CAROUSEL_HORIZONTAL_HEIGHT / IPAD_TO_IPHONE_HEIGHT_RATIO;
-    float horizontalWidth = (CAROUSEL_HORIZONTAL_ELEMENT_WIDTH + CAROUSEL_HORIZONTAL_ELEMENT_BUFFER) * numLevels + 2*CAROUSEL_HORIZONTAL_ELEMENT_BUFFER;
-    horizontalWidth = [CCDirector is_iPad] ? horizontalWidth : horizontalWidth / IPAD_TO_IPHONE_HEIGHT_RATIO;
-    
-    float horizontal_offsetX = [CCDirector is_iPad] ? CAROUSEL_HORIZONTAL_OFFSET_X : CAROUSEL_HORIZONTAL_OFFSET_X / IPAD_TO_IPHONE_HEIGHT_RATIO;
-    
-    
-    //float vertical_offsetY = self.contentSize.height * CAROUSEL_VERTICAL_MAX_HEIGHT_PERCENT;
-    CGPoint horizontal_position = ccp(position.x + width + horizontal_offsetX, height*.9);
-    
-    Carousel *horizontalCarousel = [Carousel createCarousel:horizontal_position vertical:NO width:horizontalWidth height:horizontalHeight numElements:numLevels elements:levels];
-    [self addChild:horizontalCarousel z:-1];
 
     
     /*
@@ -115,5 +141,8 @@
     return self;
 }
 
+- (int) getNumHelmets {
+    return currentNum;
+}
 
 @end

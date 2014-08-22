@@ -8,6 +8,8 @@
 	<dict>
 		<key>worldName</key>
 		<string>Fire World</string>
+		<key>requiredHelmets</key>
+		<string>0</string>
 		<key>worldPreviewFile</key>
 		<string>comingsoon.png</string>
 		<key>levels</key>
@@ -78,6 +80,8 @@
 	<dict>
 		<key>worldName</key>
 		<string>Water World</string>
+		<key>requiredHelmets</key>
+		<string>3</string>
 		<key>worldPreviewFile</key>
 		<string>comingsoon.png</string>
 		<key>levels</key>
@@ -124,6 +128,8 @@
 	<dict>
 		<key>worldName</key>
 		<string>Grass World</string>
+		<key>requiredHelmets</key>
+		<string>10</string>
 		<key>worldPreviewFile</key>
 		<string>comingsoon.png</string>
 		<key>levels</key>

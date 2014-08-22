@@ -12,15 +12,19 @@
 @implementation HorizontalElement {
     CCSprite* preview;
     
+    int _worldNum;
+    int _levelNum;
+    int _maxHelmets;
+    
     NSString* levelFile;
     NSString* levelPreview;
 }
 
-+ (HorizontalElement*) createHorizontalElement: (CGPoint)position levelData:(NSDictionary *)levelData {
-    return [[self alloc] init:position levelData:levelData];
++ (HorizontalElement*) createHorizontalElement: (CGPoint)position levelData:(NSDictionary *)levelData worldNum:(int)worldNum levelNum:(int)levelNum {
+    return [[self alloc] init:position levelData:levelData worldNum:worldNum levelNum:levelNum];
 }
 
-- (id) init: (CGPoint)position levelData:(NSDictionary *)levelData {
+- (id) init: (CGPoint)position levelData:(NSDictionary *)levelData worldNum:(int)worldNum levelNum:(int)levelNum {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
@@ -28,11 +32,14 @@
     CCColor *whiteColor = [CCColor colorWithRed:233.0f/255.0f green:233.0f/255.0f blue:233.0f/255.0f];
     CCColor *blueColor = [CCColor colorWithRed:78.0f/255.0f green:177.0f/255.0f blue:186.0f/255.0f];
     
+    _worldNum = worldNum;
+    _levelNum = levelNum;
+    
     NSString* levelName = [levelData objectForKey:@"levelName"];
     levelFile = [levelData objectForKey:@"levelFile"];
     levelPreview = [levelData objectForKey:@"levelPreview"];
     int levelScore = [[levelData objectForKey:@"levelScore"] intValue];
-    int levelScoreMax = [[levelData objectForKey:@"levelScoreMax"] intValue];
+    _maxHelmets = [[levelData objectForKey:@"levelScoreMax"] intValue];
     
     self.position = position;
     self.anchorPoint = ccp(0,0);
@@ -73,16 +80,13 @@
     [self addChild:helmet];
     
     // Add level count
-    // Add world count
-    int currentNum = 3;
-    int maxNum = 3;
-    NSString *countString = [NSString stringWithFormat:@"%d / %d",currentNum, maxNum];
+    NSString *countString = [NSString stringWithFormat:@"%d / %d",levelScore, _maxHelmets];
     CCLabelTTF *count = [CCLabelTTF labelWithString:countString fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(font_width*.6, font_height)];
     [count setHorizontalAlignment:CCTextAlignmentCenter];
     [count setVerticalAlignment:CCVerticalTextAlignmentCenter];
     count.adjustsFontSizeToFit = YES;
     count.positionType = CCPositionTypeNormalized;
-    count.color = (currentNum >= maxNum) ? blueColor : whiteColor;
+    count.color = (levelScore >= _maxHelmets) ? blueColor : whiteColor;
     count.position = ccp(0.7f, 0.13f); // Middle of screen
     count.anchorPoint = ccp(0.5f, 1);
     [self addChild:count];
@@ -103,7 +107,7 @@
     if ([levelPreview  isEqual: @"levelpreview.png"]) {
         return NO;
     }
-    [[WorldSelectScene sharedWorldSelectScene] playScene:levelFile];
+    [[WorldSelectScene sharedWorldSelectScene] playScene:levelFile worldNum:_worldNum levelNum:_levelNum maxHelmets:_maxHelmets];
     return YES;
 }
 

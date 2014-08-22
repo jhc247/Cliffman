@@ -52,19 +52,21 @@ static const float BAT_DIE_ANIMATION_DELAY = 0.3f;
 static const float STAR_WIDTH = 70;
 static const float STAR_HEIGHT = 70;
 
-static const float ROPE_ACCEL = 3000;
+static const float ROPE_ACCEL = 1500;
 static const float ROPE_THICKNESS = 5;
 static const float ROPE_MINMAX_LENGTH = 50;
 static const float ROPE_BUFFER = 50;
-static const float ROPE_PULL_FORCE = 500;
+static const float ROPE_PULL_FORCE = 1000;
 static const float ROPE_MIN_LENGTH = 0;
 static const float ROPE_HOOK_RADIUS = 5;
 static const float ROPE_INITIAL_SLACK = 0;
 static const float ROPE_ADDITIONAL_GRAVITY = -3000;
+static const int SPEAR_MAX_LIFE = 50;
 
 static const float GRAVITY_X = 0;
 static const float GRAVITY_Y = -450;
-static const float AIR_RESISTANCE = 0.01f;
+static const int AIR_RESISTANCE_DELAY = 350;
+static const float AIR_RESISTANCE = 0.000f;
 
 static const float CAMERA_PANNING_PERCENT_RIGHT = 0.60f;
 //static const float CAMERA_PANNING_RIGHT_AREA =
@@ -92,9 +94,17 @@ static const int Z_ORDER_TILEMAP = 0;
 
 // Level Select Screen
 static const float LEVEL_SCREEN_BORDER_THICKNESS = 3.0f;
-
 static const float MAX_DELTA_LEVEL_SELECTION = 50;
 static const float LEVEL_SCREEN_ARROW_BUFFER = 30;
+
+// TouchLayer
+static const float ENERGY_BAR_WIDTH = 200;
+static const float ENERGY_BAR_HEIGHT = 30;
+static const float ENERGY_BAR_INITIAL_ENERGY = 100;
+static const float ENERGY_BAR_DEPLETION_RATE = 0.5;
+static const float MENU_SCREEN_BOX_WIDTH = 210;
+static const float MENU_SCREEN_COUNT_FONT_SIZE = 40;
+static const float MENU_SCREEN_MESSAGE_FONT_SIZE = 60;
 
 // Fonts Sizes
 static const float FONT_SIZE_WORLD_NAME = 48.0f;

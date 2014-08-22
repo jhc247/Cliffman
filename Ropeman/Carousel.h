@@ -16,9 +16,10 @@
     
 }
 
-+ (Carousel*) createCarousel: (CGPoint)position vertical:(BOOL)vertical width:(float)width height:(float)height numElements:(int)numElements elements:(NSArray*)elements;
++ (Carousel*) createCarousel: (CGPoint)position vertical:(BOOL)vertical width:(float)width height:(float)height numElements:(int)numElements elements:(NSArray*)elements worldNum:(int)worldNum;
 
 - (BOOL) topArrow;
 - (BOOL) bottomArrow;
+- (int) getTotalHelmets;
 
 @end

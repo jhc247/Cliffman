@@ -15,7 +15,7 @@
     
 }
 
-+ (HorizontalElement*) createHorizontalElement: (CGPoint)position levelData:(NSDictionary*)levelData;
++ (HorizontalElement*) createHorizontalElement: (CGPoint)position levelData:(NSDictionary*)levelData worldNum:(int)worldNum levelNum:(int)levelNum;
 
 - (BOOL) enterLevel;
 - (void) dim;

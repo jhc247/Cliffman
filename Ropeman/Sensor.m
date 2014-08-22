@@ -29,13 +29,17 @@
     self = [super init];
     if (!self) return(nil);
     
-    if (type == Star) {
-        //self = [super initWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"star.png"]];
-        self = [super initWithImageNamed:@"helmet.png"];
-    }
-    
     _height = height * mult;
     _width = width * mult;
+    
+    if (type == Helmet) {
+        //self = [super initWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"star.png"]];
+        self = [super initWithImageNamed:@"helmet.png"];
+        _height = self.contentSize.height;
+        _width = self.contentSize.width;
+    }
+    
+    
     self.position = ccp(position.x * mult, position.y * mult);
     
     // Create physicsbody
@@ -68,8 +72,8 @@
             self.physicsBody.affectedByGravity = NO;
             self.physicsBody.type = CCPhysicsBodyTypeStatic;
             break;
-        case Star:
-            self.physicsBody.collisionGroup = @"starGroup";
+        case Helmet:
+            self.physicsBody.collisionGroup = @"helmetGroup";
             self.physicsBody.affectedByGravity = NO;
             self.physicsBody.type = CCPhysicsBodyTypeStatic;
             collected = NO;
@@ -104,8 +108,8 @@
     
 }
 
-- (BOOL)collectStar {
-    if (collected || _type != Star) {
+- (BOOL)collectHelmet {
+    if (collected || _type != Helmet) {
         return NO;
     }
     collected = YES;

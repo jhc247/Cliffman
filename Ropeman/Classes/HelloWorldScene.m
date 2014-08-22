@@ -26,6 +26,9 @@
     float level_width;
     
     BOOL game_over;
+    
+    int collected;
+    int maxHelmets;
 }
 
 // -----------------------------------------------------------------------
@@ -168,15 +171,15 @@
         [spritesBatchNode addChild:b];
     }
     
-    // Create stars
-    CCTiledMapObjectGroup *starGroup = [tilemap objectGroupNamed:@"stars"];
-    NSMutableArray *stars = [starGroup objects];
-    for (NSMutableDictionary *star in stars) {
-        float x = [[star valueForKey:@"x"] floatValue];
-        float y = [[star valueForKey:@"y"] floatValue];
+    // Create helmets
+    CCTiledMapObjectGroup *helmetGroup = [tilemap objectGroupNamed:@"helmets"];
+    NSMutableArray *helmets = [helmetGroup objects];
+    for (NSMutableDictionary *helmet in helmets) {
+        float x = [[helmet valueForKey:@"x"] floatValue];
+        float y = [[helmet valueForKey:@"y"] floatValue];
         
-        Sensor *s = [Sensor createSensor:ccp(x,y) type:Star width:STAR_WIDTH height:STAR_HEIGHT points:NULL mult:coordinateMultiplier];
-        [_physicsWorld addChild:s];
+        Sensor *h = [Sensor createSensor:ccp(x,y) type:Helmet width:0 height:0 points:NULL mult:coordinateMultiplier];
+        [_physicsWorld addChild:h];
     }
     
     // Create win-zone(s)
@@ -195,6 +198,10 @@
     // Set-up camera
     touchLayer = [TouchLayer createTouchLayer:self.contentSize];
     [self addChild:touchLayer];
+    
+    
+    collected = 0;
+    maxHelmets = 3;
     
     cameraLeft = 0;
     game_over = NO;
@@ -232,6 +239,9 @@
 }
 
 - (void)update:(CCTime)delta {
+    if (game_over) {
+        return;
+    }
     float currentX = _player.position.x - cameraLeft;
     float leftThreshhold = CAMERA_PANNING_PERCENT_LEFT * self.contentSize.width;
     float rightThreshhold = CAMERA_PANNING_PERCENT_RIGHT * self.contentSize.width;
@@ -255,8 +265,7 @@
     }
     
     if (_player.position.y + _player.contentSize.height/2 < 0) {
-        //CCLOG(@"Died");
-        //game_over = YES;
+        [self endLevel:YES];
     }
 }
 
@@ -273,19 +282,19 @@
     [_player throwSpear:touchLoc];
 }
 
--(void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    //[_currentRope doneRising];
-}
-
 // -----------------------------------------------------------------------
 
+- (void) endLevel: (BOOL)died {
+    game_over = YES;
+    [touchLayer createMenu:died collected:collected];
+    if (!died) {
+        [[WorldSelectScene sharedWorldSelectScene] setNewLevelScore:collected];
+    }
+    [_player.physicsBody setSleeping:YES];
+}
 
 - (BOOL)pull {
     return game_over ? NO : [_player pull];
-}
-
-- (void)win {
-    [[WorldSelectScene sharedWorldSelectScene] resetScene];
 }
 
 // Player-Sensor
@@ -296,9 +305,9 @@
             CCLOG(@"Player hit spike");
             return NO;
             
-        case Star:
-            CCLOG(@"Player hit star");
-            [sensor collectStar];
+        case Helmet:
+            CCLOG(@"Player hit helmet");
+            collected = [sensor collectHelmet] ? collected + 1 : collected;
             return NO;
             
         case Wall:
@@ -310,7 +319,7 @@
             return YES;
         case Win:
             CCLOG(@"Player hit win sensor");
-            [self win];
+            [self endLevel:NO];
             return NO;
         default:
             return YES;
@@ -326,8 +335,8 @@
             CCLOG(@"Spear hit spike");
             return YES;
             
-        case Star:
-            CCLOG(@"Spear hit star");
+        case Helmet:
+            CCLOG(@"Spear hit helmet");
             return NO;
     
         case Wall:

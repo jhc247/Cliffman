@@ -27,13 +27,15 @@
     
     BOOL topArrow;
     BOOL bottomArrow;
+    
+    int totalHelmets;
 }
 
-+ (Carousel*) createCarousel: (CGPoint)position vertical:(BOOL)vertical width:(float)width height:(float)height numElements:(int)numElements elements:(NSArray*)elements {
-    return [[self alloc] init:position vertical:vertical width:width height:height numElements:numElements elements:elements];
++ (Carousel*) createCarousel: (CGPoint)position vertical:(BOOL)vertical width:(float)width height:(float)height numElements:(int)numElements elements:(NSArray*)elements worldNum:(int)worldNum {
+    return [[self alloc] init:position vertical:vertical width:width height:height numElements:numElements elements:elements worldNum:worldNum ];
 }
 
-- (id) init: (CGPoint)position vertical:(BOOL)vertical width:(float)width height:(float)height numElements:(int)numElements elements:(NSArray*)elements {
+- (id) init: (CGPoint)position vertical:(BOOL)vertical width:(float)width height:(float)height numElements:(int)numElements elements:(NSArray*)elements worldNum:(int)worldNum {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
@@ -58,21 +60,23 @@
     
     _height = height;
     _width = width;
+    totalHelmets = 0;
     
     if (_vertical) {
         float offset = [CCDirector is_iPad] ? CAROUSEL_VERTICAL_ELEMENT_HEIGHT + CAROUSEL_VERTICAL_ELEMENT_BUFFER : (CAROUSEL_VERTICAL_ELEMENT_HEIGHT + CAROUSEL_VERTICAL_ELEMENT_BUFFER) / IPAD_TO_IPHONE_HEIGHT_RATIO;
         float buffer = [CCDirector is_iPad] ? CAROUSEL_VERTICAL_ELEMENT_BUFFER : CAROUSEL_VERTICAL_ELEMENT_BUFFER / IPAD_TO_IPHONE_HEIGHT_RATIO;
         
         for (int i = 0; i < numElements; i++) {
-            VerticalElement* element = [VerticalElement createVerticalElement:ccp(0, height - buffer - i*offset) worldNumber:i+1];
+            VerticalElement* element = [VerticalElement createVerticalElement:ccp(0, height - buffer - i*offset) worldNumber:i+1 totalHelmets:totalHelmets];
             [self addChild:element z:1];
+            totalHelmets += [element getNumHelmets];
         }
     }
     else {
         self.userInteractionEnabled = YES;
         float offset = [CCDirector is_iPad] ? CAROUSEL_HORIZONTAL_ELEMENT_WIDTH + CAROUSEL_HORIZONTAL_ELEMENT_BUFFER : (CAROUSEL_HORIZONTAL_ELEMENT_WIDTH + CAROUSEL_HORIZONTAL_ELEMENT_BUFFER) / IPAD_TO_IPHONE_HEIGHT_RATIO;
         for (int i = 0; i < numElements; i++) {
-            HorizontalElement* element = [HorizontalElement createHorizontalElement:ccp(0 + i*offset,0) levelData:[elements objectAtIndex:i]];
+            HorizontalElement* element = [HorizontalElement createHorizontalElement:ccp(0 + i*offset,0) levelData:[elements objectAtIndex:i] worldNum:worldNum levelNum:i];
             [self addChild:element z:1];
         }
     }
@@ -206,6 +210,10 @@
 
 - (BOOL) bottomArrow {
     return bottomArrow;
+}
+
+- (int) getTotalHelmets {
+    return totalHelmets;
 }
 
 @end

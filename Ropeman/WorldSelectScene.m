@@ -13,13 +13,13 @@
 // -----------------------------------------------------------------------
 
 @implementation WorldSelectScene {
-    NSString* currentLevel;
     
     Carousel* verticalCarousel;
     CCSprite* topArrow;
     CCSprite* bottomArrow;
+
     
-    
+    BOOL hasUpdated;
 }
 
 static WorldSelectScene *_sharedWorldSelectScene = nil;
@@ -29,6 +29,18 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
 	if (!_sharedWorldSelectScene) {
         _sharedWorldSelectScene = [self scene];
 	}
+    else if ([_sharedWorldSelectScene hasUpdated]) {
+        NSString* file = [_sharedWorldSelectScene currentLevelFile];
+        int w = [_sharedWorldSelectScene worldNum];
+        int l = [_sharedWorldSelectScene levelNum];
+        int m = [_sharedWorldSelectScene maxHelmets];
+        WorldSelectScene* newScene = [self scene];
+        newScene.currentLevelFile = file;
+        newScene.worldNum = w;
+        newScene.levelNum = l;
+        newScene.maxHelmets = m;
+        return newScene;
+    }
     
 	return _sharedWorldSelectScene;
 }
@@ -39,7 +51,7 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
 
 + (WorldSelectScene *)scene
 {
-    NSAssert(_sharedWorldSelectScene == nil, @"Attempted to allocate a second instance WorldSelectScene of a singleton.");
+    //NSAssert(_sharedWorldSelectScene == nil, @"Attempted to allocate a second instance WorldSelectScene of a singleton.");
 	return [[self alloc] init];
 }
 
@@ -120,8 +132,28 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     float vertical_offsetY = self.contentSize.height * CAROUSEL_VERTICAL_MAX_HEIGHT_PERCENT;
     CGPoint position = ccp(vertical_offsetX,vertical_offsetY);
     
-    verticalCarousel = [Carousel createCarousel:position vertical:YES width:verticalWidth height:verticalHeight numElements:numWorlds elements:NULL];
+    verticalCarousel = [Carousel createCarousel:position vertical:YES width:verticalWidth height:verticalHeight numElements:numWorlds elements:NULL worldNum:0];
     [self addChild:verticalCarousel z:1];
+    
+    // Total Helmet Count
+    _totalHelmets = [verticalCarousel getTotalHelmets];
+    CCSprite *helmet = [CCSprite spriteWithImageNamed:@"helmet_preview.png"];
+    helmet.positionType = CCPositionTypeNormalized;
+    helmet.anchorPoint = ccp(1, 0);
+    helmet.position = ccp(0.91f, 0.1f);
+    [topCover addChild:helmet];
+    NSString *countString = [NSString stringWithFormat:@"%d",_totalHelmets];
+    CCLabelTTF *count = [CCLabelTTF labelWithString:countString fontName:@"UnZialish" fontSize:font_size *0.5 dimensions:CGSizeMake(self.contentSize.width *.07, self.contentSize.height*.04)];
+    [count setHorizontalAlignment:CCTextAlignmentLeft];
+    [count setVerticalAlignment:CCVerticalTextAlignmentCenter];
+    count.adjustsFontSizeToFit = YES;
+    count.positionType = CCPositionTypeNormalized;
+    count.color = blueColor;
+    count.position = ccp(0.92f, 0.1f); // Middle of screen
+    count.anchorPoint = ccp(0, 0);
+    [topCover addChild:count];
+    
+
     
     // Left and middle covers
     CCNodeColor* leftCover = [CCNodeColor nodeWithColor:backgroundColor width:vertical_offsetX height:self.contentSize.height];
@@ -154,7 +186,8 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     
     [self addChild:back z:4];
     
-    currentLevel = @"";
+    _currentLevelFile = @"";
+    hasUpdated = NO;
     
     // done
 	return self;
@@ -176,24 +209,38 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     [[CCDirector sharedDirector] replaceScene:[IntroScene sharedIntroScene]];
 }
 
-- (void)onPlayClicked:(id)sender
+- (void)playScene: (NSString*)levelName worldNum:(int)worldNum levelNum:(int)levelNum maxHelmets:(int)maxHelmets
 {
-    CCButton *button = (CCButton*)sender;
-    currentLevel = [button name];
-    // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:currentLevel]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
-}
-
-- (void)playScene: (NSString*)levelName {
-    currentLevel = levelName;
-    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:currentLevel]];
+    _currentLevelFile = levelName;
+    _worldNum = worldNum;
+    _levelNum = levelNum;
+    _maxHelmets = maxHelmets;
+    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:_currentLevelFile]];
 }
 
 - (void)resetScene {
-    if (![currentLevel isEqual: @""]) {
-        [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:currentLevel]];
+    if (![self.currentLevelFile isEqual: @""]) {
+        [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:_currentLevelFile]];
     }
+}
+
+- (void) setNewLevelScore: (int)score {
+    NSString* worldKey = [NSString stringWithFormat:@"World %d",_worldNum];
+    NSMutableDictionary* world = [[[CCDirector sharedDirector] getLevelStructure] objectForKey:worldKey];
+    NSMutableDictionary* levelData = [[world objectForKey:@"levels"] objectAtIndex:_levelNum];
+    NSString* saveFilePath = [[CCDirector sharedDirector] getLevelStructurePath];
+    int previousNum = [[levelData objectForKey:@"levelScore"] intValue];
+    if (score > previousNum) {
+        [levelData setValue:[NSNumber numberWithInt:score] forKey:@"levelScore"];
+        [[[CCDirector sharedDirector] getLevelStructure] writeToFile:saveFilePath atomically:YES];
+        hasUpdated = YES;
+    }
+    
+}
+
+
+- (BOOL) hasUpdated {
+    return hasUpdated;
 }
 
 @end

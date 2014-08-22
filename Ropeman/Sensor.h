@@ -13,7 +13,7 @@
 typedef NS_ENUM(NSInteger, SensorType)
 {
     Spike,
-    Star,
+    Helmet,
     Wall,
     Win,
 };
@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, SensorType)
 
 + (Sensor *)createSensor: (CGPoint)position type:(SensorType)type width:(float)width height:(float)height points:(NSString*)points mult:(float)mult;
 
-- (BOOL)collectStar;
+- (BOOL)collectHelmet;
 - (float)getWallWidth;
 - (float)getWallHeight;
 

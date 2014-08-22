@@ -15,7 +15,6 @@
     
     CGPoint helper_throwTarget;
     
-    float ticks;
 }
 
 
@@ -68,7 +67,7 @@
     float xVel;
     float xLimit;
     
-    if (currentSpear != NULL) {
+    if (currentSpear != NULL && currentSpear.state != Detaching) {
         float target_x = currentSpear.position.x - sinf(CC_DEGREES_TO_RADIANS(currentSpear.rotation)) *currentSpear.contentSize.height*.35;
         float target_y = currentSpear.position.y - cosf(CC_DEGREES_TO_RADIANS(currentSpear.rotation)) *currentSpear.contentSize.height*.35;
         
@@ -80,7 +79,7 @@
         [_rope setContentSize:CGSizeMake(ropeThickness, length)];
         _rope.position = self.position;
         _rope.rotation = angle;
-        _rope.opacity = ([currentSpear state] == Attached) ? 1.0f : 0.3f;
+        _rope.opacity = ([currentSpear state] == Attached) ? 1.0f : 0.2f;
     }
     else {
         _rope.opacity = 0;
@@ -116,10 +115,13 @@
      CGRect newSize = CGRectMake(50, 50, width + 1, height);
      [self setTextureRect:newSize];*/
     
-    //float xVel = self.physicsBody.velocity.x;
-    //float yVel = self.physicsBody.velocity.y;
-    //[self.physicsBody setVelocity:ccp(xVel * (1-AIR_RESISTANCE), yVel)];
-    
+    // Air resistance (causes lag-like motion)
+    /*xVel = self.physicsBody.velocity.x;
+    float yVel = self.physicsBody.velocity.y;
+    if (ticks > AIR_RESISTANCE_DELAY) {
+        CCLOG(@"RESISTING");
+        [self.physicsBody setVelocity:ccp(xVel * (1-AIR_RESISTANCE), yVel)];
+    }*/
     //[self.physicsBody applyForce:ccp(resistance, 0)];
     
     // Hack to prevent player body from merging with walls, causing the game to freeze
@@ -139,10 +141,11 @@
         //self.physicsBody.torque = 0;
     }
     
-    if (currentSpear != NULL && currentSpear.state == Attached) {
-        //float angle = [Spear getAngle:self.position target:currentSpear.position];
-        //self.rotation = angle;
-    }
+    // Fixes the player's rotation (Didn't like it)
+    /*if (currentSpear != NULL && currentSpear.state == Attached) {
+        float angle = [Spear getAngle:self.position target:currentSpear.position];
+        self.rotation = angle;
+    }*/
 }
 
 - (void)startSequence {
@@ -187,7 +190,7 @@
         return NO;
     }
     CGPoint force = [currentSpear activatePulling: self.position];
-    [self.physicsBody applyImpulse:force];
+    [self.physicsBody applyForce:force];
     return !(force.x == 0 && force.y == 0);
 }
 

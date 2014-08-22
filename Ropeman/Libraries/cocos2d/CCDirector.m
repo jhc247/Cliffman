@@ -116,7 +116,8 @@ extern NSString * cocos2dVersion(void);
 //
 static CCDirector *_sharedDirector = nil;
 
-NSDictionary* _theDict;
+NSMutableDictionary* _theDict;
+NSString* saveDataPath;
 
 + (CCDirector *)sharedDirector
 {
@@ -197,9 +198,22 @@ NSDictionary* _theDict;
 		__ccContentScaleFactor = 1;
 		self.UIScaleFactor = 1;
         
-        NSString* path = [[NSBundle mainBundle] pathForResource:@"levelStructure" ofType:@"plist"];
-        _theDict = [NSDictionary dictionaryWithContentsOfFile:path];
-
+        NSFileManager *fileManger=[NSFileManager defaultManager];
+        NSError *error;
+        NSArray *pathsArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+        
+        NSString *doumentDirectoryPath=[pathsArray objectAtIndex:0];
+        
+        NSString *destinationPath= [doumentDirectoryPath stringByAppendingPathComponent:@"levelStructure.plist"];
+        
+        NSLog(@"plist path %@",destinationPath);
+        if (![fileManger fileExistsAtPath:destinationPath]){
+            NSString *sourcePath=[[[NSBundle mainBundle] resourcePath]stringByAppendingPathComponent:@"levelStructure.plist"];
+            [fileManger copyItemAtPath:sourcePath toPath:destinationPath error:&error];
+        }
+        
+        _theDict = [NSMutableDictionary dictionaryWithContentsOfFile:destinationPath];
+        saveDataPath = destinationPath;
         
         if ([UIScreen mainScreen].scale == 2.0) {
             if ([CCDirector is_iPad]) { // iPad Retina
@@ -224,6 +238,10 @@ NSDictionary* _theDict;
 	}
 
 	return self;
+}
+
+- (NSString*) getLevelStructurePath {
+    return saveDataPath;
 }
 
 - (NSString*) description
@@ -390,7 +408,7 @@ NSDictionary* _theDict;
 	return  __view;
 }
 
-- (NSDictionary*) getLevelStructure {
+- (NSMutableDictionary*) getLevelStructure {
     return _theDict;
 }
 

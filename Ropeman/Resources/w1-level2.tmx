@@ -52,7 +52,7 @@
    <polygon points="0,0 38,144 166,166 650,-3"/>
   </object>
  </objectgroup>
- <objectgroup name="stars" width="46" height="13">
+ <objectgroup name="helmets" width="46" height="13">
   <object name="star-1" x="1560" y="360"/>
   <object name="star-2" x="3000" y="1320"/>
   <object name="star-3" x="4680" y="1200" width="120" height="120"/>
