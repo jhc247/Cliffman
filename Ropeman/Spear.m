@@ -10,9 +10,8 @@
 
 
 @implementation Spear {
-    float originalLength;
+    //float originalLength;
     float originalAngle;
-    CCPhysicsJoint* joint;
     
     CGPoint _target;
     
@@ -24,6 +23,7 @@
     
     float ticks;
     
+    NSLock* attachLock;
 }
 
 
@@ -40,13 +40,11 @@
     self = [super init];
     if (!self) return(nil);
     
-    
-    
     _target = target;
     float angle = [Spear getAngle:playerPosition target:_target];
     
     // Initialize sprite
-    self = [super initWithImageNamed:@"obj_PropSpear000.png"];
+    self = [super initWithImageNamed:@"spear.png"];
     float arm_length = [CCDirector is_iPad] ? PLAYER_ARM_LENGTH : PLAYER_ARM_LENGTH / IPAD_TO_IPHONE_HEIGHT_RATIO;
     float xPos = playerPosition.x + (arm_length * sinf(CC_DEGREES_TO_RADIANS(angle)));
     float yPos = playerPosition.y + (arm_length * cosf(CC_DEGREES_TO_RADIANS(angle)));
@@ -69,7 +67,7 @@
     [self.physicsBody setVelocity:ccp(xVel, yVel)];
     
     
-    
+    attachLock = [[NSLock alloc] init];
     _state = Flying;
     _pullState = NotPulling;
     prevX = playerPosition.x;
@@ -92,7 +90,6 @@
 // -----------------------------------------------------------------------
 
 - (void)update:(CCTime)delta {
-    //float ropeLength = ccpDistance(_player.position, self.position);
     prevX2 = prevX;
     prevY2 = prevY;
     prevX = self.position.x;
@@ -119,15 +116,16 @@
             [self.physicsBody applyForce:ccp(xForce, yForce)];
             break;
         case Attached:
-            /*_player.rotation = angle;
+            //_player.rotation = angle;
             if (_pullState == Pulling) {
                 
             }
             else {
-                if (ropeLength <= originalLength + 5 && ropeLength >= originalLength - 5) {
-                    //[_player.physicsBody applyForce:ccp(0, ROPE_ADDITIONAL_GRAVITY)];
-                }
-            }*/
+                //float ropeLength =
+                /*if (ropeLength <= originalLength *1.01 && ropeLength >= originalLength*.99) {
+                    [_player.physicsBody applyForce:ccp(0, ROPE_ADDITIONAL_GRAVITY)];
+                }*/
+            }
             break;
         case Detaching:
             break;
@@ -137,12 +135,19 @@
 
 }
 
-- (void)attach: (float)x y:(float)y width:(float)width height:(float)height {
-    if (!(_state == Flying || _state == Attached)) {
-        NSAssert(false, @"Invalid state change: attempting to attach");
+- (BOOL)attach: (float)length {
+    [attachLock lock];
+    if (!(_state == Flying)) {
+        //NSAssert(false, @"Invalid state change: attempting to attach");
+        [attachLock unlock];
+        return NO;
     }
     _state = Attached;
     self.physicsBody.type = CCPhysicsBodyTypeStatic;
+    _originalLength = length;
+    [attachLock unlock];
+    return YES;
+    
 }
 
 - (void)detach {
@@ -150,7 +155,7 @@
         return;
     }
     _state = Detaching;
-    [joint invalidate];
+    [self stopAllActions];
     [_parent removeChild:self];
     //[_player.physicsBody applyForce:ccp(0, -ROPE_ADDITIONAL_GRAVITY)];
     //CCLOG(@"forces upon detaching: %f,%f",_player.physicsBody.force.x, _player.physicsBody.force.y);

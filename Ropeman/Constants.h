@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, Orientation)
 static const float IPAD_TO_IPHONE_HEIGHT_RATIO = 2.4;
 
 static const float PLAYER_MASS = 1.0f;
-static const float PLAYER_SHOOT_SPEED = 700;
+static const float PLAYER_SHOOT_SPEED = 1500;
 
 
 // Player throwing animation
@@ -33,9 +33,10 @@ static const float PLAYER_ARM_LENGTH = 20;
 
 // Player start Sequence
 static const float PLAYER_RUN_SPEED = 300;
-static const float PLAYER_RUN_DISTANCE = 530;
+static const float PLAYER_RUN_DISTANCE = 0;
 static const float PLAYER_JUMP_IMPULSE = 300;
-static const float PLAYER_JUMP_ANGLE = 0;
+static const float PLAYER_JUMP_ANGLE = 45;
+static const float START_DELAY_TIME = 1.0;
 
 static NSString* const PLAYER_RUN_ANIMATION_NAME = @"player_run";
 static const float PLAYER_RUN_ANIMATION_DELAY = 0.05f;
@@ -52,25 +53,26 @@ static const float BAT_DIE_ANIMATION_DELAY = 0.3f;
 static const float STAR_WIDTH = 70;
 static const float STAR_HEIGHT = 70;
 
-static const float ROPE_ACCEL = 1500;
-static const float ROPE_THICKNESS = 5;
+static const float ROPE_ACCEL = 3000;
+static const float ROPE_THICKNESS = 3;
 static const float ROPE_MINMAX_LENGTH = 50;
 static const float ROPE_BUFFER = 50;
-static const float ROPE_PULL_FORCE = 1000;
+static const float ROPE_PULL_FORCE = 800;
 static const float ROPE_MIN_LENGTH = 0;
 static const float ROPE_HOOK_RADIUS = 5;
 static const float ROPE_INITIAL_SLACK = 0;
-static const float ROPE_ADDITIONAL_GRAVITY = -3000;
-static const int SPEAR_MAX_LIFE = 50;
+static const float ROPE_ADDITIONAL_GRAVITY = -100;
+static const float ROPE_EXTRA_LENGTH = 100;
+static const int SPEAR_MAX_LIFE = 40;
 
 static const float GRAVITY_X = 0;
-static const float GRAVITY_Y = -450;
+static const float GRAVITY_Y = -500;
 static const int AIR_RESISTANCE_DELAY = 350;
 static const float AIR_RESISTANCE = 0.000f;
 
 static const float CAMERA_PANNING_PERCENT_RIGHT = 0.60f;
 //static const float CAMERA_PANNING_RIGHT_AREA =
-static const float CAMERA_PANNING_PERCENT_LEFT = 0.1042f;
+static const float CAMERA_PANNING_PERCENT_LEFT = 0.40f;
 
 // Carousel constants
 static const float CAROUSEL_MAX_VELOCITY = 5;
@@ -88,9 +90,11 @@ static const float CAROUSEL_HORIZONTAL_OFFSET_X = 60;
 static const float VERTICAL_ELEMENT_TEXT_HEIGHT = 40.0f;
 
 // Z-Orders
-static const int Z_ORDER_PLAYER = 5;
-static const int Z_ORDER_SPEAR = 1;
+static const int Z_ORDER_SPRITES = 1;
+static const int Z_ORDER_SPEAR = 3;
 static const int Z_ORDER_TILEMAP = 0;
+static const int Z_ORDER_ROPE = 2;
+static const int Z_ORDER_MENU = 5;
 
 // Level Select Screen
 static const float LEVEL_SCREEN_BORDER_THICKNESS = 3.0f;
@@ -101,7 +105,7 @@ static const float LEVEL_SCREEN_ARROW_BUFFER = 30;
 static const float ENERGY_BAR_WIDTH = 200;
 static const float ENERGY_BAR_HEIGHT = 30;
 static const float ENERGY_BAR_INITIAL_ENERGY = 100;
-static const float ENERGY_BAR_DEPLETION_RATE = 0.5;
+static const float ENERGY_BAR_DEPLETION_RATE = 0.0;
 static const float MENU_SCREEN_BOX_WIDTH = 210;
 static const float MENU_SCREEN_COUNT_FONT_SIZE = 40;
 static const float MENU_SCREEN_MESSAGE_FONT_SIZE = 60;

@@ -20,21 +20,22 @@
 @property NSString* currentLevelFile;
 @property int worldNum;
 @property int levelNum;
+@property double levelDepletion;
 @property int maxHelmets;
 @property int totalHelmets;
 
 // -----------------------------------------------------------------------
 
 + (WorldSelectScene *)sharedWorldSelectScene;
++ (void)returnToSelection;
 + (WorldSelectScene *)scene;
 
-- (void)playScene: (NSString*)levelName worldNum:(int)worldNum levelNum:(int)levelNum maxHelmets:(int)maxHelmets;
+- (void)playScene: (NSString*)levelName worldNum:(int)worldNum levelNum:(int)levelNum maxHelmets:(int)maxHelmets depletionRate:(double)levelDepletion;
 - (void)resetScene;
 
 - (void) setNewLevelScore: (int)score;
 - (int) getMaxHelmets;
 - (BOOL) hasUpdated;
-- (int) getTotalHelmets;
 
 // -----------------------------------------------------------------------
 

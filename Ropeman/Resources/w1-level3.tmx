@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="44" height="13" tilewidth="120" tileheight="120">
+ <tileset firstgid="1" name="ClearRocks" tilewidth="120" tileheight="120">
+  <image source="ClearRocks.png" width="2040" height="2040"/>
+ </tileset>
+ <layer name="Tile Layer 5" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3OMRGAMBBE0T0GRbEQCxEQKSgECdygAIYuVdZBSMM292Z+/4EQQgh/SsCW1BMTMn+zemJC4W9RT3zQ+Lka/AX8YuqfkQOozh62GKr6Z2Tn58luZvzthOIVRvAIAAA=
+  </data>
+ </layer>
+ <layer name="Ceiling" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3OyU0DQRAF0AKG1SwGzG42ZwBkAGQA3DkAcfwDKUC8PMnI4ua5jSxT0lNpeqq7flNVy6ywyhrrbNBjky222aHPblX0TJmZzDmLfzETs+mN78ae2Bd7Y3/kSMMSiyx4Qy/f1fzmPOCQI4454ZQzhpxzwSVXXDPylp4pM5M5Z/EvZmI2w/Hd2BP7Ym/sjxyRJwP22fOGXoM/OWe5vqteu87Qtj5l/ZqhvP81n3XDLXddB2lZ9zzw2HWQlvXEMy9dB2lZb7zz0XWQOakfw45AnfAIAAA=
+  </data>
+ </layer>
+ <layer name="Layer 1" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA9XVQQ6CMBRF0V9EmdvSyoyl/U0IO1B3oO6Wm46Y4MCYyHvJnZ80LTTBxkgmsgPWJORtsfZC3iPWLOQ9YS1C3g7rZefeK000W/U6Xv+v6PNudKeH1fvg5UvvEH6p2t6TXvS2+t487/x81+N75r2Ql/+FJyFvgzUKeQPWs5B3AX9K1fXwCAAA
+  </data>
+ </layer>
+ <layer name="Layer 2" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgYGC4wTC0wMuBdgCJ4BeUnsbAkDCQ7iAWcDNC6KlDxL0yjAPtguEFSqF0+YC6YhSQCkbja+iCWwwMCgPtBlLAbSgeKuANFAMA8eyR4PAIAAA=
+  </data>
+ </layer>
+ <objectgroup name="helmets" width="44" height="13" opacity="0.99">
+  <object name="helmet1" x="1673" y="710" width="200" height="92"/>
+  <object name="helmet2" x="3162" y="1147" width="200" height="92"/>
+  <object name="helmet3" x="4629" y="417" width="200" height="92"/>
+ </objectgroup>
+ <objectgroup name="player" width="44" height="13">
+  <object name="player" x="257" y="245" width="94" height="147"/>
+ </objectgroup>
+ <objectgroup name="bats" width="44" height="13"/>
+ <objectgroup name="walls" width="44" height="13">
+  <object name="ceiling" x="120" y="0" width="5160" height="204"/>
+  <object name="leftwall" x="0" y="0" width="120" height="1560"/>
+  <object x="109" y="630">
+   <polygon points="0,0 62,-136 -14,-159"/>
+  </object>
+  <object x="209" y="201">
+   <polygon points="0,0 1,55 -111,85 -108,-3"/>
+  </object>
+  <object x="201" y="246">
+   <polygon points="0,0 -8,70 -99,99 -119,1"/>
+  </object>
+  <object x="160" y="496">
+   <polygon points="0,0 20,-186 -53,-180 -82,-10"/>
+  </object>
+  <object x="105" y="802">
+   <polygon points="0,0 65,145 -5,158"/>
+  </object>
+  <object x="144" y="945">
+   <polygon points="0,0 -6,37 -48,49 -35,-10"/>
+  </object>
+  <object x="4804" y="993">
+   <polygon points="0,0 4,139 55,324 469,322 465,4"/>
+  </object>
+  <object x="4867" y="1289">
+   <polygon points="0,0 -61,265 410,265 400,16"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="winZones" width="44" height="13">
+  <object x="4852" y="960" width="627" height="24"/>
+  <object x="5160" y="216" width="120" height="720"/>
+ </objectgroup>
+ <layer name="Tile Layer 4" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwlEAplC4fUFeMglEwtAAAI2n/xPAIAAA=
+  </data>
+ </layer>
+</map>

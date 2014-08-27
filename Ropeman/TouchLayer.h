@@ -18,7 +18,7 @@
 
 // -----------------------------------------------------------------------
 
-+ (TouchLayer*) createTouchLayer:(CGSize)size;
++ (TouchLayer*) createTouchLayer:(CGSize)size depletionRate:(double)levelDepletion;
 
 - (void) createMenu: (BOOL)died collected:(int)collected;
 

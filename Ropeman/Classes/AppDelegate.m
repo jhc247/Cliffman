@@ -40,7 +40,7 @@
 		// Run in portrait mode.
 //		CCSetupScreenOrientation: CCScreenOrientationPortrait,
 		// Run at a reduced framerate.
-//		CCSetupAnimationInterval: @(1.0/8.0),
+//		CCSetupAnimationInterval: @(1.0/15.0),
 		// Run the fixed timestep extra fast.
 //		CCSetupFixedUpdateInterval: @(1.0/180.0),
 		// Make iPad's act like they run at a 2x content scale. (iPad retina 4x)

@@ -94,8 +94,7 @@ static IntroScene *_sharedIntroScene = nil;
 
 - (void)onPlayClicked:(id)sender
 {
-    // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[WorldSelectScene sharedWorldSelectScene]];
+    [WorldSelectScene returnToSelection];
 }
 
 // Callback for the Mute button

@@ -27,7 +27,7 @@
 
 // -----------------------------------------------------------------------
 
-+ (HelloWorldScene *)scene: (NSString*)level_name;
++ (HelloWorldScene *)scene: (NSString*)level_name depletionRate:(double)levelDepletion;
 
 - (BOOL)pull;
 

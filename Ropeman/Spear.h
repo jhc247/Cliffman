@@ -31,10 +31,12 @@ typedef NS_ENUM(NSInteger, PullingState)
 
 @property SpearState state;
 @property PullingState pullState;
+@property float originalLength;
+
 
 + (Spear *)createSpear: (CGPoint)playerPosition target:(CGPoint)target;
 
-- (void)attach: (float)x y:(float)y width:(float)width height:(float)height;
+- (BOOL)attach: (float)length;
 - (void)detach;
 - (CGPoint)activatePulling: (CGPoint)playerPosition;
 

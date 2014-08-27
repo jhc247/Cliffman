@@ -29,20 +29,28 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
 	if (!_sharedWorldSelectScene) {
         _sharedWorldSelectScene = [self scene];
 	}
-    else if ([_sharedWorldSelectScene hasUpdated]) {
-        NSString* file = [_sharedWorldSelectScene currentLevelFile];
-        int w = [_sharedWorldSelectScene worldNum];
-        int l = [_sharedWorldSelectScene levelNum];
-        int m = [_sharedWorldSelectScene maxHelmets];
-        WorldSelectScene* newScene = [self scene];
-        newScene.currentLevelFile = file;
-        newScene.worldNum = w;
-        newScene.levelNum = l;
-        newScene.maxHelmets = m;
-        return newScene;
+	return _sharedWorldSelectScene;
+}
+
++ (void)returnToSelection {
+    WorldSelectScene* scene = [WorldSelectScene sharedWorldSelectScene];
+    if ([scene hasUpdated]) {
+        NSString* file = [scene currentLevelFile];
+        int w = [scene worldNum];
+        int l = [scene levelNum];
+        int m = [scene maxHelmets];
+        double d = [scene levelDepletion];
+        scene = [self scene];
+        scene.currentLevelFile = file;
+        scene.worldNum = w;
+        scene.levelNum = l;
+        scene.maxHelmets = m;
+        scene.levelDepletion = d;
+        _sharedWorldSelectScene = scene;
     }
     
-	return _sharedWorldSelectScene;
+    [[CCDirector sharedDirector] replaceScene:scene
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
 }
 
 // -----------------------------------------------------------------------
@@ -209,18 +217,20 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     [[CCDirector sharedDirector] replaceScene:[IntroScene sharedIntroScene]];
 }
 
-- (void)playScene: (NSString*)levelName worldNum:(int)worldNum levelNum:(int)levelNum maxHelmets:(int)maxHelmets
+- (void)playScene: (NSString*)levelName worldNum:(int)worldNum levelNum:(int)levelNum maxHelmets:(int)maxHelmets depletionRate:(double)levelDepletion
 {
     _currentLevelFile = levelName;
     _worldNum = worldNum;
     _levelNum = levelNum;
+    _levelDepletion = levelDepletion;
     _maxHelmets = maxHelmets;
-    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:_currentLevelFile]];
+    CCLOG(@"Current level: %@", _currentLevelFile);
+    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:_currentLevelFile depletionRate:_levelDepletion]];
 }
 
 - (void)resetScene {
     if (![self.currentLevelFile isEqual: @""]) {
-        [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:_currentLevelFile]];
+        [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:_currentLevelFile depletionRate:_levelDepletion]];
     }
 }
 

@@ -19,18 +19,19 @@
     
     BOOL pulling;
     float currentEnergy;
+    double _depletionRate;
     
     float energyBarWidth;
     float energyBarHeight;
 }
 
 // Creates and initializes a TouchLayer instance
-+ (instancetype) createTouchLayer:(CGSize) size {
-    return [[TouchLayer alloc] initTouchLayer:size];
++ (instancetype) createTouchLayer:(CGSize) size depletionRate:(double)levelDepletion {
+    return [[TouchLayer alloc] initTouchLayer:size depletionRate:levelDepletion];
 }
 
 // Initializes a TouchLayer instance
-- (instancetype)initTouchLayer:(CGSize) size {
+- (instancetype)initTouchLayer:(CGSize) size depletionRate:(double)levelDepletion {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
@@ -49,7 +50,11 @@
     pullButton.position = ccp(0.0f, 0.0f); // Bottom Right of screen
     pullButton.anchorPoint = ccp(0,0);
     //[pullButton setTarget:self selector:@selector(onPullClicked:)];
+    pullButton.opacity = 1;
+    
     [self addChild:pullButton];
+    
+    _depletionRate = levelDepletion;
     
     // Create pull energy bar
     energyBarWidth = [CCDirector is_iPad] ? ENERGY_BAR_WIDTH : ENERGY_BAR_WIDTH / IPAD_TO_IPHONE_HEIGHT_RATIO;
@@ -78,7 +83,7 @@
 - (void)update:(CCTime)delta {
     HelloWorldScene *scene = (HelloWorldScene*)_parent;
     if (pulling && currentEnergy > 0 && [scene pull]) {
-        currentEnergy -= ENERGY_BAR_DEPLETION_RATE;
+        currentEnergy -= (1 / _depletionRate);
         currentEnergy = currentEnergy < 0 ? 0 : currentEnergy;
         
         [pullEnergyBar setContentSize:CGSizeMake((currentEnergy / ENERGY_BAR_INITIAL_ENERGY)*energyBarWidth, energyBarHeight)];
@@ -91,9 +96,7 @@
 
 - (void)onReturnClicked:(id)sender
 {
-    // back to intro scene with transition
-    [[CCDirector sharedDirector] replaceScene:[WorldSelectScene sharedWorldSelectScene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+    [WorldSelectScene returnToSelection];
 }
 
 - (void)onRetryClicked:(id)sender
@@ -108,12 +111,12 @@
 }
 
 - (void)createMenu: (BOOL)died collected:(int)collected {
-    
+    WorldSelectScene* wselect = [WorldSelectScene sharedWorldSelectScene];
     CCColor *borderColor = [CCColor colorWithRed:191.0f/255.0f green:169.0f/255.0f blue:133.0f/255.0f];
     CCColor *brown = [CCColor colorWithRed:0.54f green:0.39f blue:0.13f];
     
-    CCNodeColor *blackCover = [CCNodeColor nodeWithColor:[CCColor blackColor]];
-    blackCover.opacity = 0.6;
+    CCNodeColor *blackCover = [CCNodeColor nodeWithColor:[CCColor blackColor] width:self.contentSize.width height:self.contentSize.height];
+    blackCover.opacity = 0.7;
     [self addChild:blackCover];
     
     // Return button
@@ -198,7 +201,7 @@
         win.anchorPoint = ccp(0.5, 1);
         
         CCSprite* winImage = [CCSprite spriteWithImageNamed:@"winPlayer.png"];
-        winImage.position = ccp(self.contentSize.width/2 + menu.contentSize.width/2 - boxWidth, self.contentSize.height/2 + menu.contentSize.height/2 - boxWidth *.6);
+        winImage.position = ccp(self.contentSize.width/2 + menu.contentSize.width/2 - boxWidth, self.contentSize.height/2 + menu.contentSize.height/2 - boxWidth *.55);
         winImage.anchorPoint = ccp(0.5, 1);
         
         [self addChild:win];
@@ -258,9 +261,7 @@
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLoc = [touch locationInNode:self];
     
-    CCLOG(@"Touched TouchLayer at %@", NSStringFromCGPoint([touch locationInNode:self]));
     if (touchLoc.x <= pullButton.contentSize.width && touchLoc.y <= pullButton.contentSize.height) {
-        CCLOG(@"PUlling");
         pulling = YES;
     }
     else {
@@ -283,7 +284,6 @@
     CGPoint touchLoc = [touch locationInNode:self];
     
     if (touchLoc.x <= pullButton.contentSize.width && touchLoc.y <= pullButton.contentSize.height) {
-        CCLOG(@"Pulling Stopped");
         
     }
     pulling = NO;
@@ -293,7 +293,6 @@
     CGPoint touchLoc = [touch locationInNode:self];
     
     if (touchLoc.x <= pullButton.contentSize.width && touchLoc.y <= pullButton.contentSize.height) {
-        CCLOG(@"PUlling Cancelled");
     }
     pulling = NO;
 }

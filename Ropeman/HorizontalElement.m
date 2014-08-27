@@ -15,6 +15,7 @@
     int _worldNum;
     int _levelNum;
     int _maxHelmets;
+    double _levelDepletion;
     
     NSString* levelFile;
     NSString* levelPreview;
@@ -40,6 +41,7 @@
     levelPreview = [levelData objectForKey:@"levelPreview"];
     int levelScore = [[levelData objectForKey:@"levelScore"] intValue];
     _maxHelmets = [[levelData objectForKey:@"levelScoreMax"] intValue];
+    _levelDepletion = [[levelData objectForKey:@"levelDepletion"] doubleValue];
     
     self.position = position;
     self.anchorPoint = ccp(0,0);
@@ -105,9 +107,9 @@
 
 - (BOOL) enterLevel {
     if ([levelPreview  isEqual: @"levelpreview.png"]) {
-        return NO;
+        //return NO;
     }
-    [[WorldSelectScene sharedWorldSelectScene] playScene:levelFile worldNum:_worldNum levelNum:_levelNum maxHelmets:_maxHelmets];
+    [[WorldSelectScene sharedWorldSelectScene] playScene:levelFile worldNum:_worldNum levelNum:_levelNum maxHelmets:_maxHelmets depletionRate:_levelDepletion];
     return YES;
 }
 

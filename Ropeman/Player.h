@@ -22,7 +22,8 @@ typedef NS_ENUM(NSInteger, PlayerState)
     Rising,
     Hanging,
     Falling,
-    Dying
+    Dying,
+    Won
 };
 
 @interface Player : CCSprite {
@@ -30,10 +31,14 @@ typedef NS_ENUM(NSInteger, PlayerState)
 }
 
 @property (assign) PlayerState state;
+@property NSLock *jointLock;
 
-+ (Player*)createPlayer: (CGPoint)position rope:(CCNodeColor*)rope;
++ (Player*)createPlayer: (CGPoint)position shoot:(BOOL)shoot;
 
 - (void)throwSpear: (CGPoint)target;
 - (BOOL)pull;
+
+- (void) killPlayer;
+- (void) levelWon;
 
 @end

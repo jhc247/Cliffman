@@ -5,27 +5,28 @@
  </tileset>
  <layer name="Tile Layer 5" width="44" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3QN0pFQRiG4f+KC7EwojaCEUMhGDEUgrE4pXEBRqyNCzAuwLgA4wJ0CR5cgWJn5bMBLxfhYHM+eLpheGci8uXLl+/vq4tIOvjvjlJXq7WdYeZYYYtDzrnlOeP3NEVsE90RFWMUO1ujpY0hZllmkwPOuOEp495evUSP1vESeweZYYkN9jnlmseMeyf0Ev429cdpI7+drdbSygDTLLLOHidc8ZBR77fO8kKkX/reGaWLhiK9VVpa6GeKBdbY5ZhL7jPqfXWvsOSTskIkIzo7qS/SW+lsM31MMs8qOxxxwV1GvS/ufeODgt4fPZdRKPAIAAA=
+   H4sIAAAAAAAAA+2UOw7CMBBEJ4iDuAcaaj4FNZ+CA+QoHMVnoSMFHAGLE4DoqHgWthSsSGmICCIjTbGe1e6LJUd6VyHl+gEdJOvteVNmahdyU5WHnjzmcU4y3/jzdF84N0ltVaPitcP3+33pLhdyU5WHnjzmcU4y33+LLdU2zoxZqa7l7dTpn7Vv+D84lnZYM97jGje56xNawIs1h3XzA7xbeLG4W8cduxH+NlOVHnD2M7k7fBe8wlM8bCnviXfh8A33MuVLOCd40FLeI5xnfMUZvE83uO4U8AgAAA==
   </data>
  </layer>
  <layer name="Ceiling" width="44" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA93RyU1CURQG4KviiLM449iB2oHagbpnobbhWViALnSNYwGOBYBDGZbil2AIG4MJiMNNvpxw33nn/HlkUkqddNFND730kaWfAQYZYpiRlEKNOj3VPnfhWegJvZGtvBv2hH1hb9gfckSGDtppM0NNfqfMR85xJphkimlmmCXPHPMssMgSy2apUaen2ucuPAs9oTfylXfDnrAv7A37Q46QJ3KMMWqGmnI1Of/yOU2p8NMZvnoOZT35Q3n/0ymn9HbLOccEtXdqofyL/puSTDecccQBtXdqofRNeVdYZa2BGa8yPnJNc1J9ftbZYLOBGS9yPnDVgrxbbLPTwIxnOe+5bEHeXfbYb2DGk5x3XLQgbzOO71v0fYu+b7HVu98BYn3nw/AIAAA=
+   H4sIAAAAAAAAA+3OyU0DQRAF0AKG1SwGzG42ZwBkAGQA3DkAcfwDKUC8PMnI4ua5jSxT0lNpeqq7flNVy6ywyhrrbNBjky222aHPblX0TJmZzDmLfzETs+mN78ae2Bd7Y3/kSMMSiyx4Qy/f1fzmPOCQI4454ZQzhpxzwSVXXDPylp4pM5M5Z/EvZmI2w/Hd2BP7Ym/sjxyRJwP22fOGXoM/OWe5vqteu87Qtj5l/ZqhvP81n3XDLXddB2lZ9zzw2HWQlvXEMy9dB2lZb7zz0XWQOakfw45AnfAIAAA=
   </data>
  </layer>
  <layer name="Layer 1" width="44" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA9XVywnCQBCA4dn4uop56c2CLGKaUDtQO1CPWoKWoH3pn4UFBQ8TJLo78B/DfgybJHMyz0kSmR7WIiFvH2uZkHeAtUrIO8RaJ+QdYZ1G7l3SitbivYpXrc+eRfRKd1qI/blvZkNb2om/D1q38J4wXuhGM9eV8H32dKCj+PdNK6P30SXKeC7fMy2N3vGP9vnp3GDmf6FFi/vwj2msYVcZ1jxy7+t+HdZJ5N5mwn6fDtkAPfAIAAA=
+   H4sIAAAAAAAAA9XVTQ6CMBCG4SmobAnlb8nR5hLADcQbqKfVt00MrNwy8yVf0uWTSTstgkyRipOUWFtH3gvWzpH3irV35L1hHRx5K6yjce9MF7pK9ipePVf0P3e60Yfk+6CDce+Tvuhb8nvT3rj3czizz7Qz7q3Dbua/0Na4N1mTOaXAGo17j/MNWBvj3pTffL9yEF9w8AgAAA==
   </data>
  </layer>
  <layer name="Layer 2" width="44" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgYGC4wTC0wMuBdgCJ4BeUnsbAkDCQ7iAWcDNC6KlDxL0yjAPtguEFSqF0OZn6tYDpxhqIfYZI+hkugNz4IhX8Y2Bo+AvEdLKOYsDPyNDAxzi43XuLgUFhoN1ACrgNxUMFvIFiAOv9a87wCAAA
+   H4sIAAAAAAAAA2NgYGC4wTC0wMuBdgCJ4BeUnsbAkDCQ7iAWcDNC6KlDxL0yjAPtguEFSqF0+YC6YhSQCugVX/8YGBr+AjGdrKMY8DMyNPAxDm733mJgUBhoN5ACbkPxUAFvoBgAg6Ge/vAIAAA=
   </data>
  </layer>
  <objectgroup name="helmets" width="44" height="13" opacity="0.99">
-  <object name="helmet1" x="657" y="578" width="200" height="92"/>
-  <object name="helmet2" x="3053" y="1270" width="200" height="92"/>
+  <object name="helmet1" x="825" y="804" width="201" height="92"/>
+  <object name="helmet2" x="2902" y="1247" width="201" height="92"/>
+  <object name="helmet3" x="3990" y="440" width="201" height="92"/>
  </objectgroup>
  <objectgroup name="player" width="44" height="13">
   <object name="player" x="186" y="967" width="94" height="147">
@@ -83,37 +84,6 @@
   <object x="223" y="1368">
    <polygon points="0,0 -2,55 -22,5"/>
   </object>
-  <object x="1134" y="776">
-   <polygon points="0,0 -47,11 -13,55 74,43"/>
-  </object>
-  <object x="1155" y="820">
-   <polygon points="0,0 -2,45 71,47 51,-6"/>
-  </object>
-  <object x="1161" y="858">
-   <polygon points="0,0 -29,32 -44,144 -37,385 85,379"/>
-  </object>
-  <object x="1126" y="1244">
-   <polygon points="0,0 -24,132 -20,246 80,225"/>
-  </object>
-  <object x="1110" y="1486">
-   <polygon points="0,0 -22,73 57,73"/>
-  </object>
-  <object x="2108" y="892">
-   <polygon points="0,0 68,121 74,244 -22,229"/>
-  </object>
-  <object x="2180" y="1127">
-   <polygon points="0,0 32,43 28,338 -32,269"/>
-  </object>
-  <object x="2209" y="1454">
-   <polygon points="0,0 18,101 -42,75"/>
-  </object>
-  <object x="1136" y="779" width="1097" height="52"/>
-  <object x="2212" y="830">
-   <polygon points="0,0 -18,67 -113,62 -108,19"/>
-  </object>
-  <object x="2234" y="781">
-   <polygon points="0,0 37,6 27,28 -3,48"/>
-  </object>
  </objectgroup>
  <objectgroup name="winZones" width="44" height="13">
   <object x="4852" y="960" width="627" height="24"/>
@@ -124,4 +94,11 @@
    H4sIAAAAAAAAA2NgGAWjYBSMglEwlEAplC4fUFeMglEwtAAAI2n/xPAIAAA=
   </data>
  </layer>
+ <objectgroup name="spikes" width="44" height="13">
+  <object x="277" y="201" width="406" height="141"/>
+  <object x="1115" y="201" width="527" height="140"/>
+  <object x="2207" y="200" width="513" height="137"/>
+  <object x="3165" y="201" width="147" height="133"/>
+  <object x="3636" y="197" width="884" height="135"/>
+ </objectgroup>
 </map>

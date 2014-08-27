@@ -120,7 +120,7 @@
     firstClicked = NULL;
     maxDistance = 0;
     if (_vertical) {
-        CCLOG(@"Touched Vertical carousel: %@", NSStringFromCGPoint(lastTouch));
+        
     }
     
     else {
@@ -128,7 +128,6 @@
         float xlimit = CAROUSEL_VERTICAL_OFFSET_X + CAROUSEL_VERTICAL_WIDTH;
         xlimit = [CCDirector is_iPad] ? xlimit : xlimit / IPAD_TO_IPHONE_HEIGHT_RATIO;
         if (parentTouch.x < xlimit) {
-            CCLOG(@"Trying to pass up");
             [_parent touchBegan:touch withEvent:event];
         }
         else {
@@ -144,7 +143,6 @@
                 }
                 
             }
-            CCLOG(@"Touched Horizontal carousel: %@", NSStringFromCGPoint(parentTouch));
         }
         
     }

@@ -37,6 +37,7 @@
         self = [super initWithImageNamed:@"helmet.png"];
         _height = self.contentSize.height;
         _width = self.contentSize.width;
+        self.anchorPoint = ccp(0,0);
     }
     
     
@@ -79,6 +80,7 @@
             collected = NO;
             break;
         case Wall:
+            //self.physicsBody.sleeping = YES;
             self.physicsBody.collisionGroup = @"wallGroup";
             self.physicsBody.affectedByGravity = NO;
             self.physicsBody.type = CCPhysicsBodyTypeStatic;

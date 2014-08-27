@@ -48,7 +48,7 @@
 // external
 #import "kazmath/GL/matrix.h"
 
-const NSUInteger defaultCapacity = 0;
+const NSUInteger defaultCapacity = 2;
 
 #pragma mark -
 #pragma mark CCSpriteBatchNode

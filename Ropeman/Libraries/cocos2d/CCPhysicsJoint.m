@@ -184,6 +184,12 @@
 
 -(void)addToPhysicsNode:(CCPhysicsNode *)physicsNode
 {
+    CCPhysicsNode* a = self.bodyA.physicsNode;
+    CCPhysicsNode* b = self.bodyB.physicsNode;
+    
+    if (!(self.bodyA.physicsNode == self.bodyB.physicsNode)) {
+        
+    }
 	NSAssert(self.bodyA.physicsNode == self.bodyB.physicsNode, @"Bodies connected by a joint must be added to the same CCPhysicsNode.");
 	
 	[self willAddToPhysicsNode:physicsNode];

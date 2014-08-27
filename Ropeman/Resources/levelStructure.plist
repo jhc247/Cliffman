@@ -7,7 +7,7 @@
 	<key>World 1</key>
 	<dict>
 		<key>worldName</key>
-		<string>Fire World</string>
+		<string>Clear Skies</string>
 		<key>requiredHelmets</key>
 		<string>0</string>
 		<key>worldPreviewFile</key>
@@ -16,7 +16,7 @@
 		<array>
 			<dict>
 				<key>levelName</key>
-				<string>Level 1</string>
+				<string>First Swing</string>
 				<key>levelFile</key>
 				<string>w1-level1.tmx</string>
 				<key>levelPreview</key>
@@ -24,11 +24,13 @@
 				<key>levelScore</key>
 				<string>0</string>
 				<key>levelScoreMax</key>
-				<string>0</string>
+				<string>1</string>
+				<key>levelDepletion</key>
+				<string>1</string>
 			</dict>
 			<dict>
 				<key>levelName</key>
-				<string>Level 2</string>
+				<string>Up</string>
 				<key>levelFile</key>
 				<string>w1-level2.tmx</string>
 				<key>levelPreview</key>
@@ -36,11 +38,13 @@
 				<key>levelScore</key>
 				<string>0</string>
 				<key>levelScoreMax</key>
-				<string>3</string>
+				<string>2</string>
+				<key>levelDepletion</key>
+				<string>3.5</string>
 			</dict>
 			<dict>
 				<key>levelName</key>
-				<string>Level 3</string>
+				<string>King of The Alps</string>
 				<key>levelFile</key>
 				<string>w1-level3.tmx</string>
 				<key>levelPreview</key>
@@ -48,11 +52,13 @@
 				<key>levelScore</key>
 				<string>0</string>
 				<key>levelScoreMax</key>
-				<string>0</string>
+				<string>3</string>
+				<key>levelDepletion</key>
+				<string>2</string>
 			</dict>
 			<dict>
 				<key>levelName</key>
-				<string>Level 4</string>
+				<string>Not Very Smooth</string>
 				<key>levelFile</key>
 				<string>w1-level4.tmx</string>
 				<key>levelPreview</key>
@@ -60,11 +66,13 @@
 				<key>levelScore</key>
 				<string>0</string>
 				<key>levelScoreMax</key>
-				<string>0</string>
+				<string>3</string>
+				<key>levelDepletion</key>
+				<string>3</string>
 			</dict>
 			<dict>
 				<key>levelName</key>
-				<string>Level 5</string>
+				<string>Compilation</string>
 				<key>levelFile</key>
 				<string>w1-level5.tmx</string>
 				<key>levelPreview</key>
@@ -72,7 +80,9 @@
 				<key>levelScore</key>
 				<string>0</string>
 				<key>levelScoreMax</key>
-				<string>0</string>
+				<string>4</string>
+				<key>levelDepletion</key>
+				<string>1</string>
 			</dict>
 		</array>
 	</dict>
@@ -81,7 +91,7 @@
 		<key>worldName</key>
 		<string>Water World</string>
 		<key>requiredHelmets</key>
-		<string>3</string>
+		<string>12</string>
 		<key>worldPreviewFile</key>
 		<string>comingsoon.png</string>
 		<key>levels</key>

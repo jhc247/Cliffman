@@ -21,8 +21,6 @@
     float width, height;
     TouchLayer *touchLayer;
     
-    CCNodeColor* rope;
-    
     float level_width;
     
     BOOL game_over;
@@ -35,14 +33,14 @@
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (HelloWorldScene *)scene: (NSString*)level_name
++ (HelloWorldScene *)scene: (NSString*)level_name depletionRate:(double)levelDepletion
 {
-    return [[self alloc] initLevel:level_name];
+    return [[self alloc] initLevel:level_name depletionRate:levelDepletion];
 }
 
 // -----------------------------------------------------------------------
 
-- (id)initLevel: (NSString*)level_name
+- (id)initLevel: (NSString*)level_name depletionRate:(double)levelDepletion
 {
     // Apple recommend assigning self with supers return value
     self = [super init];
@@ -84,10 +82,6 @@
     }
     */
     
-    rope = [CCNodeColor nodeWithColor:[CCColor blackColor] width:10 height:50];
-    rope.opacity = 0;
-    [self addChild:rope];
-    
     float coordinateMultiplier;
     switch ([CCDirector sharedDirector].device) {
         case iPadRetina:
@@ -123,14 +117,15 @@
     [self addChild:_physicsWorld];
     
     CCSpriteBatchNode *spritesBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"sprites.pvr.ccz"];
-    [_physicsWorld addChild:spritesBatchNode z:Z_ORDER_PLAYER];
+    [_physicsWorld addChild:spritesBatchNode z:Z_ORDER_SPRITES];
     
     // Create the player
     CCTiledMapObjectGroup *playerGroup = [tilemap objectGroupNamed:@"player"];
     NSMutableDictionary *p = [[playerGroup objects] objectAtIndex:0];
     float x = ([[p valueForKey:@"x"] floatValue] + 48) * coordinateMultiplier;
     float y = ([[p valueForKey:@"y"] floatValue] + 116) * coordinateMultiplier;
-    _player = [Player createPlayer:ccp(x,y) rope:rope];
+    BOOL shoot = (![[p valueForKey:@"dontshoot"] intValue] > 0);
+    _player = [Player createPlayer:ccp(x,y) shoot:shoot];
     [spritesBatchNode addChild:_player];
     
     // Create walls
@@ -196,8 +191,8 @@
     }
     
     // Set-up camera
-    touchLayer = [TouchLayer createTouchLayer:self.contentSize];
-    [self addChild:touchLayer];
+    touchLayer = [TouchLayer createTouchLayer:self.contentSize depletionRate:levelDepletion];
+    [self addChild:touchLayer z:Z_ORDER_MENU];
     
     
     collected = 0;
@@ -205,6 +200,7 @@
     
     cameraLeft = 0;
     game_over = NO;
+    
     return self;
 }
 
@@ -285,12 +281,26 @@
 // -----------------------------------------------------------------------
 
 - (void) endLevel: (BOOL)died {
+    if (game_over) {
+        return;
+    }
+    
     game_over = YES;
+    WorldSelectScene* wselect = [WorldSelectScene sharedWorldSelectScene];
     [touchLayer createMenu:died collected:collected];
     if (!died) {
+        NSString* b = [[WorldSelectScene sharedWorldSelectScene] currentLevelFile];
         [[WorldSelectScene sharedWorldSelectScene] setNewLevelScore:collected];
+        NSString* c = [[WorldSelectScene sharedWorldSelectScene] currentLevelFile];
     }
     [_player.physicsBody setSleeping:YES];
+    if (died) {
+        [_player killPlayer];
+    }
+    else {
+        [_player levelWon];
+    }
+    
 }
 
 - (BOOL)pull {
@@ -299,26 +309,24 @@
 
 // Player-Sensor
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair sensorCollision:(Sensor *)sensor playerCollision:(Player *)player {
-    CCLOG(@"Sensor-Player collision");
+    //CCLOG(@"Sensor-Player collision");
     switch ([sensor type]) {
         case Spike:
-            CCLOG(@"Player hit spike");
+            [self endLevel:YES];
             return NO;
             
         case Helmet:
-            CCLOG(@"Player hit helmet");
             collected = [sensor collectHelmet] ? collected + 1 : collected;
             return NO;
             
         case Wall:
-            CCLOG(@"Player hit wall");
+            //CCLOG(@"Player hit wall");
             self.physicsBody.collisionGroup = @"wallGroup";
             self.physicsBody.collisionType = @"wallCollision";
             self.physicsBody.affectedByGravity = NO;
             self.physicsBody.type = CCPhysicsBodyTypeStatic;
             return YES;
         case Win:
-            CCLOG(@"Player hit win sensor");
             [self endLevel:NO];
             return NO;
         default:
@@ -327,27 +335,57 @@
     }
 }
 
+
 // Spear-Sensor
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair sensorCollision:(Sensor *)sensor spearCollision:(Spear *)spear {
-    CCLOG(@"Sensor-spear collision");
     switch ([sensor type]) {
         case Spike:
-            CCLOG(@"Spear hit spike");
+            if (spear.state == Attached) {
+                return YES;
+            }
+            [spear detach];
             return YES;
-            
+
         case Helmet:
-            CCLOG(@"Spear hit helmet");
             return NO;
     
-        case Wall:
-            CCLOG(@"Spear hit wall");
-            [spear attach:sensor.position.x y:sensor.position.y width:sensor.getWallWidth height:sensor.getWallHeight];
+        case Wall: {
+            [self parent];
             // Create the physics joint
-            float ropeLength = ccpDistance(_player.position, spear.position) + ROPE_INITIAL_SLACK;
-            ropeLength = (ropeLength >= ROPE_MINMAX_LENGTH) ? ropeLength : ROPE_MINMAX_LENGTH;
-            [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:spear.physicsBody anchorA:ccp(_player.contentSize.width*.5, _player.contentSize.height*.5) anchorB:ccp(spear.contentSize.width/2,spear.contentSize.height*.2) minDistance:ROPE_MIN_LENGTH maxDistance:ropeLength];
-            return YES;
+            float target_x = spear.position.x - sinf(CC_DEGREES_TO_RADIANS(spear.rotation)) *spear.contentSize.height*.45;
+            float target_y = spear.position.y - cosf(CC_DEGREES_TO_RADIANS(spear.rotation)) *spear.contentSize.height*.45;
+            float angle1 = _player.flipX ? _player.rotation + 45 : -_player.rotation + 45;
             
+            float deltaX = cosf(CC_DEGREES_TO_RADIANS(angle1)) * _player.contentSize.height*.20 * sqrtf(2);
+            float deltaY = sinf(CC_DEGREES_TO_RADIANS(angle1)) * _player.contentSize.height*.20 * sqrtf(2);
+            
+            float orig_x = _player.flipX ? _player.position.x - deltaX : _player.position.x + deltaX;
+            float orig_y = _player.position.y + deltaY;
+            CGPoint orig = ccp(orig_x, orig_y);
+            CGPoint target = ccp(target_x, target_y);
+            
+            float ropeLength = ccpDistance(orig, target);
+            //float otherLength = ccpDistance(_player.position, spear.position);
+            float ropeMax = [CCDirector is_iPad] ? ROPE_MINMAX_LENGTH : ROPE_MINMAX_LENGTH / IPAD_TO_IPHONE_HEIGHT_RATIO;
+            ropeLength = (ropeLength >= ropeMax) ? ropeLength : ropeMax;
+            //ropeLength *= 0.95;
+            if (![spear attach:ropeLength]) {
+                return YES;
+            }
+            [[_player jointLock] lock];
+            for (CCPhysicsJoint* joint in [_player.physicsBody joints]) {
+                if (joint.valid) {
+                    [joint invalidate];
+                }
+            }
+            float ropemin = [CCDirector is_iPad] ? ROPE_MIN_LENGTH : ROPE_MIN_LENGTH / IPAD_TO_IPHONE_HEIGHT_RATIO;
+            CCPhysicsNode* a = _player.physicsNode;
+            CCPhysicsNode* b = spear.physicsNode;
+            CCPhysicsJoint* joint= [CCPhysicsJoint connectedDistanceJointWithBodyA:_player.physicsBody bodyB:spear.physicsBody anchorA:ccp(_player.contentSize.width*.5, _player.contentSize.height*.55) anchorB:ccp(spear.contentSize.width*.5,0) minDistance:0 maxDistance:ropeLength];
+            [[_player jointLock] unlock];
+            [spear setOriginalLength:ropeLength];
+            return YES;
+        }
         case Win:
             return NO;
         default:
