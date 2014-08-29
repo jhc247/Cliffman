@@ -234,6 +234,28 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
     }
 }
 
+- (BOOL) atLastLevel {
+    NSArray* levels = [[[[CCDirector sharedDirector] getLevelStructure] objectForKey:[NSString stringWithFormat:@"World %d", _worldNum]] objectForKey:@"levels"];
+    int count = [levels count];
+    return (_levelNum + 1 >= count);
+}
+
+- (void)nextScene {
+    
+    if ([self atLastLevel]) {
+        [WorldSelectScene returnToSelection];
+        return;
+    }
+    NSArray* levels = [[[[CCDirector sharedDirector] getLevelStructure] objectForKey:[NSString stringWithFormat:@"World %d", _worldNum]] objectForKey:@"levels"];
+    _levelNum++;
+    NSDictionary* level = [levels objectAtIndex:_levelNum];
+    _currentLevelFile = [level objectForKey:@"levelFile"];
+    _maxHelmets = [[level objectForKey:@"levelScoreMax"] intValue];
+    _levelDepletion = [[level objectForKey:@"levelDepletion"] doubleValue];
+    
+    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene:_currentLevelFile depletionRate:_levelDepletion]];
+}
+
 - (void) setNewLevelScore: (int)score {
     NSString* worldKey = [NSString stringWithFormat:@"World %d",_worldNum];
     NSMutableDictionary* world = [[[CCDirector sharedDirector] getLevelStructure] objectForKey:worldKey];
@@ -245,7 +267,6 @@ static WorldSelectScene *_sharedWorldSelectScene = nil;
         [[[CCDirector sharedDirector] getLevelStructure] writeToFile:saveFilePath atomically:YES];
         hasUpdated = YES;
     }
-    
 }
 
 

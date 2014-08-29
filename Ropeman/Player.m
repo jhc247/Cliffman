@@ -39,7 +39,7 @@
     //self = [super initWithImageNamed:@"obj_FallFlat001.png"];
     self.position  = position;
     self.anchorPoint = ccp(0.5, 0.35);
-    self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){ccp(self.contentSize.width*.3,self.contentSize.height*.02), CGSizeMake(self.contentSize.width*.4, self.contentSize.height*.68)} cornerRadius:0];
+    self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){ccp(self.contentSize.width*.3,self.contentSize.height*.02), CGSizeMake(self.contentSize.width*.3, self.contentSize.height*.58)} cornerRadius:0];
     self.physicsBody.collisionGroup = @"playerGroup";
     self.physicsBody.collisionType = @"playerCollision";
     self.physicsBody.sensor = NO;
@@ -174,7 +174,7 @@
         float angle = [Spear getAngle:self.position target:currentSpear.position];
         self.rotation = angle;
     }*/
-    if (self.state == Rising && ticks > 0) {
+    if (self.state == Rising && ticks > 2) {
         self.state = Hanging;
         
         
@@ -339,7 +339,7 @@
 }
 
 - (BOOL)pull {
-    if (currentSpear == NULL || _state == Starting) {
+    if (!(currentSpear != NULL && currentSpear.state == Attached)) {
         return NO;
     }
     self.state = Rising;

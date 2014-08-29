@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="44" height="13" tilewidth="120" tileheight="120">
+ <tileset firstgid="1" name="ClearRocks" tilewidth="120" tileheight="120">
+  <image source="ClearRocks-ipadhd.png" width="2040" height="2040"/>
+ </tileset>
+ <layer name="Spikes2" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3OwQ1EABQA0V+KBB2gA3TAdoAOdnWADtAB2wHuVKEUc5G4OiH+JO8+Ipr2vhaR9eqHM80P+9U0TcQUMRz4iJDgiwI1Ogy4+nPP4sVFgBgpfijRoMd4o1+bFw8hPsiQo0KLP6bD7wb9DOU98AgAAA==
+  </data>
+ </layer>
+ <layer name="Spikes" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+1UUQ6AIAjlKB3Fo3iUjsJR+tVTdJRggSOnrS3N2npbA54O3wgA+FFCAMBOefmbNY4AC8XL3byxk17KO/fQ2wtc33iMHcWucneiM8/2CW0l5PUs1Vf/AdmJrI8D9V6pb35nJFhf1r+Hfhbu1T2d42t6Kz3CvYzErzqD7Bs+ceKjnKOdW8u12tmVHuG3+J1VZzDs2pRPnPgo52jn1nKtdvbZjnsjRu6HDbLtWpvwCAAA
+  </data>
+ </layer>
+ <layer name="Tile Layer 5" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA9WVOy8EURTHz3rWu57lJqh0G7QKQYVGUN4O3wCVFt8Axb/HN0Chswn2VTNe9XoXKr9NRjLGbrLDrsdJfsneTGbnd8+95xyzj5E2c/bPooDzLbxAa8xcd+z7ezg2S4ICa/kk358F1qr8T58jj+cNPEMLrl018C1FOuBR+u2T9AmuI/nm8LyGJ2jGtbNGvvWKLJ5X8AhNuHb8cd8MnpfwAI24tod84zHOC4qc2zmcRDy/WscZnh7cQwOubSHfBK4xuMPzAk5/2ZfvOzwcPg4vlwj54i/2IfYjD9ifjurcB1Nmq6kKzzhfxzm7YskB13jIl/sh7om4L+LeKPMD+R3BF2yY/hH1XepP1KGoR1GXyv6A7zS+YFNmXtR36W+iz4l+J/qecmV8e8jDAIzCDMzDEqzBJuzAfhW5esWT3HjkxiM33uQXfJkfYo6IeSLmivJlfHtxGYQxmIUFWIZ12IJdOKjCN1z7E75vfwRv5rOY02Jei7mtQhnfPlyGYBzmYBFWYAO2YQ8Oq/AN1/4b2XsFIvAIAAA=
+  </data>
+ </layer>
+ <layer name="Ceiling" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3VSS5EURQG4IvS933fswDtArQL0A4NtDvA6AxMMGaAHWAHCFbmS4i8mSKVVISTfLl57517zj+qyqWUyqmgkiqqqaGWOuppoJEmmlMKZ3zR89nnXfgWekJv1L7fDXvCvrA37A85IkcZpZSY4UyeU+4jZzsddNJFNz300kc/AwwyxDAjZjnji57PPu/Ct9ATeqPv/W7YE/aFvWF/yBHyRButtJjhTG2ZnL+5LlPaKnaGfOtE1otflPe//mZNMMlUsYPkWXPMs1DsIHnWCqusFWDWqL+HaRZZZ49DTrnilgdeM787372zzQ67Bcg7Zu4MS2ywzxFnXHPHIy+ZvD+5U6gaN3eWZTY54JhzbrjniefM7p/cydYbKW/qrfAIAAA=
+  </data>
+ </layer>
+ <layer name="Layer 1" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA9XVPRLBQBiA4U38tUb+lDrcADfADVBsjxINSjQo0eAGuAFO4ibxJsNIRZqM7DfzzKTaeWcnu6tromBAKDIJWk2FepO0Wgr1pmi1FepN0+oo1JuhNR/z3gGGGAm/V9Ir/1v0fWaYYyH8/0E6Me/dYIud8M+btGPe6wa+uc+kFfPerPZp5r2QZkS9dyEeFxyxxhR9dNBEDWX8Wsd9NXuj02pE1Huj5YwDVpighzYaqKIUoje4vxqtuYh6r7ScsMcSY3TRQh0VFEP0vpu9eQL4HKhn8AgAAA==
+  </data>
+ </layer>
+ <layer name="Layer 2" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgYGC4wTC0wMuBdgCJ4BeUnsbAkDCQ7iAWcDNC6KlDxL0yjAPtguEFSqF0+YC6YhSQCkbja+iCWwwMCgPtBlLAbSgeKuANFAMA8eyR4PAIAAA=
+  </data>
+ </layer>
+ <layer name="Tile Layer 4" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwlEAplC4fUFeMglEwtAAAI2n/xPAIAAA=
+  </data>
+ </layer>
+ <objectgroup name="helmets" width="44" height="13">
+  <object name="helmet1" x="1346" y="1434" width="201" height="92"/>
+  <object name="helmet2" x="1777" y="310" width="201" height="92"/>
+  <object name="helmet3" x="2149" y="918" width="201" height="92"/>
+  <object name="helmet4" x="3963" y="613" width="201" height="92"/>
+ </objectgroup>
+ <objectgroup name="player" width="44" height="13">
+  <object name="player" x="286" y="397" width="94" height="147">
+   <properties>
+    <property name="dontshoot" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="bats" width="44" height="13"/>
+ <objectgroup name="walls" width="44" height="13">
+  <object name="ceiling" x="120" y="0" width="5160" height="204"/>
+  <object name="leftwall" x="0" y="0" width="120" height="1560"/>
+  <object x="109" y="630">
+   <polygon points="0,0 62,-136 -14,-159"/>
+  </object>
+  <object x="209" y="201">
+   <polygon points="0,0 1,55 -111,85 -108,-3"/>
+  </object>
+  <object x="201" y="246">
+   <polygon points="0,0 -8,70 -99,99 -119,1"/>
+  </object>
+  <object x="160" y="496">
+   <polygon points="0,0 20,-186 -53,-180 -82,-10"/>
+  </object>
+  <object x="105" y="802">
+   <polygon points="0,0 65,145 -5,158"/>
+  </object>
+  <object x="144" y="945">
+   <polygon points="0,0 -6,37 -48,49 -35,-10"/>
+  </object>
+  <object x="4804" y="993">
+   <polygon points="0,0 4,139 55,324 469,322 465,4"/>
+  </object>
+  <object x="634" y="190">
+   <polygon points="0,0 -30,821 446,821 435,2"/>
+  </object>
+  <object x="649" y="1009">
+   <polygon points="0,0 6,44 353,72 431,-3"/>
+  </object>
+  <object x="1679" y="1559">
+   <polygon points="0,0 9,-905 85,-959 116,-959 450,-923"/>
+  </object>
+  <object x="2109" y="671">
+   <polygon points="0,0 54,3 -3,288 -25,196"/>
+  </object>
+  <object x="2067" y="1233">
+   <polygon points="0,0 62,-130 48,-165 27,-173"/>
+  </object>
+  <object x="2107" y="947">
+   <polygon points="0,0 -14,20 -14,1"/>
+  </object>
+  <object x="2099" y="1062">
+   <polygon points="0,0 -1,-105 -19,-69"/>
+  </object>
+  <object x="2044" y="1207" width="2804" height="377"/>
+ </objectgroup>
+ <objectgroup name="winZones" width="44" height="13">
+  <object x="4852" y="960" width="627" height="24"/>
+  <object x="5160" y="216" width="120" height="720"/>
+ </objectgroup>
+ <objectgroup name="spikes" width="44" height="13">
+  <object x="503" y="288" width="127" height="632"/>
+  <object x="1070" y="267" width="117" height="658"/>
+  <object x="1581" y="649" width="106" height="995"/>
+  <object x="1712" y="518" width="420" height="120"/>
+  <object x="2206" y="1089" width="2553" height="129"/>
+  <object x="3629" y="201" width="886" height="148"/>
+ </objectgroup>
+</map>

@@ -33,6 +33,7 @@
 #import <Foundation/Foundation.h>
 #include <zlib.h>
 
+#import "CCDirector.h"
 #import "ccMacros.h"
 #import "Support/CGPointExtension.h"
 #import "CCTMXXMLParser.h"
@@ -234,11 +235,36 @@
 		else
 			CCLOG(@"cocos2d: TMXFomat: Unsupported orientation: %d", _orientation);
 
-		_mapSize.width = [[attributeDict objectForKey:@"width"] intValue];
-		_mapSize.height = [[attributeDict objectForKey:@"height"] intValue];
-		_tileSize.width = [[attributeDict objectForKey:@"tilewidth"] intValue];
-		_tileSize.height = [[attributeDict objectForKey:@"tileheight"] intValue];
-
+        
+        switch ([CCDirector sharedDirector].device) {
+            case iPadRetina:
+                _mapSize.width = [[attributeDict objectForKey:@"width"] intValue];
+                _mapSize.height = [[attributeDict objectForKey:@"height"] intValue];
+                _tileSize.width = [[attributeDict objectForKey:@"tilewidth"] intValue];
+                _tileSize.height = [[attributeDict objectForKey:@"tileheight"] intValue];
+                break;
+            case iPadNonRetina:
+                _mapSize.width = [[attributeDict objectForKey:@"width"] intValue] * 2;
+                _mapSize.height = [[attributeDict objectForKey:@"height"] intValue] * 2;
+                _tileSize.width = [[attributeDict objectForKey:@"tilewidth"] intValue] / 2;
+                _tileSize.height = [[attributeDict objectForKey:@"tileheight"] intValue] / 2;
+                break;
+            case iPhoneRetina:
+                _mapSize.width = [[attributeDict objectForKey:@"width"] intValue] * 2.4;
+                _mapSize.height = [[attributeDict objectForKey:@"height"] intValue] * 2.4;
+                _tileSize.width = [[attributeDict objectForKey:@"tilewidth"] intValue] / 2.4;
+                _tileSize.height = [[attributeDict objectForKey:@"tileheight"] intValue] / 2.4;
+                break;
+            case iPhoneNonRetina:
+                _mapSize.width = [[attributeDict objectForKey:@"width"] intValue] * 4.8;
+                _mapSize.height = [[attributeDict objectForKey:@"height"] intValue] * 4.8;
+                _tileSize.width = [[attributeDict objectForKey:@"tilewidth"] intValue] / 4.8;
+                _tileSize.height = [[attributeDict objectForKey:@"tileheight"] intValue] / 4.8;
+                break;
+            default:
+                break;
+        }
+        
 		// The parent element is now "map"
 		_parentElement = TMXPropertyMap;
 	} else if([elementName isEqualToString:@"tileset"]) {
@@ -267,8 +293,28 @@
 			tileset.spacing = [[attributeDict objectForKey:@"spacing"] intValue];
 			tileset.margin = [[attributeDict objectForKey:@"margin"] intValue];
 			CGSize s;
-			s.width = [[attributeDict objectForKey:@"tilewidth"] intValue];
-			s.height = [[attributeDict objectForKey:@"tileheight"] intValue];
+            
+            switch ([CCDirector sharedDirector].device) {
+                case iPadRetina:
+                    s.width = [[attributeDict objectForKey:@"tilewidth"] intValue];
+                    s.height = [[attributeDict objectForKey:@"tileheight"] intValue];
+                    break;
+                case iPadNonRetina:
+                    s.width = [[attributeDict objectForKey:@"tilewidth"] intValue] / 2;
+                    s.height = [[attributeDict objectForKey:@"tileheight"] intValue] / 2;
+                    break;
+                case iPhoneRetina:
+                    s.width = [[attributeDict objectForKey:@"tilewidth"] intValue] / 2.4;
+                    s.height = [[attributeDict objectForKey:@"tileheight"] intValue] / 2.4;
+                    break;
+                case iPhoneNonRetina:
+                    s.width = [[attributeDict objectForKey:@"tilewidth"] intValue] / 4.8;
+                    s.height = [[attributeDict objectForKey:@"tileheight"] intValue] / 4.8;
+                    break;
+                default:
+                    break;
+            }
+            
 			tileset.tileSize = s;
 			tileset.tileOffset = CGPointZero; //default offset (0,0)
 
@@ -335,7 +381,12 @@
 		CCTiledMapTilesetInfo *tileset = [_tilesets lastObject];
 
 		// build full path
-		NSString *imagename = [attributeDict objectForKey:@"source"];
+        NSString* imgName = [attributeDict objectForKey:@"source"];
+        
+        NSArray* comps = [imgName componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-."]];
+        
+		NSString *imagename = [NSString stringWithFormat:@"%@.%@", [comps objectAtIndex:0], [comps objectAtIndex:([comps count] - 1)]];
+        
 		NSString *path = [_filename stringByDeletingLastPathComponent];
 		if (!path)
 			path = _resources;

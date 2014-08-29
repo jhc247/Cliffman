@@ -35,8 +35,8 @@
     if (type == Helmet) {
         //self = [super initWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"star.png"]];
         self = [super initWithImageNamed:@"helmet.png"];
-        _height = self.contentSize.height;
-        _width = self.contentSize.width;
+        _height = self.contentSize.height * 1.1;
+        _width = self.contentSize.width * 1.1;
         self.anchorPoint = ccp(0,0);
     }
     

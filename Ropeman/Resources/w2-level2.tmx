@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="44" height="13" tilewidth="120" tileheight="120">
+ <tileset firstgid="1" name="ClearRocks" tilewidth="120" tileheight="120">
+  <image source="ClearRocks-ipadhd.png" width="425" height="425"/>
+ </tileset>
+ <tileset firstgid="10" name="bandaids" tilewidth="120" tileheight="120">
+  <image source="bandaids-ipadhd.png" width="400" height="400"/>
+ </tileset>
+ <layer name="Bandaids 2" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBjeAACEibSH8AgAAA==
+  </data>
+ </layer>
+ <layer name="Layer 1" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3QwQmAMBBE0dFEo11aiqVtaf4GhLBgcnA+zDHLI1KuKt2FrWxhyTPDwht4A2/gjZ43p3R9q3ov87/HRG/DuLON1U5vm+h1zjn3rx4qTppu8AgAAA==
+  </data>
+ </layer>
+ <layer name="Layer 2" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgIB6wMzA4cAAxJxCToG3AANC9DED3MnAOtEOIBKPhOwpGwSgYBaNgFNAGAACvyZDa8AgAAA==
+  </data>
+ </layer>
+ <layer name="Layer 3" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBjeAACEibSH8AgAAA==
+  </data>
+ </layer>
+ <layer name="Layer 4" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBjeAACEibSH8AgAAA==
+  </data>
+ </layer>
+ <layer name="Bandaids" width="44" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAWjgHwgyMBwQACIB9odo2AUjIJRMApGAT4AACBkQUrwCAAA
+  </data>
+ </layer>
+ <objectgroup name="helmets" width="44" height="13" opacity="0.99">
+  <object name="helmet1" x="1440" y="960" width="200" height="92"/>
+  <object name="helmet2" x="2649" y="503" width="200" height="92"/>
+  <object name="helmet3" x="3360" y="1260" width="200" height="92"/>
+ </objectgroup>
+ <objectgroup name="player" width="44" height="13">
+  <object name="player" x="183" y="796" width="94" height="147">
+   <properties>
+    <property name="dontshoot" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="bats" width="44" height="13"/>
+ <objectgroup name="walls" width="44" height="13">
+  <object name="ceiling" x="0" y="0" width="2160" height="444"/>
+  <object x="4804" y="993">
+   <polygon points="0,0 4,139 55,324 469,322 465,4"/>
+  </object>
+  <object x="4867" y="1289">
+   <polygon points="0,0 -61,265 410,265 400,16"/>
+  </object>
+  <object name="right-ceiling" x="3360" y="0" width="1920" height="408"/>
+  <object x="0" y="444" width="1440" height="240"/>
+  <object x="1440" y="444" width="360" height="120"/>
+  <object x="3243" y="417">
+   <polygon points="0,0 123,-11 43,-443"/>
+  </object>
+  <object x="2161" y="437">
+   <polygon points="0,0 48,14 57,-113"/>
+  </object>
+  <object x="2219" y="330">
+   <polygon points="0,0 32,-13 38,-204 13,-219"/>
+  </object>
+  <object x="2253" y="241">
+   <polygon points="0,0 20,-11 27,-45 22,-62 10,-84 3,-87"/>
+  </object>
+  <object x="2232" y="119">
+   <polygon points="0,0 -4,-35 -18,-56"/>
+  </object>
+  <object x="2215" y="70">
+   <polygon points="0,0 -6,-50 -33,-59 -56,-56"/>
+  </object>
+  <object x="3319" y="406">
+   <polygon points="0,0 118,26 163,26"/>
+  </object>
+  <object x="3478" y="430">
+   <polygon points="0,0 105,47 272,17"/>
+  </object>
+  <object x="3700" y="458">
+   <polygon points="0,0 949,21 1574,4 1562,-63"/>
+  </object>
+  <object x="2724" y="874">
+   <polygon points="0,0 -2,-33 4,-31 17,8"/>
+  </object>
+  <object x="2783" y="878">
+   <polygon points="0,0 11,-38 21,-37 16,-1"/>
+  </object>
+  <object x="2732" y="870">
+   <polygon points="0,0 65,0 64,9 1,9"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="winZones" width="44" height="13">
+  <object x="4852" y="960" width="627" height="24"/>
+  <object x="5142" y="231" width="120" height="720"/>
+ </objectgroup>
+ <objectgroup name="spikes" width="44" height="13">
+  <object x="2427" y="1361" width="143" height="173"/>
+  <object x="2546" y="875" width="430" height="487"/>
+  <object x="2960" y="1229" width="145" height="318"/>
+ </objectgroup>
+</map>

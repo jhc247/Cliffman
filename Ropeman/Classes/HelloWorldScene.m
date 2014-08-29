@@ -63,48 +63,51 @@
     // Create a colored background (Dark Grey)
     // 91-89-60 = dirt color
     // 48-102-70 = green color
-    CCColor *startColor = [CCColor colorWithRed:76.0/255.0f green:180.0f/255.0f blue:224.0f/255.0f];
-    CCColor *endColor = [CCColor colorWithRed:42.0f/255.0f green:117.0f/255.0f blue:166.0f/255.0f];
+    CCColor *startColor = [CCColor colorWithRed:254.0/255.0f green:254.0f/255.0f blue:254.0f/255.0f];
+    CCColor *endColor = [CCColor colorWithRed:149.0f/255.0f green:179.0f/255.0f blue:254.0f/255.0f];
     
     CCNodeGradient *background = [CCNodeGradient nodeWithColor:startColor fadingTo:endColor];
     [background setContentSize:CGSizeMake(level_width, height)];
     [self addChild:background];
-    /*
+    
     // Create background
-    CCTexture *backgroundTexture = [CCTexture textureWithFile:@"snow_background.png"];
-    int numRepetitions = (int)(ceilf(level_width / backgroundTexture.contentSize.width));
+    CCTexture *backgroundTexture = [CCTexture textureWithFile:@"mountain.png"];
+    int numRepetitions = random() % (int)(3*ceilf(level_width / backgroundTexture.contentSize.width));
     numRepetitions = numRepetitions < 1 ? 1 : numRepetitions;
     for (int i = 0; i < numRepetitions; i++) {
         CCSprite* background = [CCSprite spriteWithTexture:backgroundTexture];
-        background.anchorPoint = ccp(0,0);
-        background.position = ccp(background.contentSize.width * i, 0);
+        background.anchorPoint = ccp(0.5,0);
+        float x = random() % (int)level_width;
+        float y = random() % (int)backgroundTexture.contentSize.height*.8;
+        background.flipX = (random() % 2 > 0);
+        background.position = ccp(x, -y);
         [self addChild:background];
     }
-    */
+    
     
     float coordinateMultiplier;
     switch ([CCDirector sharedDirector].device) {
         case iPadRetina:
-            [tilemap setScale:1.0f];
+            //[tilemap setScale:1.0f];
             coordinateMultiplier = 0.5f;
             break;
         case iPadNonRetina:
-            [tilemap setScale:0.5f];
+            //[tilemap setScale:0.5f];
             coordinateMultiplier = 0.5f;
             break;
         case iPhoneRetina:
-            [tilemap setScale:(100.0f/240.0f)];
+            //[tilemap setScale:(100.0f/240.0f)];
             coordinateMultiplier = (50.0f/240.0f);
             break;
         case iPhoneNonRetina:
-            [tilemap setScale:(50.0f/240.0f)];
+            //[tilemap setScale:(50.0f/240.0f)];
             coordinateMultiplier = (50.0f/240.0f);
             break;
         default:
             break;
     }
     
-    [tilemap setScale:coordinateMultiplier];
+    //[tilemap setScale:coordinateMultiplier];
     [self addChild:tilemap];
     
     // Create physics
@@ -343,7 +346,7 @@
             if (spear.state == Attached) {
                 return YES;
             }
-            [spear detach];
+            //[spear detach];
             return YES;
 
         case Helmet:

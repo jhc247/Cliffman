@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="44" height="13" tilewidth="120" tileheight="120">
  <tileset firstgid="1" name="ClearRocks" tilewidth="120" tileheight="120">
-  <image source="ClearRocks.png" width="2040" height="2040"/>
+  <image source="ClearRocks-ipadhd.png" width="2040" height="2040"/>
  </tileset>
  <layer name="Tile Layer 5" width="44" height="13">
   <data encoding="base64" compression="gzip">

@@ -170,7 +170,7 @@
         float origDelta = abs(currentLoc.x - firstTouch.x);
         maxDistance = origDelta > maxDistance ? origDelta : maxDistance;
         float limit = [CCDirector is_iPad] ? MAX_DELTA_LEVEL_SELECTION : MAX_DELTA_LEVEL_SELECTION / IPAD_TO_IPHONE_HEIGHT_RATIO;
-        if (maxDistance > limit && firstClicked != NULL) {
+        if (maxDistance > limit && firstClicked != NULL ) {
             [firstClicked undim];
         }
     }
@@ -189,6 +189,7 @@
         CCLOG(@"Ended horizontal");
         float limit = [CCDirector is_iPad] ? MAX_DELTA_LEVEL_SELECTION : MAX_DELTA_LEVEL_SELECTION / IPAD_TO_IPHONE_HEIGHT_RATIO;
         if (maxDistance <= limit && firstClicked != NULL) {
+            
             if (![firstClicked enterLevel]) {
                 [firstClicked undim];
             }

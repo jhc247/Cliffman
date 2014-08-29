@@ -38,7 +38,7 @@
     
     //self = [CCNodeColor nodeWithColor:[CCColor blueColor] width:size.width height:size.height];
     self.userInteractionEnabled = YES;
-    self.multipleTouchEnabled = NO;
+    self.multipleTouchEnabled = YES;
     self.anchorPoint = ccp(0.5,0.5);
     self.position = ccp(size.width/2,size.height/2);
     [self setContentSize: size];
@@ -56,16 +56,25 @@
     
     _depletionRate = levelDepletion;
     
+    
+    
     // Create pull energy bar
     energyBarWidth = [CCDirector is_iPad] ? ENERGY_BAR_WIDTH : ENERGY_BAR_WIDTH / IPAD_TO_IPHONE_HEIGHT_RATIO;
+    energyBarWidth = pullButton.contentSize.width;
     energyBarHeight = [CCDirector is_iPad] ? ENERGY_BAR_HEIGHT : ENERGY_BAR_HEIGHT / IPAD_TO_IPHONE_HEIGHT_RATIO;
     
-    pullEnergyBar = [CCNodeColor nodeWithColor:[CCColor greenColor] width:energyBarWidth height:energyBarHeight];
-    pullEnergyBar.anchorPoint = ccp(0,1);
-    pullEnergyBar.positionType = CCPositionTypeNormalized;
-    pullEnergyBar.position = ccp(0, 0.95f);
+    float borderThickness = ENERGY_BAR_HEIGHT * .10;
+    
+    CCNodeColor* border = [CCNodeColor nodeWithColor:[CCColor blackColor] width:energyBarWidth + 2*borderThickness height:energyBarHeight + 2*borderThickness];
+    border.position = ccp(0, pullButton.contentSize.height*PULL_BUTTON_SCALE_INCREASE);
+    [self addChild:border];
+    
+    pullEnergyBar = [CCNodeColor nodeWithColor:[CCColor brownColor] width:energyBarWidth height:energyBarHeight];
+    pullEnergyBar.anchorPoint = ccp(0,0);
+    pullEnergyBar.position = ccp(borderThickness, pullButton.contentSize.height*PULL_BUTTON_SCALE_INCREASE + borderThickness);
     currentEnergy = ENERGY_BAR_INITIAL_ENERGY;
     [self addChild:pullEnergyBar];
+    
     
     
     // Create a pull button
@@ -87,6 +96,10 @@
         currentEnergy = currentEnergy < 0 ? 0 : currentEnergy;
         
         [pullEnergyBar setContentSize:CGSizeMake((currentEnergy / ENERGY_BAR_INITIAL_ENERGY)*energyBarWidth, energyBarHeight)];
+        pullButton.scale = PULL_BUTTON_SCALE_INCREASE;
+    }
+    else {
+        pullButton.scale = 1;
     }
 }
 
@@ -106,8 +119,7 @@
 
 - (void)onNextClicked:(id)sender
 {
-    //[[WorldSelectScene sharedWorldSelectScene] resetScene];
-    CCLOG(@"Next");
+    [[WorldSelectScene sharedWorldSelectScene] nextScene];
 }
 
 - (void)createMenu: (BOOL)died collected:(int)collected {
@@ -173,9 +185,9 @@
         retry.anchorPoint = ccp(0.5, 0);
         retry.position = ccp(self.contentSize.width/2 + menu.contentSize.width/2 - boxWidth, self.contentSize.height/2 - menu.contentSize.height/2 + boxWidth *.1);
         CCButton *retryButton = [CCButton buttonWithTitle:@" "];
-        [retryButton setPreferredSize:retry.contentSize];
-        retryButton.position = retry.position;
-        retryButton.anchorPoint = ccp(0.5,0);
+        [retryButton setPreferredSize:CGSizeMake(retry.contentSize.width, boxWidth*1.1)];
+        retryButton.position = ccp(self.contentSize.width/2 + menu.contentSize.width/2 - boxWidth, self.contentSize.height/2 - menu.contentSize.height/2 + boxWidth *.5);
+        retryButton.anchorPoint = ccp(0.5,0.5);
         [retryButton setTarget:self selector:@selector(onRetryClicked:)];
         CCLabelTTF *retryText = [CCLabelTTF labelWithString:@"Replay" fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(retry.contentSize.width, boxWidth * .2)];
         [retryText setHorizontalAlignment:CCTextAlignmentCenter];
@@ -215,9 +227,9 @@
         retry.anchorPoint = ccp(0.5, 0);
         retry.position = ccp(self.contentSize.width/2 + menu.contentSize.width/2 - 1.5*boxWidth, self.contentSize.height/2 - menu.contentSize.height/2 + boxWidth *.1);
         CCButton *retryButton = [CCButton buttonWithTitle:@" "];
-        [retryButton setPreferredSize:retry.contentSize];
-        retryButton.position = retry.position;
-        retryButton.anchorPoint = ccp(0.5,0);
+        [retryButton setPreferredSize:CGSizeMake(retry.contentSize.width, boxWidth*1.1)];
+        retryButton.position = ccp(self.contentSize.width/2 + menu.contentSize.width/2 - 1.5*boxWidth, self.contentSize.height/2 - menu.contentSize.height/2 + boxWidth *.5);
+        retryButton.anchorPoint = ccp(0.5,0.5);
         [retryButton setTarget:self selector:@selector(onRetryClicked:)];
         CCLabelTTF *retryText = [CCLabelTTF labelWithString:@"Replay" fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(next.contentSize.width*.9, boxWidth * .2)];
         [retryText setHorizontalAlignment:CCTextAlignmentCenter];
@@ -234,11 +246,12 @@
         next.anchorPoint = ccp(0.5, 0);
         next.position = ccp(self.contentSize.width/2 + menu.contentSize.width/2 - 0.5*boxWidth, self.contentSize.height/2 - menu.contentSize.height/2 + boxWidth *.27);
         CCButton *nextButton = [CCButton buttonWithTitle:@" "];
-        [nextButton setPreferredSize:CGSizeMake(next.contentSize.width, retry.contentSize.height)];
+        [nextButton setPreferredSize:CGSizeMake(next.contentSize.width*1.1, retry.contentSize.height)];
         nextButton.position = next.position;
         nextButton.anchorPoint = ccp(0.5,0.25);
         [nextButton setTarget:self selector:@selector(onNextClicked:)];
-        CCLabelTTF *nextText = [CCLabelTTF labelWithString:@"Next Level" fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(next.contentSize.width*1.5, boxWidth * .2)];
+        NSString* nextTextString = [[WorldSelectScene sharedWorldSelectScene] atLastLevel] ? @"Level Selection" : @"Next Level";
+        CCLabelTTF *nextText = [CCLabelTTF labelWithString:nextTextString fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(next.contentSize.width*1.5, boxWidth * .2)];
         [nextText setHorizontalAlignment:CCTextAlignmentCenter];
         [nextText setVerticalAlignment:CCVerticalTextAlignmentCenter];
         nextText.adjustsFontSizeToFit = YES;

@@ -55,9 +55,9 @@ static const float STAR_HEIGHT = 70;
 
 static const float ROPE_ACCEL = 3000;
 static const float ROPE_THICKNESS = 3;
-static const float ROPE_MINMAX_LENGTH = 50;
+static const float ROPE_MINMAX_LENGTH = 25;
 static const float ROPE_BUFFER = 50;
-static const float ROPE_PULL_FORCE = 800;
+static const float ROPE_PULL_FORCE = 900;
 static const float ROPE_MIN_LENGTH = 0;
 static const float ROPE_HOOK_RADIUS = 5;
 static const float ROPE_INITIAL_SLACK = 0;
@@ -103,12 +103,13 @@ static const float LEVEL_SCREEN_ARROW_BUFFER = 30;
 
 // TouchLayer
 static const float ENERGY_BAR_WIDTH = 200;
-static const float ENERGY_BAR_HEIGHT = 30;
+static const float ENERGY_BAR_HEIGHT = 20;
 static const float ENERGY_BAR_INITIAL_ENERGY = 100;
 static const float ENERGY_BAR_DEPLETION_RATE = 0.0;
 static const float MENU_SCREEN_BOX_WIDTH = 210;
 static const float MENU_SCREEN_COUNT_FONT_SIZE = 40;
 static const float MENU_SCREEN_MESSAGE_FONT_SIZE = 60;
+static const float PULL_BUTTON_SCALE_INCREASE = 1.1;
 
 // Fonts Sizes
 static const float FONT_SIZE_WORLD_NAME = 48.0f;

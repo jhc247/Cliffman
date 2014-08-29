@@ -32,6 +32,8 @@
 
 - (void)playScene: (NSString*)levelName worldNum:(int)worldNum levelNum:(int)levelNum maxHelmets:(int)maxHelmets depletionRate:(double)levelDepletion;
 - (void)resetScene;
+- (void)nextScene;
+- (BOOL) atLastLevel;
 
 - (void) setNewLevelScore: (int)score;
 - (int) getMaxHelmets;

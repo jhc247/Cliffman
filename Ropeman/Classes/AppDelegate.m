@@ -54,7 +54,6 @@
     
     //[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites_player.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"tiles_spritesheet.plist"];
     
     // -----------------------------------------------------------------------
     #pragma mark - Add Animations To Cache

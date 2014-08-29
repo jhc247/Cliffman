@@ -70,20 +70,6 @@
 				<key>levelDepletion</key>
 				<string>3</string>
 			</dict>
-			<dict>
-				<key>levelName</key>
-				<string>Compilation</string>
-				<key>levelFile</key>
-				<string>w1-level5.tmx</string>
-				<key>levelPreview</key>
-				<string>levelpreview.png</string>
-				<key>levelScore</key>
-				<string>0</string>
-				<key>levelScoreMax</key>
-				<string>4</string>
-				<key>levelDepletion</key>
-				<string>1</string>
-			</dict>
 		</array>
 	</dict>
 	<key>World 2</key>
@@ -91,7 +77,7 @@
 		<key>worldName</key>
 		<string>Water World</string>
 		<key>requiredHelmets</key>
-		<string>12</string>
+		<string>8</string>
 		<key>worldPreviewFile</key>
 		<string>comingsoon.png</string>
 		<key>levels</key>
@@ -106,7 +92,9 @@
 				<key>levelScore</key>
 				<string>0</string>
 				<key>levelScoreMax</key>
-				<string>0</string>
+				<string>4</string>
+				<key>levelDepletion</key>
+				<string>5</string>
 			</dict>
 			<dict>
 				<key>levelName</key>
@@ -119,6 +107,8 @@
 				<string>0</string>
 				<key>levelScoreMax</key>
 				<string>0</string>
+				<key>levelDepletion</key>
+				<string>3.75</string>
 			</dict>
 			<dict>
 				<key>levelName</key>
@@ -139,7 +129,7 @@
 		<key>worldName</key>
 		<string>Grass World</string>
 		<key>requiredHelmets</key>
-		<string>10</string>
+		<string>30</string>
 		<key>worldPreviewFile</key>
 		<string>comingsoon.png</string>
 		<key>levels</key>

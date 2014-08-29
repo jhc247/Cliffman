@@ -59,12 +59,6 @@
     title.anchorPoint = ccp(0.5f, 1);
     [self addChild:title];
     
-    // Add world preview image
-    CCSprite *preview = [CCSprite spriteWithImageNamed:worldPreviewFile];
-    preview.positionType = CCPositionTypeNormalized;
-    preview.position = ccp(0,0.9f);
-    preview.anchorPoint = ccp(0,1);
-    [self addChild:preview];
     
     // Add helmet icon
     CCSprite *helmet = [CCSprite spriteWithImageNamed:@"helmet_preview.png"];
@@ -72,12 +66,18 @@
     helmet.anchorPoint = ccp(0.5f, 1);
     helmet.position = ccp(0.2f, 0.1f);
     [self addChild:helmet];
-
+    //totalHelmets = 100;
     if (totalHelmets < requiredHelmets) {
+        // Add world preview image
+        CCSprite *preview = [CCSprite spriteWithImageNamed:@"lockedWorld.png"];
+        preview.positionType = CCPositionTypeNormalized;
+        preview.position = ccp(0,0.9f);
+        preview.anchorPoint = ccp(0,1);
+        [self addChild:preview];
         preview.opacity = 0.3;
         
         // Add required helmets
-        NSString *countString = [NSString stringWithFormat:@"%d / %d",totalHelmets , requiredHelmets];
+        NSString *countString = [NSString stringWithFormat:@"%d", requiredHelmets];
         CCLabelTTF *count = [CCLabelTTF labelWithString:countString fontName:@"UnZialish" fontSize:font_size dimensions:CGSizeMake(font_width*.6, font_height)];
         [count setHorizontalAlignment:CCTextAlignmentCenter];
         [count setVerticalAlignment:CCVerticalTextAlignmentCenter];
@@ -89,6 +89,13 @@
         [self addChild:count];
     }
     else {
+        // Add world preview image
+        CCSprite *preview = [CCSprite spriteWithImageNamed:worldPreviewFile];
+        preview.positionType = CCPositionTypeNormalized;
+        preview.position = ccp(0,0.9f);
+        preview.anchorPoint = ccp(0,1);
+        [self addChild:preview];
+        
         
         // Add world count
         currentNum = 0;

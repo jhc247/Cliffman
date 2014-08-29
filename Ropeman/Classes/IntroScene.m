@@ -84,6 +84,7 @@ static IntroScene *_sharedIntroScene = nil;
     [credits setTarget:self selector:@selector(onCreditButtonClicked:)];
     [self addChild:credits];
     
+    
     // done
 	return self;
 }
